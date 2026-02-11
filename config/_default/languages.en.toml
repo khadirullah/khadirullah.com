@@ -1,0 +1,29 @@
+disabled = false
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "Khadirullah Mohammad"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  # logo = "img/logo.png"
+  # secondaryLogo = "img/secondary-logo.png"
+  description = "DevOps & Cloud Engineer — Blog on DevOps, Cloud, and Infrastructure"
+  copyright = "© { year } Khadirullah Mohammad"
+
+[params.author]
+   name = "Khadirullah Mohammad"
+   email = "contact@khadirullah.com"
+   image = "img/km.svg"
+   headline = "DevOps & Cloud Engineer"
+   bio = "Building CI/CD pipelines and cloud infrastructure with AWS, Docker, Kubernetes, and Terraform. Writing about DevOps and open source."
+   links = [
+     { github = "https://github.com/khadirullah" },
+     { linkedin = "https://linkedin.com/in/khadirullah" },
+     { x-twitter = "https://twitter.com/KhadirullahM" },
+     { dev = "https://dev.to/khadirullah" },     
+     { email = "mailto:contact@khadirullah.com" },
+   ]
