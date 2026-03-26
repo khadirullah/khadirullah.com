@@ -3,14 +3,15 @@
 
 colorScheme = "ocean"
 defaultAppearance = "dark" # valid options: light or dark
-autoSwitchAppearance = true
+autoSwitchAppearance = false
 
 
 enableSearch = true
 enableCodeCopy = true	
 enableStructuredBreadcrumbs = true 	
 highlightCurrentMenuArea = true         
-smartTOC = true                         
+smartTOC = true
+enableStyledScrollbar = true
 
 
 
@@ -26,7 +27,7 @@ disableTextInHeader = false
   showMenu = true
   showCopyright = true
   showThemeAttribution = false
-  showAppearanceSwitcher = true
+  showAppearanceSwitcher = false
   showScrollToTop = true
 
 [homepage]
@@ -35,8 +36,9 @@ disableTextInHeader = false
   showRecentItems = 5
   showMoreLink = true		
   showMoreLinkDest = "/blog/"	
-  cardView = true		
+  cardView = true
   cardViewScreenWidth = false
+  layoutBackgroundBlur = true
   
 [article]
   showDate = true
