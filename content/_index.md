@@ -2,8 +2,6 @@
 title: "Home"
 ---
 
-I design scalable systems and build cloud-native infrastructure.
+I build CI/CD pipelines, manage cloud infrastructure, and automate everything I can — with Docker, Kubernetes, Terraform, and AWS.
 
-Passionate about **DevOps**, **AWS**, and **open-source tools**.
-
-Currently sharing my learnings in cloud architecture, CI/CD pipelines, and infrastructure as code.
+This blog is where I document it all — real tutorials and practical notes from the field.

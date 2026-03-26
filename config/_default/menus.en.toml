@@ -9,9 +9,39 @@
   pageRef = "about"
   weight = 20
 
+[[main]]
+  name = "Resume"
+  url = "/resume/"
+  weight = 25
+
 
 # -- Footer Menu --
 [[footer]]
+  name = "GitHub"
+  url = "https://github.com/khadirullah"
+  weight = 10
+
+[[footer]]
+  name = "LinkedIn"
+  url = "https://linkedin.com/in/khadirullah"
+  weight = 20
+
+[[footer]]
+  name = "Resume"
+  url = "/resume/"
+  weight = 25
+
+[[footer]]
+  name = "Contact"
+  url = "mailto:contact@khadirullah.com"
+  weight = 30
+
+[[footer]]
   name = "Tags"
   pageRef = "tags"
-  weight = 10
+  weight = 35
+
+[[footer]]
+  name = "Categories"
+  pageRef = "categories"
+  weight = 40
