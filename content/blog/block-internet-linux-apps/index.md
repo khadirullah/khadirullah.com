@@ -36,6 +36,24 @@ That's the entire trick:
 
 For **services** (Jellyfin, Syncthing), we match by **UID** because they already run as dedicated users. For **desktop apps** (Firefox, Chromium), we match by **GID** using a `no-internet` group.
 
+{{< mermaid >}}
+graph TD
+    A[Linux App] -->|Opens network socket| B(Linux Kernel)
+    B -->|Stamps packet with UID & GID| C{Firewall <br/> UFW / netfilter}
+    
+    C -->|Matches 'no-internet' stamp?| D{Yes, it matches!}
+    C -->|Normal app stamp?| E((Allowed to Internet))
+    
+    D -->|Going to Local LAN?| F((Yes: Allowed))
+    D -->|Going to External IP?| G((No: REJECTED))
+
+    classDef allow fill:#22c55e,color:black,stroke:#166534;
+    classDef block fill:#ef4444,color:white,stroke:#991b1b;
+    
+    class E,F allow;
+    class G block;
+{{< /mermaid >}}
+
 ---
 
 ## Which Approach Should You Use?
@@ -71,18 +89,21 @@ For **services** (Jellyfin, Syncthing), we match by **UID** because they already
 If you didn't take a VM or system snapshot, you **must** back up your current firewall state. Take 30 seconds to save your current rules so you can easily revert them later:
 
 ```bash
-sudo iptables-save > /root/iptables.before
-sudo cp /etc/ufw/before.rules /root/before.rules.bak
-sudo cp /etc/ufw/before6.rules /root/before6.rules.bak
+sudo iptables-save > ~/iptables.before
+sudo mkdir -p ~/ufw_rules_backup
+sudo cp /etc/ufw/before.rules ~/ufw_rules_backup/before.rules.backup
+sudo cp /etc/ufw/before6.rules ~/ufw_rules_backup/before6.rules.backup
 ```
 
 If anything goes wrong:
 
 ```bash
-sudo cp /root/before.rules.bak /etc/ufw/before.rules
-sudo cp /root/before6.rules.bak /etc/ufw/before6.rules
+sudo cp ~/ufw_rules_backup/before.rules.backup /etc/ufw/before.rules
+sudo cp ~/ufw_rules_backup/before6.rules.backup /etc/ufw/before6.rules
 sudo ufw reload
 ```
+
+![Backing up UFW configuration files in the terminal](media/ufw-backup.webp)
 
 ---
 
@@ -102,9 +123,18 @@ Open the file and look for the `*filter` section at the top:
 ← YOUR RULES GO HERE, right after these lines
 ```
 
-### For Desktop Apps (GID Match)
+![Opening /etc/ufw/before.rules with sudo vim](media/ufw-config-edit.webp)
 
-Replace `GID` with your actual numeric group ID (run `getent group no-internet` to find it):
+Your file should initially look like this:
+
+![The default /etc/ufw/before.rules filter section before any custom rules](media/ufw-default-rules.webp)
+
+### For Desktop Apps (GID Match)
+Once you paste your rules into the editor, it should look exactly like this:
+
+![Inserting the no-internet GID block into the UFW config](media/ufw-gid-insertion.webp)
+
+Replace `GID` with your actual numeric group ID:
 
 ```bash
 # --- BEGIN no-internet block (IPv4) ---
@@ -172,12 +202,23 @@ The rules are evaluated top-to-bottom, first match wins:
 
 ### Safe Way to Edit
 
-Don't edit the live file directly. Copy, edit, test, then move:
+> [!WARNING]
+> Always backup your original firewall rules to a safe, persistent location (like your root directory) before editing. Temporary files in `/tmp/` are wiped upon every reboot!
+
+Don't edit the live file directly. Backup, copy to a temp file, edit, test, then apply:
 
 ```bash
+# 1. Create a permanent backup
+sudo cp /etc/ufw/before.rules /root/before.rules.backup
+
+# 2. Copy to a temporary file for editing
 sudo cp /etc/ufw/before.rules /tmp/before.rules.edit
 sudo nano /tmp/before.rules.edit                          # paste your rules
-sudo iptables-restore --test < /tmp/before.rules.edit     # syntax check (safe, doesn't apply)
+
+# 3. Syntax check (safe, doesn't apply)
+sudo iptables-restore --test < /tmp/before.rules.edit     
+
+# 4. Apply the rules
 sudo mv /tmp/before.rules.edit /etc/ufw/before.rules
 sudo chown root:root /etc/ufw/before.rules
 sudo chmod 644 /etc/ufw/before.rules
@@ -198,8 +239,19 @@ This is the fastest way. You create a tiny script that launches any app under a 
 # Create the group
 sudo groupadd -f no-internet
 getent group no-internet    # note the GID (e.g., 1001)
+```
 
-# Create the wrapper
+![Creating the 'no-internet' group and verifying its GID](media/group-creation.webp)
+
+```bash
+# Add your user to the group so 'sg' doesn't prompt for a password
+sudo usermod -aG no-internet $USER
+```
+
+![Adding the current user to the 'no-internet' group](media/user-group-fix.webp)
+
+### 3. Create the wrapper script
+```bash
 sudo tee /usr/local/bin/no-internet > /dev/null <<'EOF'
 #!/bin/bash
 exec sg no-internet "$@"
@@ -217,6 +269,8 @@ no-internet steam &
 no-internet keepassxc &
 ```
 
+![Launching Firefox using our new no-internet wrapper script](media/no-internet-wrapper-usage.webp)
+
 ### Verify It Works
 
 ```bash
@@ -226,6 +280,8 @@ sg no-internet -c 'curl -I -m 10 https://example.com' && echo "FAIL" || echo "BL
 # Should still work:
 sg no-internet -c 'curl -I -m 10 http://192.168.1.1' && echo "LAN works ✓" || echo "FAIL"
 ```
+
+![Proof: Firefox trying to reach Google and failing with 'Unable to connect'](media/firefox-internet-blocked.webp)
 
 **Downside:** If you launch the app from the desktop menu, it won't use the wrapper. You'd need to edit the `.desktop` file:
 
@@ -295,16 +351,22 @@ Services already run as dedicated system users. You just match their UID in the 
 ### Find the UID
 
 ```bash
-id -u jellyfin    # e.g., 107
+id -u jellyfin    # e.g., 112
 ```
+
+![Checking the numeric UID of the jellyfin service user](media/service-uid-check.webp)
 
 ### Add UID Rules to UFW
 
-Same as the [GID rules above](#for-desktop-apps-gid-match), but use `--uid-owner 107` instead of `--gid-owner`. Paste into `before.rules` and `before6.rules`, then:
+Same as the [GID rules above](#for-desktop-apps-gid-match), but use `--uid-owner 112` instead of `--gid-owner`. Paste into `before.rules` and `before6.rules`, then:
 
 ```bash
 sudo ufw reload
 ```
+
+![Firewall successfully reloaded after configuration changes](media/ufw-reload-success.webp)
+
+![The final UFW before.rules file with both GID and UID blocks implemented](media/final-ufw-ruleset.webp)
 
 ### Test
 
@@ -312,9 +374,18 @@ sudo ufw reload
 # Internet should be blocked:
 sudo -u jellyfin curl -I -m 10 https://example.com && echo "FAIL" || echo "BLOCKED ✓"
 
-# LAN should work:
+# LAN should work (reaches a local Python HTTP server):
 sudo -u jellyfin curl -I -m 10 http://192.168.1.10 && echo "LAN works ✓" || echo "FAIL"
 ```
+
+{{< video src="media/jellyfin-service-demo.webm" poster="media/jellyfin-service-poster.webp" autoplay="true" loop="true" muted="true" caption="Jellyfin service verification: Internet requests are blocked while LAN requests (Python server) succeed." >}}
+
+### The Ultimate Proof: LAN vs Internet
+One of the best ways to verify your setup is to try reaching an external site and a local IP in the same process. Here is the result of that test:
+
+{{< video src="media/lan-vs-internet-demo.webm" poster="media/lan-vs-internet-poster.webp" autoplay="true" loop="true" muted="true" caption="Technical Proof: Internet access (Google) is blocked, while local network access (Python HTTP server) remains fully accessible." >}}
+
+---
 
 ### Don't Forget: Allow Incoming on the Service Port
 
@@ -350,6 +421,9 @@ The solution: use Debian's `dpkg-divert` to relocate the real binary, then put a
 # 1. Create the group
 sudo groupadd -f no-internet
 getent group no-internet    # note the GID
+
+# Add your user to the group so 'sg' doesn't prompt for a password
+sudo usermod -aG no-internet $USER
 
 # 2. Divert the real binary to a new location
 sudo mkdir -p /usr/lib/chromium
@@ -524,6 +598,23 @@ The firewall's `--gid-owner` match checks the process's **EGID** (Effective Grou
 | Directly (`/usr/lib/chromium/chromium.distrib`) | User's primary group (1000) | ❌ No | ✅ **Full access** |
 
 When a user runs a binary directly, their **primary group** becomes the EGID. The `no-internet` supplementary group membership is irrelevant to the firewall.
+
+{{< mermaid >}}
+graph TD
+    A[User wants to run Chromium]
+    
+    A -->|Path 1: Uses Wrapper Script<br/>'sg no-internet'| B[Process EGID becomes 1001<br/>'no-internet' group]
+    A -->|Path 2: Runs Binary Directly| C[Process EGID remains 1000<br/>User's primary group]
+    
+    B -->|Traffic hits Firewall| D{Firewall sees GID 1001}
+    C -->|Traffic hits Firewall| E{Firewall sees GID 1000}
+    
+    D --> F[Internet BLOCKED]
+    E --> G[Internet ALLOWED <br/> Bypass Successful!]
+    
+    style F fill:#ef4444,color:white,stroke:#991b1b;
+    style G fill:#f59e0b,color:black,stroke:#b45309;
+{{< /mermaid >}}
 
 And there's a catch-22: `sg` (which the wrapper uses) requires the user to be a **member** of the `no-internet` group. But if they're a member, they also have permission to execute the `chmod 0750` binary directly — bypassing the wrapper entirely.
 
@@ -759,6 +850,17 @@ sudo chmod 700 /usr/local/sbin/rollback-noinet.sh
 
 ---
 
+## Watch it in Action: Full GUI Demo
+ 
+This 75-second walkthrough shows the system handling a real-world browser (Google Chrome). You'll see:
+1. **The Block**: Chrome attempting to reach Google and failing while the firewall is active.
+2. **LAN Routing**: Chrome successfully loading a local technical dashboard (LAN) while all external traffic remains blocked.
+3. **The Control**: Toggling `ufw disable` to instantly restore access and `ufw enable` to re-lock the app.
+ 
+{{< video src="media/final-gui-demo.webm" poster="media/final-gui-demo-poster.webp" autoplay="true" loop="true" muted="true" caption="Full walkthrough: Isolating a browser from the internet while maintaining access to a local Python HTTP dashboard." >}}
+ 
+---
+ 
 ## Summary
 
 The GID-based approach (Options A–E) is a clean, elegant way to restrict app networking — and it's **good enough for most personal use cases**. If you want to stop Jellyfin from downloading metadata, or prevent a game from phoning home, it works perfectly.

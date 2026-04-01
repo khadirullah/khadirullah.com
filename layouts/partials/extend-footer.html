@@ -1,0 +1,25 @@
+<!-- DiagView & Panzoom Integration -->
+<style>
+  /* Protect all DiagView UI components from Blowfish's global aggressive styling */
+  .diagview-menu,
+  .diagview-menu *,
+  [class*="dv-"],
+  [id^="dv-"] {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.0/dist/panzoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/diagview@1/dist/diagview.umd.min.js"></script>
+<script>
+  // Add a small delay to ensure Mermaid has finished rendering its SVGs
+  window.addEventListener('load', function () {
+    setTimeout(() => {
+      DiagView.init({
+        layout: 'floating',
+        showKeyboardHelp: true,
+        diagramSelector: '.mermaid'
+      });
+    }, 500);
+  });
+</script>
