@@ -21,7 +21,7 @@ So, I built **DiagView**.
 
 ## Demo
 
-![DiagView Demo](demo.gif "Zoom, pan, and search in action")
+{{< video src="demo.webm" poster="demo-poster.webp" autoplay="true" loop="true" muted="true" caption="Zoom, pan, and search in action" >}}
 
 ## What is DiagView?
 

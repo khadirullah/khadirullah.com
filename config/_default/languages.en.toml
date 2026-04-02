@@ -10,7 +10,7 @@ title = "Khadirullah Mohammad"
   rtl = false
   dateFormat = "2 January 2006"
   logo = "img/km.svg"
-  images = ["img/km.svg"]
+  images = ["img/og-image.png"]
   description = "DevOps & Infrastructure Engineer from India specializing in AWS, Kubernetes, CI/CD, and Terraform. Available for remote and full-time roles."
   copyright = "© { year } Khadirullah Mohammad"
 

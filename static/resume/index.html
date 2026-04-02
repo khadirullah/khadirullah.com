@@ -5,7 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Khadirullah Mohammad — Resume</title>
+  <meta name="description" content="Resume of Khadirullah Mohammad — DevOps & Infrastructure Engineer with 4+ years of experience in AWS, Kubernetes, CI/CD, and Terraform.">
+  <meta property="og:title" content="Khadirullah Mohammad — Resume">
+  <meta property="og:description" content="DevOps & Infrastructure Engineer | AWS, Kubernetes, Terraform, CI/CD">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://khadirullah.com/resume/">
+  <link rel="canonical" href="https://khadirullah.com/resume/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *,
@@ -265,6 +276,47 @@
       fill: currentColor;
     }
 
+    /* --- Mobile --- */
+    @media (max-width: 640px) {
+      .header {
+        padding: 24px 20px 20px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+      }
+
+      .body {
+        padding: 20px 20px 28px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 4px 0;
+      }
+
+      .skill-category {
+        margin-top: 8px;
+      }
+
+      .entry-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .entry-date {
+        align-self: flex-start;
+      }
+
+      .download-bar {
+        padding: 0 16px;
+      }
+
+      .contact-row {
+        gap: 4px 12px;
+      }
+    }
+
     /* --- Print --- */
     @media print {
       body {
@@ -313,6 +365,7 @@
 
 <body>
   <div class="download-bar">
+    <a href="/" style="font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--color-accent); text-decoration: none;">← khadirullah.com</a>
     <button class="download-btn" onclick="window.print()">
       <svg viewBox="0 0 24 24">
         <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.17v6h5v-6h3.17L12 2z" />

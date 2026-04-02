@@ -1,25 +1,33 @@
-<!-- DiagView & Panzoom Integration -->
-<style>
-  /* Protect all DiagView UI components from Blowfish's global aggressive styling */
-  .diagview-menu,
-  .diagview-menu *,
-  [class*="dv-"],
-  [id^="dv-"] {
-    text-decoration: none !important;
-    text-decoration-line: none !important;
-  }
-</style>
-<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.0/dist/panzoom.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/diagview@1/dist/diagview.umd.min.js"></script>
+<!-- DiagView & Panzoom Integration — only initializes on pages with Mermaid diagrams -->
 <script>
-  // Add a small delay to ensure Mermaid has finished rendering its SVGs
   window.addEventListener('load', function () {
-    setTimeout(() => {
-      DiagView.init({
-        layout: 'floating',
-        showKeyboardHelp: true,
-        diagramSelector: '.mermaid'
-      });
-    }, 500);
+    // Only load DiagView if there are Mermaid diagrams on the page
+    if (!document.querySelector('.mermaid')) return;
+
+    // Inject DiagView CSS fix
+    var style = document.createElement('style');
+    style.textContent = '.diagview-menu, .diagview-menu *, [class*="dv-"], [id^="dv-"] { text-decoration: none !important; text-decoration-line: none !important; }';
+    document.head.appendChild(style);
+
+    // Load Panzoom
+    var panzoom = document.createElement('script');
+    panzoom.src = 'https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js';
+    panzoom.onload = function () {
+      // Load DiagView after Panzoom is ready
+      var diagview = document.createElement('script');
+      diagview.src = 'https://cdn.jsdelivr.net/npm/diagview@1.0.0/dist/diagview.umd.min.js';
+      diagview.onload = function () {
+        // Small delay for Mermaid to finish rendering SVGs
+        setTimeout(function () {
+          DiagView.init({
+            layout: 'floating',
+            showKeyboardHelp: true,
+            diagramSelector: '.mermaid'
+          });
+        }, 500);
+      };
+      document.head.appendChild(diagview);
+    };
+    document.head.appendChild(panzoom);
   });
 </script>

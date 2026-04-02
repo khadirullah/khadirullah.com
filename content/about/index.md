@@ -29,11 +29,11 @@ Assembling PCs, installing operating systems, configuring routers, optimizing Wi
 Graduated from Andhra University. Explored full-stack development but realized I enjoyed the infrastructure side more than building web applications.
 {{< /timelineItem >}}
 
-{{< timelineItem icon="shield" header="Engineer — Network, Systems & IT Infrastructure" badge="Jul 2019 – Nov 2023 · 4y 5m" >}}
+{{< timelineItem icon="shield" header="Engineer — Programmer, Network & System Admin" badge="Jul 2019 – Nov 2023 · 4y 5m" >}}
 Sole engineer managing end-to-end IT operations for a startup — system provisioning, network administration, hardware maintenance, and troubleshooting across the organization.
 {{< /timelineItem >}}
 
-{{< timelineItem icon="cloud" header="DevOps & Cloud Engineering" badge="Current Focus" >}}
+{{< timelineItem icon="cloud" header="DevOps & Cloud Engineering" badge="Dec 2023 – Present" >}}
 Building reliable CI/CD pipelines with Jenkins, managing Kubernetes clusters, provisioning infrastructure as code with Terraform, and working towards AWS certifications.
 {{< /timelineItem >}}
 
@@ -88,7 +88,7 @@ A lightweight (19KB) interactive SVG/Mermaid diagram viewer with search, export,
 
 ### This Website
 
-Hugo + Blowfish theme, deployed on Cloudflare Pages with custom domain, DNS records, and email authentication (SPF/DKIM/DMARC).
+Hugo + Blowfish theme, deployed on Cloudflare Pages with custom domain, DNS records, and email authentication (SPF/DKIM/DMARC). → [khadirullah.com](https://khadirullah.com)
 
 {{< github repo="khadirullah/khadirullah.com" >}}
 
@@ -103,7 +103,7 @@ I'm actively looking for **DevOps Engineer**, **Cloud Engineer**, and **Infrastr
 - {{< icon "email" >}} **Email:** [contact@khadirullah.com](mailto:contact@khadirullah.com)
 - {{< icon "github" >}} **GitHub:** [github.com/khadirullah](https://github.com/khadirullah)
 - {{< icon "linkedin" >}} **LinkedIn:** [linkedin.com/in/khadirullah](https://linkedin.com/in/khadirullah)
-- 📄 **Resume:** [Download Resume](/resume/)
+- 📄 **Resume:** [View Resume](/resume/)
 
 {{< button href="mailto:contact@khadirullah.com" >}}
 {{< icon "email" >}} &nbsp; Contact Me
