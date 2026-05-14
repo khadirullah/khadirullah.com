@@ -20,9 +20,10 @@
         // Small delay for Mermaid to finish rendering SVGs
         setTimeout(function () {
           DiagView.init({
-            layout: 'floating',
+            layout: 'off',
             showKeyboardHelp: true,
-            diagramSelector: '.mermaid'
+            diagramSelector: '.mermaid',
+            showMinimap: false,
           });
         }, 500);
       };

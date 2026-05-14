@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Khadirullah Mohammad — Resume</title>
-  <meta name="description" content="Resume of Khadirullah Mohammad — DevOps & Infrastructure Engineer with 4+ years of experience in AWS, Kubernetes, CI/CD, and Terraform.">
+  <meta name="description" content="Resume of Khadirullah Mohammad — DevOps & Infrastructure Engineer with 4+ years of IT infrastructure experience, specializing in AWS, Kubernetes, CI/CD, and Terraform.">
   <meta property="og:title" content="Khadirullah Mohammad — Resume">
   <meta property="og:description" content="DevOps & Infrastructure Engineer | AWS, Kubernetes, Terraform, CI/CD">
   <meta property="og:type" content="website">
@@ -28,30 +28,34 @@
     }
 
     :root {
-      --color-primary: #1a1a2e;
+      --color-primary: #0f172a;
       --color-accent: #2563eb;
-      --color-accent-light: #eff6ff;
-      --color-text: #1f2937;
-      --color-text-secondary: #4b5563;
-      --color-border: #e5e7eb;
+      --color-accent-dark: #1d4ed8;
+      --color-accent-subtle: #dbeafe;
+      --color-text: #1e293b;
+      --color-text-secondary: #475569;
+      --color-text-muted: #64748b;
+      --color-border: #e2e8f0;
       --color-bg: #ffffff;
+      --color-bg-page: #f1f5f9;
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       color: var(--color-text);
-      background: #f3f4f6;
+      background: var(--color-bg-page);
       line-height: 1.5;
       font-size: 13.5px;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .resume {
       max-width: 800px;
-      margin: 24px auto;
+      margin: 0 auto;
       background: var(--color-bg);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.06);
-      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+      border-radius: 6px;
       overflow: hidden;
     }
 
@@ -60,6 +64,18 @@
       background: var(--color-primary);
       color: #fff;
       padding: 36px 48px 28px;
+      position: relative;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 48px;
+      right: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+      border-radius: 2px;
     }
 
     .header h1 {
@@ -81,20 +97,25 @@
       flex-wrap: wrap;
       gap: 6px 20px;
       font-size: 12.5px;
-      color: #d1d5db;
+      color: #cbd5e1;
     }
 
     .contact-row a {
       color: #93c5fd;
       text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .contact-row a:hover {
+      color: #bfdbfe;
     }
 
     .contact-row span::before {
       content: '';
       display: inline-block;
-      width: 4px;
-      height: 4px;
-      background: #6b7280;
+      width: 3px;
+      height: 3px;
+      background: #475569;
       border-radius: 50%;
       margin-right: 8px;
       vertical-align: middle;
@@ -106,11 +127,11 @@
 
     /* --- Body --- */
     .body {
-      padding: 32px 48px 40px;
+      padding: 28px 48px 40px;
     }
 
     .section {
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .section:last-child {
@@ -118,13 +139,13 @@
     }
 
     .section-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.5px;
       color: var(--color-accent);
       border-bottom: 2px solid var(--color-accent);
-      padding-bottom: 4px;
+      padding-bottom: 5px;
       margin-bottom: 14px;
     }
 
@@ -132,7 +153,12 @@
     .summary p {
       color: var(--color-text-secondary);
       font-size: 13.5px;
-      line-height: 1.65;
+      line-height: 1.7;
+    }
+
+    .summary b {
+      color: var(--color-text);
+      font-weight: 600;
     }
 
     /* --- Experience & Education --- */
@@ -159,7 +185,7 @@
 
     .entry-date {
       font-size: 12.5px;
-      color: var(--color-text-secondary);
+      color: var(--color-text-muted);
       white-space: nowrap;
       font-weight: 500;
     }
@@ -179,13 +205,13 @@
       margin-bottom: 5px;
       color: var(--color-text);
       font-size: 13px;
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     .entry li::marker {
       color: var(--color-accent);
     }
-    
+
     .entry li b {
       font-weight: 600;
       color: var(--color-text);
@@ -194,8 +220,8 @@
     /* --- Skills --- */
     .skills-grid {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 10px 16px;
+      grid-template-columns: 175px 1fr;
+      gap: 8px 16px;
       font-size: 13px;
     }
 
@@ -206,10 +232,18 @@
 
     .skill-items {
       color: var(--color-text-secondary);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     /* --- Projects --- */
+    .project-entry {
+      margin-bottom: 14px;
+    }
+
+    .project-entry:last-child {
+      margin-bottom: 0;
+    }
+
     .project-name {
       font-weight: 600;
       color: var(--color-text);
@@ -219,67 +253,136 @@
     .project-name a {
       color: var(--color-accent);
       text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .project-name a:hover {
+      color: var(--color-accent-dark);
+      text-decoration: underline;
     }
 
     .project-desc {
       font-size: 13px;
       color: var(--color-text-secondary);
-      margin-top: 4px;
-      line-height: 1.5;
+      margin-top: 3px;
+      line-height: 1.55;
     }
 
     .project-tech {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--color-accent);
       margin-top: 4px;
       font-weight: 500;
+      letter-spacing: 0.2px;
     }
 
-    /* --- Download Button --- */
-    .download-bar {
+    /* --- Additional --- */
+    .additional-list {
+      list-style: none;
+      padding: 0;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .additional-list li {
+      margin-bottom: 3px;
+    }
+
+    .additional-list b {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .additional-list a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* --- Top Bar --- */
+    .top-bar {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       max-width: 800px;
-      margin: 24px auto 0;
+      margin: 20px auto 16px;
       padding: 0 4px;
+    }
+
+    .back-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover {
+      color: var(--color-accent-dark);
+    }
+
+    .back-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
     .download-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 22px;
+      padding: 9px 20px;
       background: var(--color-accent);
       color: #fff;
       border: none;
       border-radius: 6px;
       font-family: inherit;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
     }
 
     .download-btn:hover {
-      background: #1d4ed8;
+      background: var(--color-accent-dark);
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
     .download-btn:active {
       transform: translateY(0);
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
     }
 
     .download-btn svg {
-      width: 16px;
-      height: 16px;
+      width: 15px;
+      height: 15px;
       fill: currentColor;
+    }
+
+    /* --- Footer --- */
+    .footer-note {
+      text-align: center;
+      max-width: 800px;
+      margin: 16px auto 24px;
+      font-size: 12px;
+      color: var(--color-text-muted);
     }
 
     /* --- Mobile --- */
     @media (max-width: 640px) {
       .header {
         padding: 24px 20px 20px;
+      }
+
+      .header::after {
+        left: 20px;
+        right: 20px;
       }
 
       .header h1 {
@@ -292,11 +395,15 @@
 
       .skills-grid {
         grid-template-columns: 1fr;
-        gap: 4px 0;
+        gap: 2px 0;
       }
 
       .skill-category {
         margin-top: 8px;
+      }
+
+      .skill-category:first-child {
+        margin-top: 0;
       }
 
       .entry-header {
@@ -308,8 +415,9 @@
         align-self: flex-start;
       }
 
-      .download-bar {
+      .top-bar {
         padding: 0 16px;
+        margin: 16px auto 12px;
       }
 
       .contact-row {
@@ -333,25 +441,38 @@
 
       .header {
         padding: 28px 40px 22px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .header::after {
+        left: 40px;
+        right: 40px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
       .body {
-        padding: 24px 40px 32px;
+        padding: 22px 40px 28px;
       }
 
       .section {
-        margin-bottom: 18px;
+        margin-bottom: 16px;
       }
 
       .section-title {
-        font-size: 11.5px;
+        font-size: 11px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
       a {
         color: inherit !important;
+        text-decoration: none !important;
       }
 
-      .download-bar {
+      .top-bar,
+      .footer-note {
         display: none !important;
       }
 
@@ -364,13 +485,16 @@
 </head>
 
 <body>
-  <div class="download-bar">
-    <a href="/" style="font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--color-accent); text-decoration: none;">← khadirullah.com</a>
+  <div class="top-bar">
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      khadirullah.com
+    </a>
     <button class="download-btn" onclick="window.print()">
       <svg viewBox="0 0 24 24">
-        <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.17v6h5v-6h3.17L12 2z" />
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
       </svg>
-      Download as PDF
+      Save as PDF
     </button>
   </div>
 
@@ -394,9 +518,9 @@
 
       <!-- Summary -->
       <div class="section summary">
-        <div class="section-title">Summary</div>
+        <div class="section-title">Professional Summary</div>
         <p>
-          Results-driven <b>DevOps & Infrastructure Engineer</b> with 4+ years of experience architecting and managing end-to-end IT environments. Expertise in building CI/CD pipelines, deploying containerized applications (Docker & Kubernetes), and designing scalable AWS architectures via Terraform. Proven track record of independently operating and securing infrastructure for a organization. Passionate about eliminating manual toil through Infrastructure as Code (IaC) and reliable automation.
+          <b>DevOps & Infrastructure Engineer</b> with 4+ years of IT infrastructure experience — including system administration, network management, and Linux operations — now specializing in <b>CI/CD pipelines</b>, containerized deployments on <b>Kubernetes</b>, and cloud infrastructure automation on <b>AWS</b> using <b>Terraform</b>. Proven ability to independently own and operate end-to-end infrastructure from hardware through cloud. Skilled in eliminating manual toil through automation, Infrastructure as Code, and GitOps practices.
         </p>
       </div>
 
@@ -406,29 +530,31 @@
 
         <div class="entry">
           <div class="entry-header">
-            <span class="entry-title">Cloud & Infrastructure Engineer (Independent)</span>
+            <span class="entry-title">DevOps & Cloud Engineer (Self-Directed)</span>
             <span class="entry-date">Dec 2023 – Present</span>
           </div>
-          <div class="entry-subtitle">Freelance / Contract · India</div>
+          <div class="entry-subtitle">Independent · Remote</div>
           <ul>
-            <li>Architected and deployed production-ready <b>AWS environments</b> (VPC, EC2, ELB, S3) using <b>Terraform</b>, implementing Infrastructure as Code best practices.</li>
-            <li>Designed and engineered automated <b>CI/CD pipelines</b> (Jenkins, GitHub Actions) for code integration, SonarQube static analysis, Trivy vulnerability scanning, and Docker builds.</li>
-            <li>Deployed highly available <b>Kubernetes clusters</b> on cloud infrastructure, configuring Deployments, Services, RBAC, Ingress routing, and secure Network Policies.</li>
-            <li>Built and secured high-performance technical websites (Hugo, Cloudflare Pages), configuring advanced DNS routing and email authentication protocols (SPF/DKIM/DMARC).</li>
+            <li>Built <b>CI/CD pipelines</b> using Jenkins and GitHub Actions — integrating SonarQube static analysis, Trivy container scanning, Docker image builds, and automated deployment to Kubernetes clusters.</li>
+            <li>Provisioned <b>AWS infrastructure</b> (VPC, EC2, ELB, S3, IAM) using <b>Terraform</b> with variable files, output values, and full init → plan → apply → destroy lifecycle management.</li>
+            <li>Deployed <b>Kubernetes</b> workloads with Deployments, Services (ClusterIP/NodePort/LoadBalancer), Ingress controllers, RBAC, NetworkPolicies, and SecurityContexts.</li>
+            <li>Configured <b>DNS and email security infrastructure</b> — SPF, DKIM, DMARC, and MX records in Cloudflare for custom domain email with Zoho, including alias routing and folder-based filtering rules.</li>
+            <li>Built and published <b>DiagView</b>, an open-source npm package (v1.0.6, 169 unit tests), with a fully automated CI/CD pipeline: lint → test → build → publish to npm → deploy docs to GitHub Pages.</li>
           </ul>
         </div>
 
         <div class="entry">
           <div class="entry-header">
-            <span class="entry-title">Engineer (Programmer, Network & System Admin)</span>
+            <span class="entry-title">Engineer — Programmer, Network & System Admin</span>
             <span class="entry-date">Jul 2019 – Nov 2023</span>
           </div>
-          <div class="entry-subtitle">Bizrak Web Solutions · India</div>
+          <div class="entry-subtitle">Bizrak Web Solutions · India · 4 yrs 5 mos</div>
           <ul>
-            <li>Managed end-to-end IT infrastructure for a <b>organization</b>, ensuring <b>99.9% uptime</b> and reliability.</li>
-            <li>Configured and maintained Linux systems and network devices, including custom router setups with <b>OpenWRT</b> and static IP assignments.</li>
-            <li>Automated system provisioning and software deployments using custom <b>Bash scripts</b>.</li>
-            <li>Implemented firewall policies and system hardening to strengthen infrastructure security.</li>
+            <li>Sole engineer managing <b>end-to-end IT operations</b> for the organization — system provisioning, network administration, hardware maintenance, and security.</li>
+            <li>Administered <b>Linux and Windows systems</b>, handling OS installations, patch management, user provisioning, and troubleshooting across all workstations.</li>
+            <li>Configured and maintained <b>network infrastructure</b> — routers (TP-Link, OpenWRT), WiFi access points with channel optimization, static IP assignments, VPN tunnels, and firewall rules.</li>
+            <li>Automated routine system administration tasks using <b>Bash scripts</b>, reducing manual provisioning time and ensuring consistent configurations across systems.</li>
+            <li>Deployed and managed <b>CCTV surveillance</b> and physical security systems, including network-attached camera configuration and monitoring setup.</li>
           </ul>
         </div>
       </div>
@@ -438,19 +564,19 @@
         <div class="section-title">Technical Skills</div>
         <div class="skills-grid">
           <span class="skill-category">Cloud & IaC</span>
-          <span class="skill-items">AWS (EC2, S3, VPC, ELB, IAM, CloudFormation), Terraform, Ansible</span>
+          <span class="skill-items">AWS (EC2, S3, VPC, ELB, IAM, Route 53), Terraform, Ansible</span>
 
           <span class="skill-category">Containers & Orchestration</span>
-          <span class="skill-items">Docker, Kubernetes (Deployments, Services, RBAC, Ingress, Network Policies)</span>
+          <span class="skill-items">Docker, Docker Compose, Kubernetes (Deployments, Services, RBAC, Ingress, NetworkPolicies)</span>
 
-          <span class="skill-category">CI/CD & Automation</span>
-          <span class="skill-items">Jenkins, GitHub Actions, Git, Maven</span>
+          <span class="skill-category">CI/CD & DevOps</span>
+          <span class="skill-items">Jenkins, GitHub Actions, SonarQube, Trivy, Git, Maven, npm</span>
 
           <span class="skill-category">Systems & Networking</span>
-          <span class="skill-items">Linux (Ubuntu/Debian) Administration, Bash Scripting, DNS, TCP/IP, UFW/iptables, VPNs</span>
+          <span class="skill-items">Linux Administration (Fedora, Debian/Ubuntu), Bash Scripting, DNS, TCP/IP, QEMU/KVM, iptables</span>
 
-          <span class="skill-category">Observability & Security</span>
-          <span class="skill-items">Prometheus, Grafana, SonarQube, Trivy, Cloudflare</span>
+          <span class="skill-category">Security</span>
+          <span class="skill-items">SPF/DKIM/DMARC, SSL/TLS, IAM Policies, Cloudflare</span>
         </div>
       </div>
 
@@ -458,22 +584,22 @@
       <div class="section">
         <div class="section-title">Projects</div>
 
-        <div class="entry">
-          <div class="project-name">Automated CI/CD Kubernetes Deployments</div>
-          <div class="project-desc">Engineered automated Jenkins pipelines to orchestrate source code pull, continuous integration, Docker image building/pushing, security scanning (Trivy), and zero-downtime deployment to AWS EKS clusters behind an Application Load Balancer.</div>
-          <div class="project-tech">Jenkins · Docker · Kubernetes · AWS · SonarQube · Trivy</div>
+        <div class="project-entry">
+          <div class="project-name">DiagView — Open Source npm Package · <a href="https://github.com/khadirullah/diagview">github.com/khadirullah/diagview</a></div>
+          <div class="project-desc">Built a framework-agnostic, lightweight (19KB) interactive SVG/Mermaid diagram viewer with zoom, pan, search, and export. Published to npm (v1.0.6) with a fully automated GitHub Actions CI/CD pipeline — linting, 169 unit tests, semantic versioning, and automated npm publishing on tagged releases.</div>
+          <div class="project-tech">JavaScript · GitHub Actions · npm · Jest · Rollup · CI/CD</div>
         </div>
 
-        <div class="entry">
-          <div class="project-name">AWS Infrastructure Automation (Terraform)</div>
-          <div class="project-desc">Provisioned resilient, multi-tier AWS network architectures entirely via code. Deployed custom VPCs, public/private subnets, Auto Scaling Groups, and restrictive Security Groups to establish a reproducible, secure cloud foundation.</div>
-          <div class="project-tech">Terraform · AWS · VPC · Infrastructure as Code</div>
+        <div class="project-entry">
+          <div class="project-name">DNS & Email Security Infrastructure · <a href="https://khadirullah.com">khadirullah.com</a></div>
+          <div class="project-desc">Configured custom domain email with Zoho — set up SPF, DKIM, DMARC, and MX records in Cloudflare DNS. Implemented alias routing (contact@, firstname@), group aliases for platform accounts, and folder-based filtering rules for organized email management.</div>
+          <div class="project-tech">Cloudflare DNS · Zoho Mail · SPF · DKIM · DMARC · MX Records</div>
         </div>
 
-        <div class="entry">
-          <div class="project-name">DiagView (Open Source NPM Package)</div>
-          <div class="project-desc">Developed a framework-agnostic, lightweight (19KB) interactive SVG/Mermaid diagram viewing component using Vanilla JavaScript. Integrates panning, zooming, searching, and exporting capabilities.</div>
-          <div class="project-tech">JavaScript · NPM · Open Source</div>
+        <div class="project-entry">
+          <div class="project-name">Personal Technical Blog · <a href="https://khadirullah.com">khadirullah.com</a></div>
+          <div class="project-desc">Built and deployed a technical blog using Hugo with the Blowfish theme, hosted on Cloudflare Pages with custom domain configuration. Features automated deployments via Git push, SEO optimization, and responsive design.</div>
+          <div class="project-tech">Hugo · Cloudflare Pages · Git · DNS · Custom Domain</div>
         </div>
 
       </div>
@@ -490,7 +616,21 @@
         </div>
       </div>
 
+      <!-- Additional -->
+      <div class="section">
+        <div class="section-title">Additional</div>
+        <ul class="additional-list">
+          <li><b>Blog:</b> <a href="https://khadirullah.com">khadirullah.com</a> — Technical articles on DevOps, CI/CD, and cloud infrastructure</li>
+          <li><b>Open Source:</b> Maintainer of <a href="https://github.com/khadirullah/diagview">DiagView</a> — npm package with automated CI/CD pipeline, 169 unit tests, and GitHub Pages docs</li>
+          <li><b>Lab Environment:</b> QEMU/KVM + virt-manager for local DevOps labs on Fedora & Debian</li>
+        </ul>
+      </div>
+
     </div>
+  </div>
+
+  <div class="footer-note">
+    Last updated May 2026 · Best viewed on desktop · Use "Save as PDF" for a print-ready copy
   </div>
 </body>
 
