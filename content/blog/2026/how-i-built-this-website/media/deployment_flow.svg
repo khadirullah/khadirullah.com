@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="800" height="240">
+  <defs>
+    <linearGradient id="node-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="240" fill="#0f172a" rx="12" />
+
+  <!-- Nodes -->
+  <g id="local">
+    <rect x="40" y="90" width="130" height="60" rx="10" fill="url(#node-grad)" stroke="#334155" stroke-width="2" />
+    <text x="105" y="125" font-family="sans-serif" font-size="14" fill="#f8fafc" font-weight="bold" text-anchor="middle">💻 Local Git</text>
+  </g>
+
+  <g id="github">
+    <rect x="235" y="90" width="130" height="60" rx="10" fill="url(#node-grad)" stroke="#334155" stroke-width="2" />
+    <text x="300" y="125" font-family="sans-serif" font-size="14" fill="#f8fafc" font-weight="bold" text-anchor="middle">🐙 GitHub</text>
+  </g>
+
+  <g id="cloudflare">
+    <rect x="430" y="90" width="130" height="60" rx="10" fill="url(#node-grad)" stroke="#334155" stroke-width="2" />
+    <text x="495" y="125" font-family="sans-serif" font-size="14" fill="#f8fafc" font-weight="bold" text-anchor="middle">☁️ Cloudflare</text>
+  </g>
+
+  <g id="live">
+    <rect x="625" y="90" width="130" height="60" rx="10" fill="url(#node-grad)" stroke="#334155" stroke-width="2" />
+    <text x="690" y="125" font-family="sans-serif" font-size="14" fill="#f8fafc" font-weight="bold" text-anchor="middle">🚀 Live Site</text>
+  </g>
+
+  <!-- Connection Lines -->
+  <line x1="170" y1="120" x2="235" y2="120" stroke="#334155" stroke-width="2" stroke-dasharray="4,4" />
+  <line x1="365" y1="120" x2="430" y2="120" stroke="#334155" stroke-width="2" stroke-dasharray="4,4" />
+  <line x1="560" y1="120" x2="625" y2="120" stroke="#334155" stroke-width="2" stroke-dasharray="4,4" />
+
+  <!-- Animated Data Pulse -->
+  <circle r="6" fill="#3b82f6" filter="url(#glow)">
+    <animateMotion 
+      path="M 170 120 L 235 120 M 365 120 L 430 120 M 560 120 L 625 120" 
+      dur="3s" 
+      repeatCount="indefinite" 
+      calcMode="linear"
+    />
+    <animate attributeName="opacity" values="0;1;1;0" dur="1s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Step Labels -->
+  <text x="202" y="105" font-family="sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">git push</text>
+  <text x="397" y="105" font-family="sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">webhook</text>
+  <text x="592" y="105" font-family="sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">deploy</text>
+
+  <!-- Success Indicator -->
+  <circle cx="765" cy="120" r="8" fill="#22c55e" opacity="0">
+    <animate attributeName="opacity" values="0;0;0;0;1;0" dur="3s" repeatCount="indefinite" />
+    <animate attributeName="r" values="0;0;0;0;12;8" dur="3s" repeatCount="indefinite" />
+  </circle>
+</svg>
