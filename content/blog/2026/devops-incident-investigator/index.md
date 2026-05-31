@@ -27,7 +27,7 @@ Built a DevOps Incident Investigator using Coral SQL that correlates **GitHub PR
 
 Built in 4 days for the Pirates of the Coral-bean hackathon.
 
-![Demo Video](images/demo.gif)
+{{< youtube yjisIfk4B60 >}}
 
 ![Dashboard Stats & Timeline](images/dashboard-hero-stats.png)
 *Real-time DevOps intelligence dashboard correlating deployments, incidents, Slack activity, and payment health.*
