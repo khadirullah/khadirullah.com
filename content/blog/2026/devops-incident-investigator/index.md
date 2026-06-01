@@ -32,6 +32,22 @@ Built in 4 days for the Pirates of the Coral-bean hackathon.
 ![Dashboard Stats & Timeline](images/dashboard-hero-stats.png)
 *Real-time DevOps intelligence dashboard correlating deployments, incidents, Slack activity, and payment health.*
 
+## 📖 The Story (what this tool does)
+
+> Imagine this: a developer merges a Pull Request on GitHub. That PR **automatically shows up** in the Incident Investigator dashboard under Deployments.
+>
+> Minutes later, something breaks — a new error starts firing in Sentry. The tool **instantly correlates** that error back to the exact PR that caused it, showing you: *"PR #42 was merged 15 minutes before this error first appeared."*
+>
+> Now the on-call engineer clicks the incident → **Gemini AI analyzes the root cause** in seconds, gives immediate fix steps and long-term prevention advice.
+>
+> One click on **📢 Send to Slack** and the full incident report is posted to your team's `#incidents` channel.
+>
+> And if you just want a quick answer? Type plain English like *"Which errors have the most events?"* → Gemini writes the Coral SQL → executes it live → shows you the results.
+>
+> **That's the DevOps Incident Investigator** — from PR merge to root cause to team notification, all in one tool powered by Coral SQL + Gemini AI.
+
+---
+
 ## The Problem
 
 As a DevOps engineer, I've experienced the pain of incident investigation firsthand — switching between GitHub, Sentry, and Slack at 2 AM trying to figure out what broke production.
