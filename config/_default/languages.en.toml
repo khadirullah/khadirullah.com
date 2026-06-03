@@ -11,7 +11,7 @@ title = "Khadirullah Mohammad"
   dateFormat = "2 January 2006"
   logo = "img/km.svg"
   images = ["img/og-image.png"]
-  description = "DevOps & Infrastructure Engineer from India specializing in AWS, Kubernetes, CI/CD, and Terraform. Available for remote and full-time roles."
+  description = "DevOps & Cloud Engineer from India specializing in AWS, Kubernetes, CI/CD, and Terraform. Built an AI-powered incident correlation tool using cross-source SQL. Available for remote and full-time roles."
   copyright = "© { year } Khadirullah Mohammad"
 
 [params.author]
@@ -19,7 +19,7 @@ title = "Khadirullah Mohammad"
    email = "contact@khadirullah.com"
    image = "img/km.svg"
    headline = "DevOps & Cloud Engineer"
-   bio = "Former IT fixer turned DevOps Engineer. I build CI/CD pipelines, manage AWS infrastructure, and automate everything I can with Docker, Kubernetes, and Terraform."
+   bio = "Former IT fixer turned DevOps Engineer. I build CI/CD pipelines, manage AWS infrastructure, and automate incident workflows — with Docker, Kubernetes, Terraform, and Python."
    links = [
      { github = "https://github.com/khadirullah" },
      { linkedin = "https://linkedin.com/in/khadirullah" },

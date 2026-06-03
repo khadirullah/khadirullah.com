@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "About Khadirullah Mohammad — DevOps & Infrastructure Engineer"
+description: "About Khadirullah Mohammad — DevOps & Cloud Engineer"
 showDate: false
 showReadingTime: false
 showAuthor: false
@@ -11,8 +11,8 @@ showTableOfContents: true
 ## Hey, I'm Khadirullah 👋
 
 {{< lead >}}
-DevOps & Infrastructure Engineer with 4+ years of professional IT experience and a B.Tech in Computer Science.
-I build CI/CD pipelines, manage cloud infrastructure on AWS, and automate deployments using Docker, Kubernetes, and Terraform.
+DevOps & Cloud Engineer with 4+ years of professional IT experience and a B.Tech in Computer Science.
+I build CI/CD pipelines, manage cloud infrastructure on AWS, and automate deployments using Docker, Kubernetes, and Terraform. Recently built an AI-powered incident correlation tool that JOINs data across GitHub, Sentry, and Slack using cross-source SQL.
 {{< /lead >}}
 
 ---
@@ -44,27 +44,51 @@ Building reliable CI/CD pipelines with Jenkins, managing Kubernetes clusters, pr
 ## Skills
 
 <span class="text-2xl">{{< icon "cloud" >}}</span> **Cloud & Infrastructure**
-- AWS — EC2, S3, VPC, ELB, IAM, CloudFormation
+- AWS — EC2, S3, VPC, ELB, IAM, Route 53, CloudFormation
 - Terraform — Infrastructure as Code
 - Ansible — Configuration Management & Playbooks
 
 <span class="text-2xl">{{< icon "docker" >}}</span> **Containers & Orchestration**
-- Docker — Dockerfiles, custom images, multi-stage builds
+- Docker — Dockerfiles, custom images, multi-stage builds, Docker Compose
 - Kubernetes — Deployments, Services, RBAC, Network Policies, Ingress, Security Contexts
 
 <span class="text-2xl">{{< icon "git" >}}</span> **CI/CD & Tooling**
 - Jenkins — Pipelines with SonarQube, Trivy, Docker, and Kubernetes integration
-- GitHub Actions
-- Git, Maven, Bash scripting
+- GitHub Actions — Automated testing, publishing, and deployment
+- Git, Maven, npm, Bash scripting
 
 <span class="text-2xl">{{< icon "linux" >}}</span> **Systems & Networking**
 - Linux — Administration, systemd, networking, troubleshooting
 - DNS — SPF, DKIM, DMARC configuration
-- Networking — Router configuration, WiFi optimization
+- Networking — Router configuration, WiFi optimization, TCP/IP, iptables
+
+🐍 **Scripting & Automation**
+- Python — API integration, automation scripts, Flask
+- SQL — Cross-source queries with Coral for incident correlation
+- Bash — System administration and deployment automation
+
+🔒 **Monitoring & Security**
+- Prometheus — Metrics collection and alerting
+- Grafana — Dashboard visualization and monitoring
+- Sentry — Error tracking and incident monitoring
+- Slack — Incident alerting and team notifications
+- Coral SQL — Cross-source API queries (GitHub + Sentry + Slack)
+- Fernet AES encryption, SSL/TLS, IAM, Cloudflare
 
 ---
 
 ## Projects
+
+### 🔍 DevOps Incident Investigator
+*Hackathon: Pirates of the Coral-bean (WeMakeDevs, May 2026)*
+
+An AI-powered incident correlation tool that JOINs data from GitHub PRs, Sentry errors, and Slack messages using cross-source SQL via Coral — reducing incident triage from 15 minutes of tab-switching to a single unified view. Features a web dashboard with real-time incident timeline, Gemini AI root-cause analysis, one-click Slack alerting, natural-language-to-SQL queries, and encrypted token management.
+
+**Tech:** Python, Flask, Coral SQL, Gemini 2.0 Flash, Docker, GitHub Actions, Slack API, Sentry API
+
+{{< github repo="khadirullah/devops-incident-investigator" >}}
+
+---
 
 ### CI/CD Pipelines
 
@@ -80,9 +104,11 @@ Set up Kubernetes clusters with Deployments, Services, RBAC, Network Policies, I
 
 Provisioned AWS infrastructure using Terraform — VPCs, EC2 instances, load balancers, and security groups.
 
+---
+
 ### DiagView
 
-A lightweight (19KB) interactive SVG/Mermaid diagram viewer with search, export, and deep linking. Published to NPM.
+A lightweight interactive SVG/Mermaid diagram viewer with search, export, and deep linking. Published to npm with 169 unit tests and fully automated CI/CD.
 
 {{< github repo="khadirullah/diagview" >}}
 

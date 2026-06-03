@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Khadirullah Mohammad — Resume</title>
-  <meta name="description" content="Resume of Khadirullah Mohammad — DevOps & Infrastructure Engineer with 4+ years of IT infrastructure experience, specializing in AWS, Kubernetes, CI/CD, and Terraform.">
+  <meta name="description" content="Resume of Khadirullah Mohammad — DevOps & Cloud Engineer specializing in CI/CD, Kubernetes, AWS, Terraform, and incident automation.">
   <meta property="og:title" content="Khadirullah Mohammad — Resume">
-  <meta property="og:description" content="DevOps & Infrastructure Engineer | AWS, Kubernetes, Terraform, CI/CD">
+  <meta property="og:description" content="DevOps & Cloud Engineer | CI/CD, Kubernetes, AWS, Terraform">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://khadirullah.com/resume/">
   <link rel="canonical" href="https://khadirullah.com/resume/">
@@ -27,25 +27,34 @@
       box-sizing: border-box;
     }
 
+    /* --- Dark Mode (Default) --- */
     :root {
-      --color-primary: #0f172a;
-      --color-accent: #2563eb;
-      --color-accent-dark: #1d4ed8;
-      --color-accent-subtle: #dbeafe;
-      --color-text: #1e293b;
-      --color-text-secondary: #475569;
+      --color-primary: #0b1120;
+      --color-accent: #60a5fa;
+      --color-accent-dark: #3b82f6;
+      --color-text: #e2e8f0;
+      --color-text-secondary: #94a3b8;
       --color-text-muted: #64748b;
-      --color-border: #e2e8f0;
-      --color-bg: #ffffff;
-      --color-bg-page: #f1f5f9;
+      --color-border: #1e293b;
+      --color-bg: #0f172a;
+      --color-bg-page: #020617;
+      --color-header-subtitle: #93c5fd;
+      --color-contact: #94a3b8;
+      --color-contact-link: #60a5fa;
+      --color-contact-dot: #334155;
+      --color-summary-bold: #f1f5f9;
+      --color-entry-title: #f1f5f9;
+      --color-entry-li: #cbd5e1;
+      --color-skill-cat: #f1f5f9;
+      --color-project-link-hover: #93c5fd;
     }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       color: var(--color-text);
       background: var(--color-bg-page);
-      line-height: 1.5;
-      font-size: 13.5px;
+      line-height: 1.6;
+      font-size: 14.5px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -54,7 +63,7 @@
       max-width: 800px;
       margin: 0 auto;
       background: var(--color-bg);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
       border-radius: 6px;
       overflow: hidden;
     }
@@ -63,7 +72,7 @@
     .header {
       background: var(--color-primary);
       color: #fff;
-      padding: 36px 48px 28px;
+      padding: 32px 48px 24px;
       position: relative;
     }
 
@@ -88,20 +97,20 @@
     .header .subtitle {
       font-size: 15px;
       font-weight: 500;
-      color: #93c5fd;
-      margin-bottom: 16px;
+      color: var(--color-header-subtitle);
+      margin-bottom: 14px;
     }
 
     .contact-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 20px;
-      font-size: 12.5px;
-      color: #cbd5e1;
+      gap: 6px 22px;
+      font-size: 13px;
+      color: var(--color-contact);
     }
 
     .contact-row a {
-      color: #93c5fd;
+      color: var(--color-contact-link);
       text-decoration: none;
       transition: color 0.15s;
     }
@@ -115,7 +124,7 @@
       display: inline-block;
       width: 3px;
       height: 3px;
-      background: #475569;
+      background: var(--color-contact-dot);
       border-radius: 50%;
       margin-right: 8px;
       vertical-align: middle;
@@ -131,7 +140,7 @@
     }
 
     .section {
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .section:last-child {
@@ -139,31 +148,31 @@
     }
 
     .section-title {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--color-accent);
       border-bottom: 2px solid var(--color-accent);
-      padding-bottom: 5px;
+      padding-bottom: 6px;
       margin-bottom: 14px;
     }
 
     /* --- Summary --- */
     .summary p {
       color: var(--color-text-secondary);
-      font-size: 13.5px;
+      font-size: 14.5px;
       line-height: 1.7;
     }
 
     .summary b {
-      color: var(--color-text);
+      color: var(--color-summary-bold);
       font-weight: 600;
     }
 
     /* --- Experience & Education --- */
     .entry {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .entry:last-child {
@@ -178,20 +187,20 @@
     }
 
     .entry-title {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 600;
-      color: var(--color-text);
+      color: var(--color-entry-title);
     }
 
     .entry-date {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--color-text-muted);
       white-space: nowrap;
       font-weight: 500;
     }
 
     .entry-subtitle {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--color-text-secondary);
       margin-bottom: 8px;
       font-style: italic;
@@ -202,10 +211,10 @@
     }
 
     .entry li {
-      margin-bottom: 5px;
-      color: var(--color-text);
-      font-size: 13px;
-      line-height: 1.6;
+      margin-bottom: 6px;
+      color: var(--color-entry-li);
+      font-size: 14px;
+      line-height: 1.65;
     }
 
     .entry li::marker {
@@ -214,30 +223,30 @@
 
     .entry li b {
       font-weight: 600;
-      color: var(--color-text);
+      color: var(--color-entry-title);
     }
 
     /* --- Skills --- */
     .skills-grid {
       display: grid;
-      grid-template-columns: 175px 1fr;
-      gap: 8px 16px;
-      font-size: 13px;
+      grid-template-columns: 180px 1fr;
+      gap: 10px 18px;
+      font-size: 14px;
     }
 
     .skill-category {
       font-weight: 600;
-      color: var(--color-text);
+      color: var(--color-skill-cat);
     }
 
     .skill-items {
       color: var(--color-text-secondary);
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     /* --- Projects --- */
     .project-entry {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .project-entry:last-child {
@@ -246,8 +255,8 @@
 
     .project-name {
       font-weight: 600;
-      color: var(--color-text);
-      font-size: 13.5px;
+      color: var(--color-entry-title);
+      font-size: 14.5px;
     }
 
     .project-name a {
@@ -257,21 +266,21 @@
     }
 
     .project-name a:hover {
-      color: var(--color-accent-dark);
+      color: var(--color-project-link-hover);
       text-decoration: underline;
     }
 
     .project-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--color-text-secondary);
-      margin-top: 3px;
-      line-height: 1.55;
+      margin-top: 4px;
+      line-height: 1.6;
     }
 
     .project-tech {
-      font-size: 11.5px;
+      font-size: 12.5px;
       color: var(--color-accent);
-      margin-top: 4px;
+      margin-top: 5px;
       font-weight: 500;
       letter-spacing: 0.2px;
     }
@@ -280,7 +289,7 @@
     .additional-list {
       list-style: none;
       padding: 0;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--color-text-secondary);
       line-height: 1.7;
     }
@@ -290,7 +299,7 @@
     }
 
     .additional-list b {
-      color: var(--color-text);
+      color: var(--color-entry-title);
       font-weight: 600;
     }
 
@@ -336,7 +345,7 @@
       align-items: center;
       gap: 8px;
       padding: 9px 20px;
-      background: var(--color-accent);
+      background: var(--color-accent-dark);
       color: #fff;
       border: none;
       border-radius: 6px;
@@ -345,18 +354,18 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3);
     }
 
     .download-btn:hover {
-      background: var(--color-accent-dark);
+      background: #2563eb;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
     }
 
     .download-btn:active {
       transform: translateY(0);
-      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3);
     }
 
     .download-btn svg {
@@ -425,10 +434,25 @@
       }
     }
 
-    /* --- Print --- */
+    /* --- Print (White / Printer-Friendly) --- */
     @media print {
+      :root {
+        --color-accent: #2563eb;
+        --color-accent-dark: #1d4ed8;
+        --color-text: #1e293b;
+        --color-text-secondary: #475569;
+        --color-text-muted: #64748b;
+        --color-bg: #ffffff;
+        --color-bg-page: #ffffff;
+        --color-summary-bold: #1e293b;
+        --color-entry-title: #1e293b;
+        --color-entry-li: #1e293b;
+        --color-skill-cat: #1e293b;
+      }
+
       body {
         background: #fff;
+        color: #1e293b;
         font-size: 12.5px;
       }
 
@@ -437,12 +461,35 @@
         box-shadow: none;
         border-radius: 0;
         max-width: 100%;
+        background: #fff;
       }
 
       .header {
+        background: #fff !important;
+        color: #1e293b !important;
         padding: 28px 40px 22px;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .header h1 {
+        color: #0f172a !important;
+      }
+
+      .header .subtitle {
+        color: #2563eb !important;
+      }
+
+      .contact-row {
+        color: #475569 !important;
+      }
+
+      .contact-row a {
+        color: #1e293b !important;
+        text-decoration: none !important;
+      }
+
+      .contact-row span::before {
+        background: #94a3b8 !important;
       }
 
       .header::after {
@@ -503,7 +550,7 @@
     <!-- Header -->
     <div class="header">
       <h1>Khadirullah Mohammad</h1>
-      <div class="subtitle">DevOps & Infrastructure Engineer</div>
+      <div class="subtitle">DevOps & Cloud Engineer</div>
       <div class="contact-row">
         <span>India</span>
         <span><a href="mailto:contact@khadirullah.com">contact@khadirullah.com</a></span>
@@ -520,7 +567,7 @@
       <div class="section summary">
         <div class="section-title">Professional Summary</div>
         <p>
-          <b>DevOps & Infrastructure Engineer</b> with 4+ years of IT infrastructure experience — including system administration, network management, and Linux operations — now specializing in <b>CI/CD pipelines</b>, containerized deployments on <b>Kubernetes</b>, and cloud infrastructure automation on <b>AWS</b> using <b>Terraform</b>. Proven ability to independently own and operate end-to-end infrastructure from hardware through cloud. Skilled in eliminating manual toil through automation, Infrastructure as Code, and GitOps practices.
+          <b>DevOps & Cloud Engineer</b> with 4+ years of IT infrastructure experience — from bare-metal system administration and network management to <b>CI/CD pipelines</b>, <b>Kubernetes</b> orchestration, and cloud automation on <b>AWS</b> with <b>Terraform</b>. Built and shipped an <b>AI-powered incident correlation tool</b> integrating GitHub, Sentry, and Slack APIs using cross-source SQL joins. Proven ability to independently own end-to-end infrastructure and deliver under pressure. Skilled in eliminating manual toil through automation, Infrastructure as Code, and GitOps practices.
         </p>
       </div>
 
@@ -535,10 +582,10 @@
           </div>
           <div class="entry-subtitle">Independent · Remote</div>
           <ul>
-            <li>Built <b>CI/CD pipelines</b> using Jenkins and GitHub Actions — integrating SonarQube static analysis, Trivy container scanning, Docker image builds, and automated deployment to Kubernetes clusters.</li>
-            <li>Provisioned <b>AWS infrastructure</b> (VPC, EC2, ELB, S3, IAM) using <b>Terraform</b> with variable files, output values, and full init → plan → apply → destroy lifecycle management.</li>
-            <li>Deployed <b>Kubernetes</b> workloads with Deployments, Services (ClusterIP/NodePort/LoadBalancer), Ingress controllers, RBAC, NetworkPolicies, and SecurityContexts.</li>
-            <li>Configured <b>DNS and email security infrastructure</b> — SPF, DKIM, DMARC, and MX records in Cloudflare for custom domain email with Zoho, including alias routing and folder-based filtering rules.</li>
+            <li>Built an <b>AI-powered DevOps Incident Investigator</b> that correlates GitHub PRs, Sentry errors, and Slack messages using <b>cross-source SQL JOINs</b> via Coral — reducing incident triage from 15 minutes of tab-switching to a single unified view. Integrated <b>Gemini AI</b> for automated root-cause analysis with actionable fix suggestions.</li>
+            <li>Built <b>CI/CD pipelines</b> using Jenkins and GitHub Actions — integrating SonarQube static analysis, Trivy container scanning, Docker multi-stage builds, and automated deployment to Kubernetes clusters with AWS ELB.</li>
+            <li>Provisioned <b>AWS infrastructure</b> (VPC, EC2, ELB, S3, IAM, Route 53) using <b>Terraform</b> with modular configurations, variable files, and full lifecycle management.</li>
+            <li>Deployed <b>Kubernetes</b> workloads with Deployments, Services, Ingress controllers, RBAC, NetworkPolicies, and SecurityContexts on both local VMs and AWS.</li>
             <li>Built and published <b>DiagView</b>, an open-source npm package (v1.0.6, 169 unit tests), with a fully automated CI/CD pipeline: lint → test → build → publish to npm → deploy docs to GitHub Pages.</li>
           </ul>
         </div>
@@ -550,11 +597,11 @@
           </div>
           <div class="entry-subtitle">Bizrak Web Solutions · India · 4 yrs 5 mos</div>
           <ul>
-            <li>Sole engineer managing <b>end-to-end IT operations</b> for the organization — system provisioning, network administration, hardware maintenance, and security.</li>
-            <li>Administered <b>Linux and Windows systems</b>, handling OS installations, patch management, user provisioning, and troubleshooting across all workstations.</li>
+            <li>Sole engineer managing <b>end-to-end IT operations</b> for the organization — system provisioning, network administration, hardware maintenance, and security across all workstations.</li>
+            <li>Administered <b>Linux and Windows systems</b> — OS installations, patch management, user provisioning, and troubleshooting. Maintained uptime through proactive monitoring and incident resolution.</li>
             <li>Configured and maintained <b>network infrastructure</b> — routers (TP-Link, OpenWRT), WiFi access points with channel optimization, static IP assignments, VPN tunnels, and firewall rules.</li>
-            <li>Automated routine system administration tasks using <b>Bash scripts</b>, reducing manual provisioning time and ensuring consistent configurations across systems.</li>
-            <li>Deployed and managed <b>CCTV surveillance</b> and physical security systems, including network-attached camera configuration and monitoring setup.</li>
+            <li>Automated routine administration tasks using <b>Bash scripts</b>, reducing manual provisioning time and ensuring consistent configurations across systems.</li>
+            <li>Deployed and managed <b>CCTV surveillance</b> and physical security systems, including network-attached camera configuration and remote monitoring setup.</li>
           </ul>
         </div>
       </div>
@@ -564,7 +611,7 @@
         <div class="section-title">Technical Skills</div>
         <div class="skills-grid">
           <span class="skill-category">Cloud & IaC</span>
-          <span class="skill-items">AWS (EC2, S3, VPC, ELB, IAM, Route 53), Terraform, Ansible</span>
+          <span class="skill-items">AWS (EC2, S3, VPC, ELB, IAM, Route 53, CloudFormation), Terraform, Ansible</span>
 
           <span class="skill-category">Containers & Orchestration</span>
           <span class="skill-items">Docker, Docker Compose, Kubernetes (Deployments, Services, RBAC, Ingress, NetworkPolicies)</span>
@@ -572,11 +619,17 @@
           <span class="skill-category">CI/CD & DevOps</span>
           <span class="skill-items">Jenkins, GitHub Actions, SonarQube, Trivy, Git, Maven, npm</span>
 
+          <span class="skill-category">Scripting & Automation</span>
+          <span class="skill-items">Python (scripting, API integration, Flask), Bash, SQL, YAML</span>
+
+          <span class="skill-category">Monitoring & Observability</span>
+          <span class="skill-items">Prometheus, Grafana, Sentry (error tracking), Slack (incident alerting), Coral SQL (cross-source queries)</span>
+
           <span class="skill-category">Systems & Networking</span>
-          <span class="skill-items">Linux Administration (Fedora, Debian/Ubuntu), Bash Scripting, DNS, TCP/IP, QEMU/KVM, iptables</span>
+          <span class="skill-items">Linux Administration (Fedora, Debian/Ubuntu), DNS, TCP/IP, QEMU/KVM, iptables, SSL/TLS</span>
 
           <span class="skill-category">Security</span>
-          <span class="skill-items">SPF/DKIM/DMARC, SSL/TLS, IAM Policies, Cloudflare</span>
+          <span class="skill-items">SPF/DKIM/DMARC, IAM Policies, Fernet Encryption, Cloudflare, Token Management</span>
         </div>
       </div>
 
@@ -585,21 +638,21 @@
         <div class="section-title">Projects</div>
 
         <div class="project-entry">
-          <div class="project-name">DiagView — Open Source npm Package · <a href="https://github.com/khadirullah/diagview">github.com/khadirullah/diagview</a></div>
-          <div class="project-desc">Built a framework-agnostic, lightweight (19KB) interactive SVG/Mermaid diagram viewer with zoom, pan, search, and export. Published to npm (v1.0.6) with a fully automated GitHub Actions CI/CD pipeline — linting, 169 unit tests, semantic versioning, and automated npm publishing on tagged releases.</div>
+          <div class="project-name">DevOps Incident Investigator · <a href="https://github.com/khadirullah/devops-incident-investigator">GitHub</a></div>
+          <div class="project-desc">Full-stack incident correlation tool that JOINs GitHub PRs, Sentry errors, and Slack messages using cross-source SQL via Coral. Features a web dashboard with real-time incident timeline, AI-powered root-cause analysis (Gemini 2.0 Flash), one-click Slack alerting, natural-language-to-SQL queries, encrypted token storage (Fernet AES), and a custom Coral source spec for internal API monitoring. Dual interface: CLI (Python stdlib only) + Flask web dashboard. Dockerized with auto-configuring entrypoint.</div>
+          <div class="project-tech">Python · Flask · Coral SQL · Gemini AI · Docker · GitHub Actions · Slack API · Sentry API</div>
+        </div>
+
+        <div class="project-entry">
+          <div class="project-name">DiagView — Open Source npm Package · <a href="https://github.com/khadirullah/diagview">GitHub</a></div>
+          <div class="project-desc">Lightweight interactive SVG/Mermaid diagram viewer with zoom, pan, search, and export. Published to npm (v1.0.6) with a fully automated GitHub Actions CI/CD pipeline — linting, 169 unit tests, semantic versioning, and automated npm publishing on tagged releases.</div>
           <div class="project-tech">JavaScript · GitHub Actions · npm · Jest · Rollup · CI/CD</div>
         </div>
 
         <div class="project-entry">
           <div class="project-name">DNS & Email Security Infrastructure · <a href="https://khadirullah.com">khadirullah.com</a></div>
-          <div class="project-desc">Configured custom domain email with Zoho — set up SPF, DKIM, DMARC, and MX records in Cloudflare DNS. Implemented alias routing (contact@, firstname@), group aliases for platform accounts, and folder-based filtering rules for organized email management.</div>
+          <div class="project-desc">Configured custom domain email with Zoho — SPF, DKIM, DMARC, and MX records in Cloudflare DNS. Implemented alias routing, group aliases for platform accounts, and folder-based filtering rules.</div>
           <div class="project-tech">Cloudflare DNS · Zoho Mail · SPF · DKIM · DMARC · MX Records</div>
-        </div>
-
-        <div class="project-entry">
-          <div class="project-name">Personal Technical Blog · <a href="https://khadirullah.com">khadirullah.com</a></div>
-          <div class="project-desc">Built and deployed a technical blog using Hugo with the Blowfish theme, hosted on Cloudflare Pages with custom domain configuration. Features automated deployments via Git push, SEO optimization, and responsive design.</div>
-          <div class="project-tech">Hugo · Cloudflare Pages · Git · DNS · Custom Domain</div>
         </div>
 
       </div>
@@ -620,9 +673,11 @@
       <div class="section">
         <div class="section-title">Additional</div>
         <ul class="additional-list">
-          <li><b>Blog:</b> <a href="https://khadirullah.com">khadirullah.com</a> — Technical articles on DevOps, CI/CD, and cloud infrastructure</li>
-          <li><b>Open Source:</b> Maintainer of <a href="https://github.com/khadirullah/diagview">DiagView</a> — npm package with automated CI/CD pipeline, 169 unit tests, and GitHub Pages docs</li>
+          <li><b>Hackathon:</b> Pirates of the Coral-bean (WeMakeDevs, May 2026) — Built and submitted DevOps Incident Investigator as a solo developer</li>
+          <li><b>Blog:</b> <a href="https://khadirullah.com">khadirullah.com</a> — Technical articles on DevOps, CI/CD, incident management, and cloud infrastructure</li>
+          <li><b>Open Source:</b> Maintainer of <a href="https://github.com/khadirullah/diagview">DiagView</a> — npm package with automated CI/CD, 169 unit tests, GitHub Pages docs</li>
           <li><b>Lab Environment:</b> QEMU/KVM + virt-manager for local DevOps labs on Fedora & Debian</li>
+          <li><b>Certifications:</b> Pursuing CKA & AWS Solutions Architect</li>
         </ul>
       </div>
 
@@ -630,7 +685,7 @@
   </div>
 
   <div class="footer-note">
-    Last updated May 2026 · Best viewed on desktop · Use "Save as PDF" for a print-ready copy
+    Last updated June 2026 · Best viewed on desktop · Use "Save as PDF" for a print-ready copy
   </div>
 </body>
 
