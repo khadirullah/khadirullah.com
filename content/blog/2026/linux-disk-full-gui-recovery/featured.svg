@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background grid -->
+    <pattern id="bg-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1a2332" stroke-width="0.8"/>
+    </pattern>
+
+    <!-- Ambient glow blurs -->
+    <filter id="ambient" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="80" />
+    </filter>
+
+    <!-- Subtle glow for icons -->
+    <filter id="icon-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Title gradient -->
+    <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f87171" />
+      <stop offset="50%" stop-color="#fb923c" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Recovery gradient (red to green) -->
+    <linearGradient id="recovery-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Disk fill gradient -->
+    <linearGradient id="disk-full" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#dc2626" />
+    </linearGradient>
+
+    <linearGradient id="disk-ok" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+  </defs>
+
+  <!-- ===== BACKGROUND ===== -->
+  <rect width="1200" height="630" fill="#0b1120" />
+  <rect width="1200" height="630" fill="url(#bg-grid)" />
+
+  <!-- Ambient color orbs -->
+  <ellipse cx="260" cy="80" rx="300" ry="200" fill="#dc2626" opacity="0.1" filter="url(#ambient)" />
+  <ellipse cx="940" cy="550" rx="350" ry="250" fill="#0ea5e9" opacity="0.12" filter="url(#ambient)" />
+  <ellipse cx="600" cy="350" rx="200" ry="150" fill="#22c55e" opacity="0.06" filter="url(#ambient)" />
+
+  <!-- ===== LEFT SIDE: TEXT ===== -->
+
+  <!-- Subtitle -->
+  <text x="210" y="200" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="16" fill="#64748b" font-weight="600" letter-spacing="5">REAL-WORLD TROUBLESHOOTING</text>
+
+  <!-- Main Title -->
+  <text x="210" y="270" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="56" fill="url(#title-grad)" font-weight="800">Full Disk</text>
+  <text x="210" y="340" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="56" fill="#f1f5f9" font-weight="800">Killed My</text>
+  <text x="210" y="410" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="56" fill="#f1f5f9" font-weight="800">Linux GUI</text>
+
+  <!-- Tech tags -->
+  <g transform="translate(210, 445)">
+    <!-- LightDM -->
+    <rect x="0" y="0" width="110" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="55" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">LightDM</text>
+
+    <!-- systemd -->
+    <rect x="125" y="0" width="110" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="180" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">systemd</text>
+
+    <!-- Disk -->
+    <rect x="250" y="0" width="75" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="287" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">Disk</text>
+
+    <!-- tty -->
+    <rect x="340" y="0" width="70" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="375" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">tty1</text>
+  </g>
+
+  <!-- ===== RIGHT SIDE: RECOVERY FLOW ===== -->
+  <g transform="translate(670, 100)">
+
+    <!-- Vertical connection line -->
+    <line x1="200" y1="55" x2="200" y2="400" stroke="url(#recovery-grad)" stroke-width="2" stroke-dasharray="6,6" opacity="0.5" />
+
+    <!-- Node 1: Disk Full (PROBLEM) -->
+    <g transform="translate(0, 0)" filter="url(#icon-glow)">
+      <rect x="100" y="10" width="200" height="55" rx="12" fill="#0f1a2e" stroke="#ef4444" stroke-width="1.8" />
+      <text x="140" y="43" font-family="monospace" font-size="20">💀</text>
+      <text x="170" y="43" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#f87171" font-weight="700">100% FULL</text>
+      <!-- Pulsing red dot -->
+      <circle cx="310" cy="37" r="5" fill="#ef4444">
+        <animate attributeName="r" values="4;7;4" dur="1.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Arrow 1 -->
+    <polygon points="200,73 195,65 205,65" fill="#ef4444" opacity="0.6" />
+
+    <!-- Node 2: Diagnose -->
+    <g transform="translate(0, 85)" filter="url(#icon-glow)">
+      <rect x="105" y="10" width="190" height="55" rx="12" fill="#0f1a2e" stroke="#fb923c" stroke-width="1.5" />
+      <text x="140" y="43" font-family="monospace" font-size="20">🔍</text>
+      <text x="170" y="43" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#fdba74" font-weight="600">Diagnose</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <polygon points="200,158 195,150 205,150" fill="#fb923c" opacity="0.6" />
+
+    <!-- Node 3: Clean -->
+    <g transform="translate(0, 170)" filter="url(#icon-glow)">
+      <rect x="105" y="10" width="190" height="55" rx="12" fill="#0f1a2e" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="140" y="43" font-family="monospace" font-size="20">🧹</text>
+      <text x="170" y="43" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#7dd3fc" font-weight="600">apt clean</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <polygon points="200,243 195,235 205,235" fill="#38bdf8" opacity="0.6" />
+
+    <!-- Node 4: Recovered (SUCCESS) -->
+    <g transform="translate(0, 255)" filter="url(#icon-glow)">
+      <rect x="100" y="10" width="200" height="55" rx="12" fill="#0f1a2e" stroke="#22c55e" stroke-width="2" />
+      <text x="140" y="44" font-family="monospace" font-size="20">🚀</text>
+      <text x="170" y="44" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#4ade80" font-weight="700">GUI BACK!</text>
+      <!-- Pulsing green dot -->
+      <circle cx="310" cy="37" r="5" fill="#22c55e">
+        <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Disk usage bars -->
+    <g transform="translate(80, 355)">
+      <!-- Before bar -->
+      <text x="0" y="12" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#64748b" font-weight="600">BEFORE</text>
+      <rect x="65" y="0" width="200" height="16" rx="8" fill="#1e293b" />
+      <rect x="65" y="0" width="200" height="16" rx="8" fill="url(#disk-full)" />
+      <text x="275" y="12" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#f87171" font-weight="700"> 100%</text>
+
+      <!-- After bar -->
+      <text x="0" y="38" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#64748b" font-weight="600">AFTER</text>
+      <rect x="65" y="26" width="200" height="16" rx="8" fill="#1e293b" />
+      <rect x="65" y="26" width="138" height="16" rx="8" fill="url(#disk-ok)" />
+      <text x="275" y="38" font-family="'Inter', system-ui, sans-serif" font-size="11" fill="#4ade80" font-weight="700"> 69%</text>
+    </g>
+  </g>
+</svg>
