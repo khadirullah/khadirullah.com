@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#0c1425"/>
+    </linearGradient>
+
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#162032"/>
+    </linearGradient>
+
+    <!-- Accent gradients -->
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="accentGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#4ade80"/>
+    </linearGradient>
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Subtle background circles -->
+  <circle cx="150" cy="500" r="200" fill="#1e3a5f" opacity="0.08"/>
+  <circle cx="1050" cy="130" r="250" fill="#1e3a5f" opacity="0.06"/>
+
+  <!-- Content Group with Safe-Zone Margins -->
+  <g transform="translate(90, 47) scale(0.85)">
+    <!-- ==================== HEADER ==================== -->
+    <text x="600" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="28" fill="#f8fafc" letter-spacing="0.5">QEMU/KVM Hypervisor &amp; Networking</text>
+    <text x="600" y="98" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="16" fill="#64748b">How Virt-Manager, QEMU, KVM, and Bridge Networks Integrate</text>
+
+    <!-- ==================== LEFT CARD: User Space ==================== -->
+    <g transform="translate(40, 140)">
+      <rect width="270" height="340" rx="16" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <rect width="270" height="4" rx="2" fill="url(#accentOrange)" y="0"/>
+
+      <text x="135" y="45" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">User Space</text>
+      <text x="135" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#64748b">Management &amp; Emulation</text>
+
+      <!-- Virt-Manager Box -->
+      <g transform="translate(20, 95)">
+        <rect width="230" height="100" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1" opacity="0.8"/>
+        <!-- Window title bar -->
+        <rect width="230" height="20" rx="4" fill="#1e293b"/>
+        <circle cx="15" cy="10" r="3" fill="#ef4444"/>
+        <circle cx="25" cy="10" r="3" fill="#eab308"/>
+        <circle cx="35" cy="10" r="3" fill="#22c55e"/>
+        <text x="115" y="14" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="600" font-size="10" fill="#94a3b8">Virt-Manager</text>
+        <!-- Content -->
+        <text x="15" y="45" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#f8fafc">🖥️ amzn-devops-vm1 (Running)</text>
+        <text x="15" y="65" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#64748b">CPU: 1 | RAM: 1024 MiB</text>
+        <text x="15" y="85" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#64748b">Disk: amzn-devops-vm1.qcow2</text>
+      </g>
+
+      <!-- QEMU Emulator Box -->
+      <g transform="translate(20, 215)">
+        <rect width="230" height="100" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="115" y="30" text-anchor="middle" font-family="'Courier New', monospace" font-weight="700" font-size="14" fill="#f59e0b">QEMU Process</text>
+        <line x1="20" y1="42" x2="210" y2="42" stroke="#1e293b" stroke-width="1"/>
+        <text x="15" y="62" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">-m 1024 -smp 1</text>
+        <text x="15" y="78" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">-drive file=vm1.qcow2</text>
+        <text x="15" y="94" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">-netdev bridge,br=virbr0</text>
+      </g>
+    </g>
+
+    <!-- ==================== MIDDLE CARD: Kernel Space ==================== -->
+    <g transform="translate(370, 140)">
+      <rect width="320" height="340" rx="16" fill="url(#cardGrad)" stroke="#3b82f6" stroke-width="1.5"/>
+      <rect width="320" height="4" rx="2" fill="url(#accentBlue)" y="0"/>
+
+      <text x="160" y="45" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">Host Kernel Space</text>
+      <text x="160" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#64748b">Hardware-Accelerated Execution</text>
+
+      <!-- KVM Module -->
+      <g transform="translate(20, 95)">
+        <rect width="280" height="100" rx="8" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="140" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15" fill="#f8fafc">KVM Kernel Module</text>
+        <text x="140" y="60" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11.5" fill="#93c5fd">Acts as hypervisor, schedules VM vCPUs</text>
+        <text x="140" y="80" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11.5" fill="#93c5fd">directly on physical CPU cores</text>
+      </g>
+
+      <!-- Hardware Layer -->
+      <g transform="translate(20, 215)">
+        <rect width="280" height="100" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="140" y="32" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="14" fill="#94a3b8">Physical CPU (x86_64 / ARM)</text>
+        <line x1="20" y1="45" x2="260" y2="45" stroke="#1e293b" stroke-width="1"/>
+        <!-- Chip representation -->
+        <g transform="translate(110, 55)" stroke="#3b82f6" stroke-width="1.5" fill="none">
+          <rect x="10" y="10" width="30" height="30" rx="2"/>
+          <line x1="5" y1="18" x2="10" y2="18"/>
+          <line x1="5" y1="25" x2="10" y2="25"/>
+          <line x1="5" y1="32" x2="10" y2="32"/>
+          <line x1="40" y1="18" x2="45" y2="18"/>
+          <line x1="40" y1="25" x2="45" y2="25"/>
+          <line x1="40" y1="32" x2="45" y2="32"/>
+          <line x1="18" y1="5" x2="18" y2="10"/>
+          <line x1="25" y1="5" x2="25" y2="10"/>
+          <line x1="32" y1="5" x2="32" y2="10"/>
+          <line x1="18" y1="40" x2="18" y2="45"/>
+          <line x1="25" y1="40" x2="25" y2="45"/>
+          <line x1="32" y1="40" x2="32" y2="45"/>
+        </g>
+        <text x="170" y="78" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11" fill="#4ade80">Intel VT-x / AMD-V</text>
+      </g>
+    </g>
+
+    <!-- ==================== RIGHT CARD: Networking ==================== -->
+    <g transform="translate(750, 140)">
+      <rect width="270" height="340" rx="16" fill="url(#cardGrad)" stroke="#22c55e" stroke-width="1.5"/>
+      <rect width="270" height="4" rx="2" fill="url(#accentGreen)" y="0"/>
+
+      <text x="135" y="45" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">Virtual Network</text>
+      <text x="135" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#64748b">NAT Bridge (virbr0)</text>
+
+      <!-- Network details -->
+      <g transform="translate(15, 95)">
+        <rect width="240" height="220" rx="8" fill="#0f172a" stroke="#166534" stroke-width="1"/>
+        <text x="120" y="25" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="13" fill="#4ade80">Subnet: 192.168.122.0/24</text>
+        <line x1="15" y1="38" x2="225" y2="38" stroke="#1e293b" stroke-width="1"/>
+
+        <!-- Switch port nodes -->
+        <circle cx="40" cy="65" r="8" fill="#14532d"/>
+        <circle cx="40" cy="65" r="3" fill="#4ade80"/>
+        <text x="60" y="69" font-family="'Segoe UI', system-ui, sans-serif" font-size="11.5" fill="#f8fafc">Bridge Interface (virbr0)</text>
+
+        <circle cx="40" cy="110" r="8" fill="#14532d"/>
+        <circle cx="40" cy="110" r="3" fill="#4ade80"/>
+        <text x="60" y="114" font-family="'Segoe UI', system-ui, sans-serif" font-size="11.5" fill="#94a3b8">DHCP Server (dnsmasq)</text>
+
+        <circle cx="40" cy="155" r="8" fill="#14532d"/>
+        <circle cx="40" cy="155" r="3" fill="#4ade80"/>
+        <text x="60" y="159" font-family="'Segoe UI', system-ui, sans-serif" font-size="11.5" fill="#94a3b8">NAT Rule (iptables/nftables)</text>
+
+        <line x1="15" y1="185" x2="225" y2="185" stroke="#1e293b" stroke-width="1"/>
+        <!-- Physical card interface forwarding -->
+        <text x="120" y="206" text-anchor="middle" font-family="'Courier New', monospace" font-size="10.5" fill="#64748b">Route -> Outbound -> eth0 / wlan0</text>
+      </g>
+    </g>
+
+    <!-- ==================== CONNECTING ARROWS ==================== -->
+    <!-- QEMU to KVM Module (ioctl / dev/kvm API call) -->
+    <g filter="url(#glow)">
+      <path d="M 270 330 Q 320 310 370 290" stroke="url(#arrowGrad)" stroke-width="2"/>
+      <polygon points="364,286 372,289 366,296" fill="#3b82f6"/>
+    </g>
+    <text x="320" y="285" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9.5" fill="#64748b">/dev/kvm</text>
+
+    <!-- KVM to Hardware -->
+    <g filter="url(#glow)">
+      <path d="M 530 195 L 530 215" stroke="url(#arrowGrad)" stroke-width="2"/>
+      <polygon points="526,207 530,215 534,207" fill="#3b82f6"/>
+    </g>
+
+    <!-- QEMU Bridge hookup to Virtual Network -->
+    <g filter="url(#glow)">
+      <path d="M 270 375 C 500 395 500 395 750 375" stroke="url(#arrowGrad)" stroke-width="2" stroke-dasharray="4,4"/>
+      <polygon points="742,371 750,375 742,379" fill="#22c55e"/>
+    </g>
+    <text x="510" y="372" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">tap interface (vnet0)</text>
+  </g>
+</svg>

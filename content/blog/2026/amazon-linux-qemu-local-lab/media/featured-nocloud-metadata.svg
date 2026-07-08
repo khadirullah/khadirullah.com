@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#0c1425"/>
+    </linearGradient>
+
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#162032"/>
+    </linearGradient>
+
+    <!-- Accent gradients -->
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="accentGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#4ade80"/>
+    </linearGradient>
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Subtle background circles -->
+  <circle cx="150" cy="500" r="200" fill="#1e3a5f" opacity="0.08"/>
+  <circle cx="1050" cy="130" r="250" fill="#1e3a5f" opacity="0.06"/>
+
+  <!-- Content Group with Safe-Zone Margins -->
+  <g transform="translate(90, 47) scale(0.85)">
+    <!-- ==================== HEADER ==================== -->
+    <text x="600" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="28" fill="#f8fafc" letter-spacing="0.5">Metadata Sources: Local NoCloud vs AWS EC2</text>
+    <text x="600" y="98" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="16" fill="#64748b">How Cloud-Init loads configuration across different environments</text>
+
+    <!-- ==================== LEFT CARD: Local NoCloud ==================== -->
+    <g transform="translate(60, 150)">
+      <rect width="440" height="330" rx="16" fill="url(#cardGrad)" stroke="#3b82f6" stroke-width="1.5" filter="url(#glow)"/>
+      <rect width="440" height="4" rx="2" fill="url(#accentBlue)" y="0"/>
+      
+      <text x="220" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">Local Homelab Setup: NoCloud</text>
+
+      <g transform="translate(20, 70)" font-family="'Segoe UI', system-ui, sans-serif">
+        <text x="15" y="20" font-weight="700" font-size="13.5" fill="#60a5fa">Media Source:</text>
+        <text x="15" y="40" font-size="15" fill="#f8fafc" font-weight="700">💾 CDROM ISO disk (seed.iso)</text>
+        
+        <text x="15" y="80" font-weight="700" font-size="13.5" fill="#60a5fa">Protocol:</text>
+        <text x="15" y="100" font-size="14" fill="#94a3b8">Filesystem mount (volume labeled "cidata")</text>
+
+        <text x="15" y="140" font-weight="700" font-size="13.5" fill="#60a5fa">Offline Capability:</text>
+        <text x="15" y="160" font-size="14" fill="#4ade80" font-weight="700">100% Offline (Requires no networking)</text>
+
+        <!-- Configuration files -->
+        <g transform="translate(15, 185)">
+          <rect width="370" height="70" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+          <text x="15" y="24" font-family="'Courier New', monospace" font-size="11" fill="#fbbf24">📄 user-data  (SSH keys &amp; script config)</text>
+          <text x="15" y="48" font-family="'Courier New', monospace" font-size="11" fill="#fbbf24">📄 meta-data  (instance-id &amp; hostname)</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ==================== RIGHT CARD: AWS EC2 IMDSv2 ==================== -->
+    <g transform="translate(560, 150)">
+      <rect width="480" height="330" rx="16" fill="url(#cardGrad)" stroke="#a78bfa" stroke-width="1"/>
+      <rect width="480" height="4" rx="2" fill="url(#accentPurple)" y="0"/>
+      
+      <text x="240" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">AWS EC2 Cloud Setup: IMDSv2</text>
+
+      <g transform="translate(20, 70)" font-family="'Segoe UI', system-ui, sans-serif">
+        <text x="15" y="20" font-weight="700" font-size="13.5" fill="#c084fc">Media Source:</text>
+        <text x="15" y="40" font-size="15" fill="#f8fafc" font-weight="700">🌐 AWS Metadata Service (IMDS)</text>
+        
+        <text x="15" y="80" font-weight="700" font-size="13.5" fill="#c084fc">Protocol:</text>
+        <text x="15" y="100" font-size="14" fill="#94a3b8">HTTP GET requests with session tokens</text>
+
+        <text x="15" y="140" font-weight="700" font-size="13.5" fill="#c084fc">Offline Capability:</text>
+        <text x="15" y="160" font-size="14" fill="#f87171" font-weight="700">0% Offline (Requires VPC &amp; IP routing)</text>
+
+        <!-- IMDSv2 API Endpoints -->
+        <g transform="translate(15, 185)">
+          <rect width="410" height="70" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+          <text x="15" y="24" font-family="'Courier New', monospace" font-size="10.5" fill="#a78bfa">GET http://169.254.169.254/latest/user-data</text>
+          <text x="15" y="48" font-family="'Courier New', monospace" font-size="10.5" fill="#a78bfa">GET http://169.254.169.254/latest/meta-data/...</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

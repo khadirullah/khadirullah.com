@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#0c1425"/>
+    </linearGradient>
+
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#162032"/>
+    </linearGradient>
+
+    <!-- Accent gradients -->
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="accentGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#4ade80"/>
+    </linearGradient>
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Subtle background circles -->
+  <circle cx="150" cy="500" r="200" fill="#1e3a5f" opacity="0.08"/>
+  <circle cx="1050" cy="130" r="250" fill="#1e3a5f" opacity="0.06"/>
+
+  <!-- Content Group with Safe-Zone Margins -->
+  <g transform="translate(90, 47) scale(0.85)">
+    <!-- ==================== HEADER ==================== -->
+    <text x="600" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="28" fill="#f8fafc" letter-spacing="0.5">Local Lab vs AWS EC2 Cloud Costs</text>
+    <text x="600" y="98" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="16" fill="#64748b">Comparison of local QEMU virtualization against AWS billing metrics</text>
+
+    <!-- ==================== LEFT CARD: AWS Expenses ==================== -->
+    <g transform="translate(60, 150)">
+      <rect width="440" height="330" rx="16" fill="url(#cardGrad)" stroke="#ef4444" stroke-width="1"/>
+      <rect width="440" height="4" rx="2" fill="#ef4444" y="0"/>
+      <text x="220" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">AWS EC2 Cloud Sandbox</text>
+
+      <!-- Cost metrics -->
+      <g transform="translate(20, 70)" font-family="'Segoe UI', system-ui, sans-serif">
+        <!-- Metric 1 -->
+        <text x="15" y="24" font-weight="700" font-size="13" fill="#ef4444">3x t3.medium Instances:</text>
+        <text x="15" y="44" font-size="20" fill="#f8fafc" font-weight="800">$0.125 / hour</text>
+        
+        <!-- Metric 2 -->
+        <text x="15" y="85" font-weight="700" font-size="13" fill="#ef4444">Estimated Monthly Bill:</text>
+        <text x="15" y="105" font-size="20" fill="#f8fafc" font-weight="800">~$90.00 / month</text>
+        
+        <!-- Details -->
+        <text x="15" y="145" font-size="12.5" fill="#94a3b8">💳 EBS Block Storage volume rates apply</text>
+        <text x="15" y="165" font-size="12.5" fill="#94a3b8">💳 Elastic IP &amp; NAT Gateway hourly charges</text>
+        <text x="15" y="185" font-size="12.5" fill="#94a3b8">💳 Outbound internet data egress fees</text>
+      </g>
+
+      <!-- Alert -->
+      <g transform="translate(20, 265)">
+        <rect width="400" height="42" rx="8" fill="#450a0a" stroke="#7f1d1d" stroke-width="1"/>
+        <text x="200" y="26" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#fca5a5" font-weight="700">⚠️ Warning: Costs accrue even when VM is idle</text>
+      </g>
+    </g>
+
+    <!-- ==================== RIGHT CARD: Local Lab ==================== -->
+    <g transform="translate(560, 150)">
+      <rect width="480" height="330" rx="16" fill="url(#cardGrad)" stroke="#22c55e" stroke-width="1.5" filter="url(#glow)"/>
+      <rect width="480" height="4" rx="2" fill="url(#accentGreen)" y="0"/>
+      <text x="240" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">Local QEMU/KVM Hypervisor Lab</text>
+
+      <!-- Cost metrics -->
+      <g transform="translate(20, 70)" font-family="'Segoe UI', system-ui, sans-serif">
+        <!-- Metric 1 -->
+        <text x="15" y="24" font-weight="700" font-size="13" fill="#22c55e">3x Local Headless VMs:</text>
+        <text x="15" y="44" font-size="20" fill="#4ade80" font-weight="800">$0.00 / hour</text>
+        
+        <!-- Metric 2 -->
+        <text x="15" y="85" font-weight="700" font-size="13" fill="#22c55e">Estimated Monthly Bill:</text>
+        <text x="15" y="105" font-size="20" fill="#4ade80" font-weight="800">$0.00 / month</text>
+
+        <!-- Details -->
+        <text x="15" y="145" font-size="12.5" fill="#94a3b8">⚡ Boot time: ~5 seconds (Instant-provisioning)</text>
+        <text x="15" y="165" font-size="12.5" fill="#94a3b8">⚡ Resource footprint: ~100-150MB RAM at idle</text>
+        <text x="15" y="185" font-size="12.5" fill="#94a3b8">⚡ Storage: QCOW2 linked clones save GBs of disk</text>
+      </g>
+
+      <!-- Success Badge -->
+      <g transform="translate(20, 265)">
+        <rect width="440" height="42" rx="8" fill="#062f17" stroke="#166534" stroke-width="1"/>
+        <text x="220" y="26" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4ade80" font-weight="700">🎉 100% Free DevOps &amp; Sysadmin Playground</text>
+      </g>
+    </g>
+  </g>
+</svg>

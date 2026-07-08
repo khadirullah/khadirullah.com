@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#0c1425"/>
+    </linearGradient>
+
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#162032"/>
+    </linearGradient>
+
+    <!-- Accent gradients -->
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="accentGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#4ade80"/>
+    </linearGradient>
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Subtle background circles -->
+  <circle cx="150" cy="500" r="200" fill="#1e3a5f" opacity="0.08"/>
+  <circle cx="1050" cy="130" r="250" fill="#1e3a5f" opacity="0.06"/>
+
+  <!-- Content Group with Safe-Zone Margins -->
+  <g transform="translate(90, 47) scale(0.85)">
+    <!-- ==================== HEADER ==================== -->
+    <text x="600" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="28" fill="#f8fafc" letter-spacing="0.5">DevOps Container Playground</text>
+    <text x="600" y="98" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="16" fill="#64748b">Running Docker containers inside your local Amazon Linux VM</text>
+
+    <!-- ==================== LEFT CARD: Host Workstation ==================== -->
+    <g transform="translate(40, 150)">
+      <rect width="280" height="330" rx="16" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <rect width="280" height="4" rx="2" fill="url(#accentOrange)" y="0"/>
+
+      <text x="140" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15.5" fill="#f8fafc">Host Workstation</text>
+      <text x="140" y="55" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#64748b">Web Browser &amp; CLI</text>
+
+      <!-- Web Browser Mockup -->
+      <g transform="translate(20, 90)">
+        <rect width="240" height="100" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+        <rect width="240" height="20" rx="4" fill="#1e293b"/>
+        <circle cx="12" cy="10" r="3" fill="#ef4444"/>
+        <circle cx="22" cy="10" r="3" fill="#eab308"/>
+        <circle cx="32" cy="10" r="3" fill="#22c55e"/>
+        <rect x="48" y="4" width="180" height="12" rx="3" fill="#0f172a"/>
+        <text x="54" y="13" font-family="'Courier New', monospace" font-size="8.5" fill="#94a3b8">http://192.168.122.101:8080</text>
+        
+        <!-- Browser output -->
+        <text x="120" y="58" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11" fill="#22c55e">Welcome to nginx!</text>
+        <text x="120" y="76" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#94a3b8">Served from Amazon Linux VM container</text>
+      </g>
+
+      <!-- Terminal Request -->
+      <g transform="translate(20, 210)">
+        <rect width="240" height="95" rx="8" fill="#05070c" stroke="#334155" stroke-width="1"/>
+        <text x="15" y="25" font-family="'Courier New', monospace" font-size="10.5" fill="#f59e0b">$ curl -I 192.168.122.101:8080</text>
+        <text x="15" y="48" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">HTTP/1.1 200 OK</text>
+        <text x="15" y="64" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">Server: nginx/1.25.3</text>
+        <text x="15" y="80" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">Content-Type: text/html</text>
+      </g>
+    </g>
+
+    <!-- ==================== RIGHT CARD: Amazon Linux VM ==================== -->
+    <g transform="translate(420, 150)">
+      <rect width="640" height="330" rx="16" fill="url(#cardGrad)" stroke="#22c55e" stroke-width="1.5" filter="url(#glow)"/>
+      <rect width="640" height="4" rx="2" fill="url(#accentGreen)" y="0"/>
+
+      <text x="30" y="35" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="16" fill="#f8fafc">Amazon Linux VM (192.168.122.101)</text>
+      <text x="30" y="55" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#94a3b8">Headless Server running Docker Daemon</text>
+
+      <!-- Docker Daemon container box -->
+      <g transform="translate(25, 80)">
+        <rect width="590" height="225" rx="12" fill="#0b0f19" stroke="#1e293b" stroke-width="1.5"/>
+        
+        <!-- Docker Header label -->
+        <rect x="15" y="12" width="110" height="24" rx="12" fill="#1d4ed8" stroke="#3b82f6" stroke-width="1"/>
+        <text x="70" y="28" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#ffffff">Docker Engine</text>
+
+        <!-- Container 1: Nginx -->
+        <g transform="translate(15, 55)">
+          <rect width="260" height="145" rx="8" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+          <rect width="260" height="24" rx="4" fill="#1e3a8a"/>
+          <text x="130" y="16" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#f8fafc">Container: Nginx Web Server</text>
+          
+          <g font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8" transform="translate(15, 45)">
+            <text x="0" y="15">Image: nginx:alpine</text>
+            <text x="0" y="35">Status: Up 4 hours</text>
+            <text x="0" y="55" fill="#22c55e">Port Map: 8080:80</text>
+            <text x="0" y="75">Path: /usr/share/nginx/html</text>
+          </g>
+        </g>
+
+        <!-- Container 2: Redis -->
+        <g transform="translate(305, 55)">
+          <rect width="260" height="145" rx="8" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+          <rect width="260" height="24" rx="4" fill="#581c87"/>
+          <text x="130" y="16" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#f8fafc">Container: Redis Cache</text>
+          
+          <g font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8" transform="translate(15, 45)">
+            <text x="0" y="15">Image: redis:7-alpine</text>
+            <text x="0" y="35">Status: Up 4 hours</text>
+            <text x="0" y="55" fill="#c084fc">Port Map: 6379:6379</text>
+            <text x="0" y="75">Memory Limit: 256MB</text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- Connection traffic line -->
+    <g filter="url(#glow)">
+      <path d="M 320 240 L 460 240" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="4,4"/>
+      <polygon points="452,236 460,240 452,244" fill="#22c55e"/>
+    </g>
+    <text x="390" y="230" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9.5" fill="#64748b" font-weight="700">Port 8080</text>
+  </g>
+</svg>
