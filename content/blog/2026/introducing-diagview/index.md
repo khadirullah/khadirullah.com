@@ -333,15 +333,15 @@ The project also uses:
 - **Husky** — pre-commit hooks that run lint-staged
 - **lint-staged** — runs ESLint + Prettier only on changed files
 - **release-it** — automated version bumping, changelog generation, and npm publishing
-- **size-limit** — CI fails if bundle size exceeds the budget (34 KB UMD, 38 KB ESM)
+- **size-limit** — CI fails if bundle size exceeds the budget (140 KB UMD, 150 KB ESM)
 
 ## Bundle Size
 
 | Metric | Size |
 |--------|------|
-| **UMD Minified** | ~34 KB |
-| **ESM Minified** | ~38 KB |
-| **Gzipped (Transfer)** | **~19 KB** |
+| **UMD Minified** | ~134 KB |
+| **ESM Minified** | ~140 KB |
+| **Gzipped (Transfer)** | **~38 KB** |
 
 For context, that's smaller than a single hero image. And it includes all CSS, SVG icons, and the entire UI framework.
 
