@@ -1,0 +1,342 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#0c1425"/>
+    </linearGradient>
+
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#162032"/>
+    </linearGradient>
+
+    <!-- Accent gradients -->
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+
+    <linearGradient id="accentGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#4ade80"/>
+    </linearGradient>
+
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Subtle background circles -->
+  <circle cx="200" cy="480" r="220" fill="#1e3a5f" opacity="0.07"/>
+  <circle cx="1000" cy="150" r="280" fill="#1e3a5f" opacity="0.05"/>
+
+  <!-- Content Group with Safe-Zone Margins -->
+  <g transform="translate(90, 47) scale(0.85)">
+
+    <!-- ==================== HEADER ==================== -->
+    <text x="600" y="60" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="30" fill="#f8fafc" letter-spacing="0.5">Linked Clones in Virt-Manager</text>
+    <text x="600" y="95" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="16" fill="#64748b">GUI Workflow  •  Copy-on-Write  •  Save Disk Space</text>
+
+    <!-- ==================== LEFT: Master Template ==================== -->
+    <g transform="translate(60, 145)">
+      <!-- Card background -->
+      <rect width="300" height="370" rx="16" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.5" opacity="0.95"/>
+
+      <!-- Top accent bar -->
+      <rect width="300" height="4" rx="2" fill="url(#accentOrange)" y="0"/>
+
+      <!-- Lock icon (read-only) -->
+      <g transform="translate(120, 30)">
+        <!-- Disk platters icon -->
+        <ellipse cx="30" cy="45" rx="32" ry="12" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.7"/>
+        <ellipse cx="30" cy="35" rx="32" ry="12" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.5"/>
+        <ellipse cx="30" cy="25" rx="32" ry="12" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.3"/>
+        <line x1="-2" y1="25" x2="-2" y2="45" stroke="#f59e0b" stroke-width="2" opacity="0.4"/>
+        <line x1="62" y1="25" x2="62" y2="45" stroke="#f59e0b" stroke-width="2" opacity="0.4"/>
+        <!-- Lock overlay -->
+        <g transform="translate(42, -5)">
+          <rect x="0" y="10" width="16" height="12" rx="2" fill="#f59e0b" opacity="0.8"/>
+          <path d="M3 10 V6 C3 2 13 2 13 6 V10" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.8"/>
+        </g>
+      </g>
+
+      <!-- Title -->
+      <text x="150" y="110" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="20" fill="#f8fafc">Master Template</text>
+      <text x="150" y="132" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#f59e0b">read-only base layer</text>
+
+      <!-- File info box -->
+      <g transform="translate(25, 152)">
+        <rect width="250" height="40" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="125" y="17" text-anchor="middle" font-family="'Courier New', monospace" font-size="12" fill="#94a3b8">al2023-master.qcow2</text>
+        <text x="125" y="33" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#f59e0b" font-weight="700">~1.8 GB</text>
+      </g>
+
+      <!-- Details -->
+      <g transform="translate(30, 210)">
+        <circle cx="8" cy="8" r="3" fill="#f59e0b"/>
+        <text x="20" y="12" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" fill="#94a3b8">Original cloud image</text>
+      </g>
+      <g transform="translate(30, 235)">
+        <circle cx="8" cy="8" r="3" fill="#f59e0b"/>
+        <text x="20" y="12" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" fill="#94a3b8">Never boot directly</text>
+      </g>
+      <g transform="translate(30, 260)">
+        <circle cx="8" cy="8" r="3" fill="#f59e0b"/>
+        <text x="20" y="12" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" fill="#94a3b8">Stored in templates pool</text>
+      </g>
+
+      <!-- Storage pool badge -->
+      <g transform="translate(55, 300)">
+        <rect width="190" height="32" rx="16" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+        <text x="95" y="21" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#f59e0b">📁 Storage Pool: templates</text>
+      </g>
+    </g>
+
+    <!-- ==================== ARROWS: Master → Clones ==================== -->
+    <!-- Arrow to Clone 1 (top) -->
+    <g filter="url(#glow)">
+      <path d="M365 270 C420 270 420 210 480 210" fill="none" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="8,4"/>
+      <polygon points="480,205 490,210 480,215" fill="#22c55e"/>
+    </g>
+
+    <!-- Arrow to Clone 2 (middle) -->
+    <g filter="url(#glow)">
+      <line x1="365" y1="330" x2="480" y2="330" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="8,4"/>
+      <polygon points="480,325 490,330 480,335" fill="#22c55e"/>
+    </g>
+
+    <!-- Arrow to Clone 3 (bottom) -->
+    <g filter="url(#glow)">
+      <path d="M365 390 C420 390 420 450 480 450" fill="none" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="8,4"/>
+      <polygon points="480,445 490,450 480,455" fill="#22c55e"/>
+    </g>
+
+    <!-- COW label -->
+    <text x="427" y="310" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#64748b">copy-on-</text>
+    <text x="427" y="322" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" fill="#64748b">write</text>
+
+    <!-- ==================== RIGHT: Linked Clones ==================== -->
+
+    <!-- Clone 1 -->
+    <g transform="translate(495, 155)">
+      <rect width="280" height="100" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <rect width="280" height="3" rx="2" fill="url(#accentGreen)" y="0"/>
+
+      <!-- Mini terminal icon -->
+      <g transform="translate(15, 18)">
+        <rect width="50" height="35" rx="5" fill="#0f172a" stroke="#22c55e" stroke-width="1"/>
+        <text x="8" y="16" font-family="'Courier New', monospace" font-size="8" fill="#22c55e">$ _</text>
+        <rect x="8" y="22" width="30" height="5" rx="1" fill="#22c55e" opacity="0.2"/>
+      </g>
+
+      <!-- Clone info -->
+      <text x="80" y="32" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15" fill="#f8fafc">VM 1: dev-server</text>
+      <text x="80" y="50" font-family="'Courier New', monospace" font-size="10" fill="#94a3b8">dev-server.qcow2</text>
+
+      <!-- Size badge -->
+      <g transform="translate(15, 65)">
+        <rect width="85" height="22" rx="11" fill="#052e16" stroke="#166534" stroke-width="1"/>
+        <text x="42" y="15" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#4ade80">~200 KB</text>
+      </g>
+
+      <!-- Savings badge -->
+      <g transform="translate(112, 65)">
+        <rect width="155" height="22" rx="11" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="77" y="15" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">saves 1.8 GB per VM</text>
+      </g>
+    </g>
+
+    <!-- Clone 2 -->
+    <g transform="translate(495, 275)">
+      <rect width="280" height="100" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <rect width="280" height="3" rx="2" fill="url(#accentBlue)" y="0"/>
+
+      <!-- Mini terminal icon -->
+      <g transform="translate(15, 18)">
+        <rect width="50" height="35" rx="5" fill="#0f172a" stroke="#3b82f6" stroke-width="1"/>
+        <text x="8" y="16" font-family="'Courier New', monospace" font-size="8" fill="#3b82f6">$ _</text>
+        <rect x="8" y="22" width="25" height="5" rx="1" fill="#3b82f6" opacity="0.2"/>
+      </g>
+
+      <!-- Clone info -->
+      <text x="80" y="32" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15" fill="#f8fafc">VM 2: staging</text>
+      <text x="80" y="50" font-family="'Courier New', monospace" font-size="10" fill="#94a3b8">staging.qcow2</text>
+
+      <!-- Size badge -->
+      <g transform="translate(15, 65)">
+        <rect width="85" height="22" rx="11" fill="#052e16" stroke="#166534" stroke-width="1"/>
+        <text x="42" y="15" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#4ade80">~200 KB</text>
+      </g>
+
+      <!-- Savings badge -->
+      <g transform="translate(112, 65)">
+        <rect width="155" height="22" rx="11" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="77" y="15" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">saves 1.8 GB per VM</text>
+      </g>
+    </g>
+
+    <!-- Clone 3 -->
+    <g transform="translate(495, 395)">
+      <rect width="280" height="100" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <rect width="280" height="3" rx="2" fill="url(#accentPurple)" y="0"/>
+
+      <!-- Mini terminal icon -->
+      <g transform="translate(15, 18)">
+        <rect width="50" height="35" rx="5" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+        <text x="8" y="16" font-family="'Courier New', monospace" font-size="8" fill="#a78bfa">$ _</text>
+        <rect x="8" y="22" width="35" height="5" rx="1" fill="#a78bfa" opacity="0.2"/>
+      </g>
+
+      <!-- Clone info -->
+      <text x="80" y="32" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15" fill="#f8fafc">VM 3: k8s-node</text>
+      <text x="80" y="50" font-family="'Courier New', monospace" font-size="10" fill="#94a3b8">k8s-node.qcow2</text>
+
+      <!-- Size badge -->
+      <g transform="translate(15, 65)">
+        <rect width="85" height="22" rx="11" fill="#052e16" stroke="#166534" stroke-width="1"/>
+        <text x="42" y="15" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#4ade80">~200 KB</text>
+      </g>
+
+      <!-- Savings badge -->
+      <g transform="translate(112, 65)">
+        <rect width="155" height="22" rx="11" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="77" y="15" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#64748b">saves 1.8 GB per VM</text>
+      </g>
+    </g>
+
+    <!-- ==================== RIGHT SIDE: Virt-Manager Panel ==================== -->
+    <g transform="translate(830, 155)">
+      <rect width="340" height="340" rx="16" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+
+      <!-- Top accent bar -->
+      <rect width="340" height="4" rx="2" fill="url(#accentBlue)" y="0"/>
+
+      <!-- Window title bar -->
+      <g transform="translate(15, 18)">
+        <rect width="310" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <!-- Window dots -->
+        <circle cx="15" cy="14" r="4" fill="#ef4444" opacity="0.7"/>
+        <circle cx="30" cy="14" r="4" fill="#f59e0b" opacity="0.7"/>
+        <circle cx="45" cy="14" r="4" fill="#22c55e" opacity="0.7"/>
+        <text x="160" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#94a3b8">Virtual Machine Manager</text>
+      </g>
+
+      <!-- Step indicators -->
+      <g transform="translate(20, 62)">
+        <!-- Step 1 -->
+        <g>
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="12" y="16" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11" fill="#22c55e">1</text>
+          <text x="30" y="16" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#94a3b8">Create Storage Pool</text>
+        </g>
+
+        <!-- Connector -->
+        <line x1="12" y1="25" x2="12" y2="42" stroke="#334155" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- Step 2 -->
+        <g transform="translate(0, 42)">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="12" y="16" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11" fill="#3b82f6">2</text>
+          <text x="30" y="16" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#94a3b8">Set Backing Store</text>
+        </g>
+
+        <!-- Connector -->
+        <line x1="12" y1="67" x2="12" y2="84" stroke="#334155" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- Step 3 -->
+        <g transform="translate(0, 84)">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+          <text x="12" y="16" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="11" fill="#a78bfa">3</text>
+          <text x="30" y="16" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#94a3b8">Import Disk to VM</text>
+        </g>
+      </g>
+
+      <!-- Backing store visual -->
+      <g transform="translate(20, 210)">
+        <rect width="300" height="110" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="150" y="22" text-anchor="middle" font-family="'Courier New', monospace" font-weight="700" font-size="11" fill="#60a5fa">Backing Store</text>
+        <line x1="10" y1="30" x2="290" y2="30" stroke="#1e293b" stroke-width="1"/>
+
+        <!-- Path display -->
+        <text x="15" y="50" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">Path:</text>
+        <text x="15" y="67" font-family="'Courier New', monospace" font-size="9.5" fill="#f59e0b">/VMs/templates/master.qcow2</text>
+
+        <text x="15" y="90" font-family="'Courier New', monospace" font-size="9.5" fill="#94a3b8">Format:</text>
+        <text x="65" y="90" font-family="'Courier New', monospace" font-size="9.5" fill="#22c55e">qcow2 (copy-on-write)</text>
+      </g>
+    </g>
+
+    <!-- ==================== BOTTOM BAR ==================== -->
+    <g transform="translate(0, 530)">
+      <!-- Floating dock -->
+      <rect x="60" width="1080" height="75" rx="16" fill="#0b0f19" stroke="#1e293b" stroke-width="1.5" opacity="0.9"/>
+
+      <!-- Centered tech tags inside dock -->
+      <g transform="translate(220, 24)">
+        <rect x="0" y="0" width="110" height="28" rx="14" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+        <text x="55" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#f59e0b">Virt-Manager</text>
+      </g>
+      <g transform="translate(350, 24)">
+        <rect x="0" y="0" width="80" height="28" rx="14" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.6"/>
+        <text x="40" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#3b82f6">QEMU</text>
+      </g>
+      <g transform="translate(450, 24)">
+        <rect x="0" y="0" width="80" height="28" rx="14" fill="none" stroke="#22c55e" stroke-width="1" opacity="0.6"/>
+        <text x="40" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#22c55e">KVM</text>
+      </g>
+      <g transform="translate(550, 24)">
+        <rect x="0" y="0" width="120" height="28" rx="14" fill="none" stroke="#a78bfa" stroke-width="1" opacity="0.6"/>
+        <text x="60" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#a78bfa">Linked Clones</text>
+      </g>
+      <g transform="translate(690, 24)">
+        <rect x="0" y="0" width="130" height="28" rx="14" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.6"/>
+        <text x="65" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#60a5fa">Copy-on-Write</text>
+      </g>
+      <g transform="translate(840, 24)">
+        <rect x="0" y="0" width="100" height="28" rx="14" fill="none" stroke="#22c55e" stroke-width="1" opacity="0.6"/>
+        <text x="50" y="18" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#22c55e">GUI Guide</text>
+      </g>
+    </g>
+
+  </g>
+</svg>
