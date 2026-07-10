@@ -85,7 +85,7 @@ cp ~/VMs/templates/al2023-master.qcow2 ~/VMs/active-vms/vm1/amzn-devops-vm1.qcow
 ```
 
 {{< alert >}}
-**Pro Tip: Linked Clones.** If you plan to spin up many VMs, use a linked clone instead of a full copy, saving gigabytes of disk space.
+**Pro Tip: Linked Clones.** If you plan to spin up many VMs, use a linked clone instead of a full copy, saving gigabytes of disk space. You can do this via the command line below, or **[read my quick guide on how to do it entirely in the Virt-Manager GUI](/blog/2026/virt-manager-linked-clones/)**.
 {{< /alert >}}
 
 ```bash
