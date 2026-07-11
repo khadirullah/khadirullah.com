@@ -296,13 +296,19 @@ I ran each test on a **fresh VM** to eliminate leftover state. Here's what I fou
 
 **Fresh boot with seed.iso** → Cloud-Init detects a new `instance-id`, runs `passwd -l` (locks account), then runs `chpasswd` (sets password `amazon`, unlocking the account). Password works on console. SSH key works.
 
+![Test 1: Fresh boot — passwd -S shows PS (Password set). The password we configured in user-data is active.](media/test-1-password-set.webp)
+
 **Reboot with seed.iso still attached** → Password survives. Cloud-Init sees the same `instance-id` as the previous boot. The semaphore files exist, so **all modules are skipped**: no `passwd -l`, no `chpasswd`, nothing. The password in `/etc/shadow` stays exactly as it was.
+
+![Test 2: After reboot with seed.iso still attached — passwd -S still shows PS (Password set). Cloud-Init skipped all modules.](media/test-2-reboot-password-survives.webp)
 
 #### Test 3: Removing the Seed ISO ❌
 
 **Remove seed.iso from Virt-Manager, reboot.**
 
 The password is **locked**. SSH key still works. Here's what the logs revealed:
+
+![Test 3: Console login — "Login incorrect" repeatedly. The password that worked seconds ago is now locked.](media/test-3-login-incorrect.webp)
 
 Cloud-Init can't find the seed.iso, so it falls back to `DataSourceNone` and assigns a fallback instance-id: **`iid-datasource-none`**. Because this is a "new" instance-id, Cloud-Init treats it as a fresh deployment:
 
@@ -311,6 +317,8 @@ Cloud-Init can't find the seed.iso, so it falls back to `DataSourceNone` and ass
 3. Account stays locked
 
 The SSH key survives because it's a file (`~/.ssh/authorized_keys`) sitting on the VM's disk. Nothing deletes it.
+
+![Test 3: SSH still works after seed.iso removal — but passwd -S confirms LK (Password locked).](media/test-3-ssh-still-works.webp)
 
 #### Test 4: The Semaphore Trap ❌
 
@@ -354,6 +362,8 @@ cloud-init.service; disabled; preset: disabled
 Active: active (exited)    ← STILL RAN despite being disabled!
 ```
 
+![Test 6: Despite systemctl disable, the services still show Active: active (exited) — the systemd generator overrides the disable.](media/test-6-disabled-still-locked.webp)
+
 Cloud-Init uses a **systemd generator** (`cloud-init-generator`) that dynamically creates service dependencies at boot time. The generator overrides the static `disable` setting. `systemctl disable` only removes boot symlinks, but generators can recreate them.
 
 #### Test 7: `systemctl mask` ✅
@@ -365,7 +375,11 @@ sudo touch /etc/cloud/cloud-init.disabled
 sudo systemctl mask cloud-init-local.service cloud-init.service cloud-config.service cloud-final.service
 ```
 
-**Password SURVIVES!** All services are truly dead:
+**Password SURVIVES!** Console login works after seed.iso removal:
+
+![Test 7: The money shot — password login works even after removing seed.iso, because systemctl mask prevented Cloud-Init from running passwd -l.](media/test-7-mask-password-survives.webp)
+
+All services are truly dead:
 
 ```
 cloud-init.service         → Loaded: masked    Active: inactive (dead)
