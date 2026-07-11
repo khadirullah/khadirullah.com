@@ -2,6 +2,7 @@
 title: "How to Create Linked Clones in Virt-Manager (GUI)"
 date: 2026-07-10
 draft: false
+slug: "virt-manager-linked-clones"
 description: "A quick, step-by-step guide to creating linked clones (copy-on-write disks) entirely within the Virt-Manager GUI, bypassing the command line and saving gigabytes of disk space."
 summary: "Virt-Manager's UI for duplicating virtual disks can be confusing. This bite-sized guide shows you exactly how to use Storage Pools and Backing Stores to create space-saving linked clones without ever touching the terminal."
 tags: ["linux", "kvm", "qemu", "virt-manager", "virtualization", "devops", "homelab"]

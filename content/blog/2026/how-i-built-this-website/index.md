@@ -2,6 +2,9 @@
 title: "How I Built and Deployed This Website"
 date: 2026-05-19
 draft: false
+slug: "how-i-built-this-website"
+aliases:
+  - "/blog/how-i-built-and-deployed-this-website/"
 description: "A complete walkthrough of how I set up khadirullah.com using Hugo, Blowfish theme, Git, and Cloudflare Pages — from project setup to live deployment."
 summary: "How I built khadirullah.com with Hugo and the Blowfish theme, configured it, and deployed it to Cloudflare Pages for free — with automated Git-push deployments."
 tags: ["hugo", "cloudflare", "devops", "dns", "deployment", "tutorial"]

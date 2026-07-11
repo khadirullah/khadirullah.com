@@ -2,6 +2,9 @@
 title: "How to Block Internet Access for Any Linux App (While Keeping LAN)"
 date: 2026-03-25
 draft: false
+slug: "block-internet-linux-apps"
+aliases:
+  - "/blog/how-to-block-internet-access-for-any-linux-app-while-keeping-lan/"
 description: "A deep-dive guide to restricting internet access for specific Linux apps using UFW owner-match rules — plus the security flaw nobody talks about, and what actually works."
 summary: "Block outbound internet for specific Linux apps using UFW while keeping LAN access. Five approaches from quick wrapper scripts to production-hardened setups — plus the security flaw nobody talks about."
 tags: ["linux", "ufw", "firewall", "security", "devops", "debian", "iptables", "firejail", "networking", "homelab"]

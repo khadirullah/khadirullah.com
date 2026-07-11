@@ -2,6 +2,9 @@
 title: "Setting Up Custom Domain Email with SPF, DKIM, and DMARC"
 date: 2026-05-15
 draft: false
+slug: "email-dns-spf-dkim-dmarc"
+aliases:
+  - "/blog/setting-up-custom-domain-email-with-spf-dkim-and-dmarc/"
 description: "A complete guide to configuring professional email on your custom domain using Zoho Mail and Cloudflare DNS — with SPF, DKIM, DMARC, and MX records explained."
 summary: "How I set up professional email on my custom domain using Zoho Mail and Cloudflare DNS — complete with SPF, DKIM, DMARC authentication, alias routing, and folder-based filtering."
 tags: ["dns", "email", "security", "cloudflare", "devops", "tutorial"]
