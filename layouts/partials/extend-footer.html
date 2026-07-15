@@ -1,4 +1,4 @@
-<!-- DiagView & Panzoom Integration — loading Mermaid from CDN -->
+<!-- DiagView & Panzoom Integration -->
 <script>
   // 1. Synchronously hide diagrams from the built-in theme mermaid processor
   // The theme's appearance.js runs on DOMContentLoaded and looks for .mermaid
@@ -29,8 +29,18 @@
 
       diagviewScript.onload = async () => {
         try {
-          // Import Mermaid directly from CDN (v11)
-          const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+          // Wait for the theme's bundled mermaid to be ready
+          const waitForMermaid = () => new Promise(resolve => {
+            if (window.mermaid) return resolve(window.mermaid);
+            const interval = setInterval(() => {
+              if (window.mermaid) {
+                clearInterval(interval);
+                resolve(window.mermaid);
+              }
+            }, 50);
+          });
+
+          const mermaid = await waitForMermaid();
 
           const isDark = document.documentElement.classList.contains("dark");
           mermaid.initialize({
@@ -53,7 +63,7 @@
             showMinimap: false,
           });
         } catch (err) {
-          console.error("Failed to load or initialize Mermaid from CDN:", err);
+          console.error("Failed to initialize Mermaid or DiagView:", err);
         }
       };
     };
