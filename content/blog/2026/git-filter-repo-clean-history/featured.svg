@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0b1121"/>
+      <stop offset="100%" style="stop-color:#0f1729"/>
+    </linearGradient>
+
+    <!-- Left panel (problem) -->
+    <linearGradient id="panelLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1c1017"/>
+      <stop offset="100%" style="stop-color:#150d12"/>
+    </linearGradient>
+
+    <!-- Right panel (solution) -->
+    <linearGradient id="panelRight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1a14"/>
+      <stop offset="100%" style="stop-color:#0a1610"/>
+    </linearGradient>
+
+    <!-- Command bar gradient -->
+    <linearGradient id="cmdGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="50%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#1e3a5f"/>
+    </linearGradient>
+
+    <!-- Glow effects -->
+    <filter id="glowRed">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowGreen">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowBlue">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="40" y1="0" x2="40" y2="40" stroke="#1e293b" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#1e293b" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Ambient glow spots -->
+  <circle cx="300" cy="350" r="250" fill="#ef4444" opacity="0.03"/>
+  <circle cx="900" cy="350" r="250" fill="#22c55e" opacity="0.03"/>
+  <circle cx="600" cy="300" r="200" fill="#3b82f6" opacity="0.04"/>
+
+  <!-- Content wrapper: scale(0.88) + center for uniform padding -->
+  <g transform="translate(72, 38) scale(0.88)">
+
+  <!-- ==================== HEADER ==================== -->
+  <text x="600" y="72" text-anchor="middle" font-family="'SF Mono', 'Fira Code', 'Courier New', monospace" font-weight="700" font-size="14" fill="#64748b" letter-spacing="4">GIT HISTORY REWRITING</text>
+
+  <text x="600" y="120" text-anchor="middle" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-weight="800" font-size="42" fill="#f1f5f9" letter-spacing="-0.5">Purge Files from Every Commit</text>
+
+  <!-- ==================== LEFT PANEL: BEFORE ==================== -->
+  <g transform="translate(60, 170)">
+    <!-- Panel background -->
+    <rect width="500" height="380" rx="16" fill="url(#panelLeft)" stroke="#7f1d1d" stroke-width="1" opacity="0.8"/>
+
+    <!-- Terminal dots -->
+    <circle cx="24" cy="20" r="5" fill="#ef4444" opacity="0.8"/>
+    <circle cx="42" cy="20" r="5" fill="#f59e0b" opacity="0.5"/>
+    <circle cx="60" cy="20" r="5" fill="#334155" opacity="0.5"/>
+
+    <!-- BEFORE label -->
+    <text x="250" y="24" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-weight="600" font-size="12" fill="#ef4444" letter-spacing="2">BEFORE</text>
+
+    <!-- Divider line -->
+    <line x1="20" y1="38" x2="480" y2="38" stroke="#7f1d1d" stroke-width="1" opacity="0.5"/>
+
+    <!-- Git commit chain -->
+    <!-- Commit dots on a line -->
+    <g transform="translate(50, 80)">
+      <!-- Branch line -->
+      <line x1="0" y1="0" x2="400" y2="0" stroke="#475569" stroke-width="2"/>
+
+      <!-- Commit 1 -->
+      <circle cx="0" cy="0" r="10" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+      <text x="0" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">a1b2c3d</text>
+
+      <!-- Commit 2 (the problem) -->
+      <circle cx="130" cy="0" r="14" fill="#2d1515" stroke="#ef4444" stroke-width="2.5" filter="url(#glowRed)"/>
+      <text x="130" y="4" text-anchor="middle" font-family="monospace" font-size="9" fill="#f87171" font-weight="700">!</text>
+      <text x="130" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171" font-weight="700">7adc8c2</text>
+
+      <!-- Commit 3 -->
+      <circle cx="260" cy="0" r="10" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+      <text x="260" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">e5f6g7h</text>
+
+      <!-- Commit 4 -->
+      <circle cx="400" cy="0" r="10" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+      <text x="400" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">HEAD</text>
+    </g>
+
+    <!-- .git/objects box -->
+    <g transform="translate(40, 140)">
+      <rect width="420" height="120" rx="10" fill="#1a0f0f" stroke="#7f1d1d" stroke-width="1" stroke-dasharray="6,4"/>
+      <text x="210" y="22" text-anchor="middle" font-family="monospace" font-size="11" fill="#fca5a5" font-weight="600">.git/objects/</text>
+
+      <!-- File blobs - scattered PNGs -->
+      <g transform="translate(20, 36)">
+        <rect width="58" height="26" rx="5" fill="#2d1515" stroke="#ef4444" stroke-width="1"/>
+        <text x="29" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">.png</text>
+      </g>
+      <g transform="translate(88, 36)">
+        <rect width="58" height="26" rx="5" fill="#2d1515" stroke="#ef4444" stroke-width="1"/>
+        <text x="29" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">.png</text>
+      </g>
+      <g transform="translate(156, 36)">
+        <rect width="58" height="26" rx="5" fill="#2d1515" stroke="#ef4444" stroke-width="1"/>
+        <text x="29" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">.png</text>
+      </g>
+      <g transform="translate(224, 36)">
+        <rect width="58" height="26" rx="5" fill="#2d1515" stroke="#ef4444" stroke-width="1"/>
+        <text x="29" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">.png</text>
+      </g>
+      <g transform="translate(292, 36)">
+        <rect width="58" height="26" rx="5" fill="#2d1515" stroke="#ef4444" stroke-width="1"/>
+        <text x="29" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">.png</text>
+      </g>
+      <g transform="translate(360, 36)">
+        <text x="20" y="18" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#ef4444" font-weight="700">...</text>
+      </g>
+
+      <!-- Warning text -->
+      <text x="210" y="90" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#fca5a5" font-weight="600">24 deleted PNGs still consuming 3MB</text>
+      <text x="210" y="108" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#7f1d1d">Removed from tree, still in objects</text>
+    </g>
+
+    <!-- Size badge -->
+    <g transform="translate(170, 300)">
+      <rect width="160" height="50" rx="25" fill="#2d1515" stroke="#ef4444" stroke-width="1.5"/>
+      <text x="80" y="22" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#fca5a5">repo size</text>
+      <text x="80" y="40" text-anchor="middle" font-family="'SF Mono', monospace" font-weight="800" font-size="16" fill="#f87171">76 MB</text>
+    </g>
+  </g>
+
+  <!-- ==================== CENTER: COMMAND ==================== -->
+  <g transform="translate(520, 330)">
+    <!-- Arrow from left to right -->
+    <line x1="25" y1="30" x2="135" y2="30" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
+    <polygon points="135,24 150,30 135,36" fill="#3b82f6" opacity="0.8"/>
+  </g>
+
+  <!-- Command bar at bottom center -->
+  <g transform="translate(270, 575)">
+    <rect width="660" height="42" rx="21" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5" filter="url(#glowBlue)"/>
+    <text x="20" y="26" font-family="monospace" font-size="13" fill="#475569">$</text>
+    <text x="38" y="26" font-family="'SF Mono', 'Fira Code', monospace" font-weight="600" font-size="13" fill="#60a5fa">git filter-repo</text>
+    <text x="210" y="26" font-family="'SF Mono', monospace" font-size="13" fill="#94a3b8">--path &lt;path&gt;</text>
+    <text x="370" y="26" font-family="'SF Mono', monospace" font-size="13" fill="#f59e0b">--invert-paths</text>
+    <text x="530" y="26" font-family="'SF Mono', monospace" font-size="13" fill="#94a3b8">--force</text>
+  </g>
+
+  <!-- ==================== RIGHT PANEL: AFTER ==================== -->
+  <g transform="translate(640, 170)">
+    <!-- Panel background -->
+    <rect width="500" height="380" rx="16" fill="url(#panelRight)" stroke="#166534" stroke-width="1" opacity="0.8"/>
+
+    <!-- Terminal dots -->
+    <circle cx="24" cy="20" r="5" fill="#22c55e" opacity="0.8"/>
+    <circle cx="42" cy="20" r="5" fill="#f59e0b" opacity="0.5"/>
+    <circle cx="60" cy="20" r="5" fill="#334155" opacity="0.5"/>
+
+    <!-- AFTER label -->
+    <text x="250" y="24" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-weight="600" font-size="12" fill="#22c55e" letter-spacing="2">AFTER</text>
+
+    <!-- Divider -->
+    <line x1="20" y1="38" x2="480" y2="38" stroke="#166534" stroke-width="1" opacity="0.5"/>
+
+    <!-- Clean commit chain -->
+    <g transform="translate(50, 80)">
+      <!-- Branch line -->
+      <line x1="0" y1="0" x2="400" y2="0" stroke="#475569" stroke-width="2"/>
+
+      <!-- Commit 1 -->
+      <circle cx="0" cy="0" r="10" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+      <text x="0" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">a1b2c3d</text>
+
+      <!-- Commit 2 (rewritten - clean) -->
+      <circle cx="130" cy="0" r="14" fill="#0a1a0f" stroke="#22c55e" stroke-width="2.5" filter="url(#glowGreen)"/>
+      <text x="130" y="5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4ade80">✓</text>
+      <text x="130" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80" font-weight="700">NEW</text>
+
+      <!-- Commit 3 -->
+      <circle cx="260" cy="0" r="10" fill="#0a1a0f" stroke="#22c55e" stroke-width="2"/>
+      <text x="260" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80">NEW</text>
+
+      <!-- Commit 4 -->
+      <circle cx="400" cy="0" r="10" fill="#0a1a0f" stroke="#22c55e" stroke-width="2"/>
+      <text x="400" y="30" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ade80">HEAD</text>
+    </g>
+
+    <!-- Clean .git/objects box -->
+    <g transform="translate(40, 140)">
+      <rect width="420" height="120" rx="10" fill="#0a1a0f" stroke="#166534" stroke-width="1" stroke-dasharray="6,4"/>
+      <text x="210" y="22" text-anchor="middle" font-family="monospace" font-size="11" fill="#4ade80" font-weight="600">.git/objects/</text>
+
+      <!-- Clean state - checkmark -->
+      <g transform="translate(130, 40)">
+        <circle cx="80" cy="30" r="28" fill="#0a2618" stroke="#22c55e" stroke-width="1.5" opacity="0.6"/>
+        <text x="80" y="38" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#4ade80">✓</text>
+      </g>
+
+      <text x="210" y="105" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#4ade80" font-weight="600">PNGs purged from entire history</text>
+    </g>
+
+    <!-- Size badge -->
+    <g transform="translate(170, 300)">
+      <rect width="160" height="50" rx="25" fill="#0a2618" stroke="#22c55e" stroke-width="1.5"/>
+      <text x="80" y="22" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#4ade80">repo size</text>
+      <text x="80" y="40" text-anchor="middle" font-family="'SF Mono', monospace" font-weight="800" font-size="16" fill="#22c55e">73 MB</text>
+    </g>
+  </g>
+
+  <!-- Center divider -->
+  <line x1="600" y1="170" x2="600" y2="550" stroke="#334155" stroke-width="1" stroke-dasharray="8,6" opacity="0.4"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="156" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="16" fill="#64748b">Using git filter-repo to permanently remove files from history</text>
+
+  </g> <!-- end content wrapper -->
+</svg>
