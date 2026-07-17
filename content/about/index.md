@@ -129,6 +129,7 @@ I'm actively looking for **DevOps Engineer**, **Cloud Engineer**, and **Infrastr
 - {{< icon "email" >}} **Email:** [contact@khadirullah.com](mailto:contact@khadirullah.com)
 - {{< icon "github" >}} **GitHub:** [github.com/khadirullah](https://github.com/khadirullah)
 - {{< icon "linkedin" >}} **LinkedIn:** [linkedin.com/in/khadirullah](https://linkedin.com/in/khadirullah)
+- {{< icon "x-twitter" >}} **X (Twitter):** [x.com/khadirullah_](https://x.com/khadirullah_)
 - 📄 **Resume:** [View Resume](/resume/)
 
 {{< button href="mailto:contact@khadirullah.com" >}}

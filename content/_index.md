@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "Khadirullah Mohammad | DevOps & Cloud Engineer"
 ---
 
 I build CI/CD pipelines, manage cloud infrastructure, and automate everything I can — with Docker, Kubernetes, Terraform, and AWS. Recently built an AI-powered incident correlation tool that JOINs data across GitHub, Sentry, and Slack using cross-source SQL.
