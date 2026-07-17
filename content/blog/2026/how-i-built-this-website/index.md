@@ -1,5 +1,6 @@
 ---
 title: "How I Built and Deployed This Website"
+images: ["social-fallback.webp"]
 date: 2026-05-19
 draft: false
 slug: "how-i-built-this-website"
