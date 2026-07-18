@@ -106,12 +106,12 @@
        id="text5"
        class="logo-text"
        style="font-weight:900;font-size:78px;font-family:Inter, sans-serif;dominant-baseline:middle;text-anchor:middle;fill:#ffffff"
-       aria-label="K" />
+       />
     <path
        d="m 337.79897,227.294 -13.416,-43.68 h -0.312 q 0.078,1.56 0.234,4.68 0.156,3.12 0.312,6.708 0.156,3.51 0.156,6.396 v 25.896 h -10.53 v -55.692 h 16.068 l 13.182,42.588 h 0.234 l 13.962,-42.588 h 16.068 v 55.692 h -10.998 V 200.93 q 0,-2.652 0.078,-6.084 0.156,-3.432 0.234,-6.474 0.156,-3.12 0.234,-4.68 h -0.312 l -14.352,43.602 z"
        id="text6"
        class="logo-text"
        style="font-weight:900;font-size:78px;font-family:Inter, sans-serif;dominant-baseline:middle;text-anchor:middle;fill:#ffffff"
-       aria-label="M" />
+       />
   </g>
 </svg>
