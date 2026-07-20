@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background grid -->
+    <pattern id="bg-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1a2332" stroke-width="0.8"/>
+    </pattern>
+
+    <!-- Ambient glow blurs -->
+    <filter id="ambient" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="80" />
+    </filter>
+
+    <!-- Subtle glow for icons -->
+    <filter id="icon-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Title gradient -->
+    <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <!-- Connection line gradient -->
+    <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.6" />
+    </linearGradient>
+  </defs>
+
+  <!-- ===== BACKGROUND ===== -->
+  <rect width="1200" height="630" fill="#0b1120" />
+  <rect width="1200" height="630" fill="url(#bg-grid)" />
+
+  <!-- Ambient color orbs -->
+  <ellipse cx="200" cy="100" rx="300" ry="200" fill="#1d4ed8" opacity="0.15" filter="url(#ambient)" />
+  <ellipse cx="1000" cy="530" rx="350" ry="250" fill="#7c3aed" opacity="0.12" filter="url(#ambient)" />
+  <ellipse cx="600" cy="300" rx="200" ry="150" fill="#0ea5e9" opacity="0.06" filter="url(#ambient)" />
+
+  <!-- ===== LEFT SIDE: TEXT ===== -->
+
+  <!-- Subtitle -->
+  <text x="140" y="220" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="18" fill="#64748b" font-weight="600" letter-spacing="5">A TECHNICAL WORKAROUND</text>
+
+  <!-- Main Title -->
+  <text x="140" y="290" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="62" fill="url(#title-grad)" font-weight="800">Fixing Broken</text>
+  <text x="140" y="365" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="62" fill="#f1f5f9" font-weight="800">Hugo Open Graph</text>
+  <text x="140" y="440" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="62" fill="url(#title-grad)" font-weight="800">With WebP</text>
+
+  <!-- Tech tags -->
+  <g transform="translate(140, 475)">
+    <!-- Hugo -->
+    <rect x="0" y="0" width="90" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="45" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">Hugo</text>
+
+    <!-- WebP -->
+    <rect x="105" y="0" width="90" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="150" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">WebP</text>
+
+    <!-- SVG -->
+    <rect x="210" y="0" width="80" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="250" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">SVG</text>
+
+    <!-- SEO -->
+    <rect x="305" y="0" width="75" height="34" rx="17" fill="#1e293b" stroke="#334155" stroke-width="1.2" />
+    <text x="342" y="22" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="middle">SEO</text>
+  </g>
+
+  <!-- ===== RIGHT SIDE: FIX FLOW ===== -->
+  <g transform="translate(750, 140)">
+
+    <!-- Vertical connection line -->
+    <line x1="170" y1="55" x2="170" y2="340" stroke="url(#line-grad)" stroke-width="2" stroke-dasharray="6,6" opacity="0.5" />
+
+    <!-- Node 1: SVG -->
+    <g transform="translate(0, 0)" filter="url(#icon-glow)">
+      <rect x="100" y="10" width="140" height="50" rx="12" fill="#0f1a2e" stroke="#334155" stroke-width="1.5" />
+      <text x="135" y="41" font-family="monospace" font-size="20">🎨</text>
+      <text x="165" y="41" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">Pure SVG</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <polygon points="170,68 165,60 175,60" fill="#38bdf8" opacity="0.6" />
+
+    <!-- Node 2: Breaks -->
+    <g transform="translate(0, 80)" filter="url(#icon-glow)">
+      <rect x="85" y="10" width="170" height="50" rx="12" fill="#0f1a2e" stroke="#ef4444" stroke-width="1.5" />
+      <text x="110" y="41" font-family="monospace" font-size="20">⚠️</text>
+      <text x="142" y="41" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#f87171" font-weight="600">OG Breaks</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <polygon points="170,148 165,140 175,140" fill="#818cf8" opacity="0.6" />
+
+    <!-- Node 3: cwebp -->
+    <g transform="translate(0, 160)" filter="url(#icon-glow)">
+      <rect x="75" y="10" width="190" height="50" rx="12" fill="#0f1a2e" stroke="#334155" stroke-width="1.5" />
+      <text x="100" y="42" font-family="monospace" font-size="20">⚙️</text>
+      <text x="130" y="41" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#e2e8f0" font-weight="600">cwebp -lossless</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <polygon points="170,228 165,220 175,220" fill="#a78bfa" opacity="0.6" />
+
+    <!-- Node 4: Fixed WebP -->
+    <g transform="translate(0, 240)" filter="url(#icon-glow)">
+      <rect x="70" y="10" width="200" height="50" rx="12" fill="#0f1a2e" stroke="#22c55e" stroke-width="2" />
+      <text x="95" y="42" font-family="monospace" font-size="20">✅</text>
+      <text x="130" y="42" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#4ade80" font-weight="700">Perfect Social OG</text>
+    </g>
+
+    <!-- Pulsing green dot on Live node -->
+    <circle cx="280" cy="275" r="5" fill="#22c55e">
+      <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg>
