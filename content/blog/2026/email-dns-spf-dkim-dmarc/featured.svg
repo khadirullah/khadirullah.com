@@ -9,8 +9,8 @@
 
     <!-- Card Gradient -->
     <linearGradient id="card-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="rgba(39, 39, 42, 0.8)" />
-      <stop offset="100%" stop-color="rgba(24, 24, 27, 0.9)" />
+      <stop offset="0%" stop-color="#27272a" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#18181b" stop-opacity="0.9" />
     </linearGradient>
 
     <linearGradient id="primary-glow" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -42,9 +42,16 @@
       </feMerge>
     </filter>
 
-    <!-- Drop Shadow -->
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.6"/>
+    <!-- Drop Shadow (SVG 1.1 compatible — feDropShadow is SVG2 only, unsupported by Inkscape) -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="140%">
+      <feFlood flood-color="#000000" flood-opacity="0.6" result="flood" />
+      <feComposite in="flood" in2="SourceAlpha" operator="in" result="shadow-shape" />
+      <feGaussianBlur in="shadow-shape" stdDeviation="15" result="shadow-blur" />
+      <feOffset dx="0" dy="10" result="shadow-offset" />
+      <feMerge>
+        <feMergeNode in="shadow-offset" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
     </filter>
   </defs>
 
@@ -56,7 +63,7 @@
   <circle cx="1000" cy="500" r="300" fill="#8b5cf6" opacity="0.05" filter="url(#glow-heavy)" />
 
   <!-- Grid lines -->
-  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
     <path d="M0,105 H1200 M0,210 H1200 M0,315 H1200 M0,420 H1200 M0,525 H1200" />
     <path d="M200,0 V630 M400,0 V630 M600,0 V630 M800,0 V630 M1000,0 V630" />
   </g>
@@ -77,7 +84,7 @@
     <g transform="translate(100, 270)" filter="url(#shadow)">
       <!-- Base Node -->
       <rect width="160" height="160" rx="24" fill="url(#card-grad)" stroke="#3f3f46" stroke-width="2" />
-      <circle cx="80" cy="65" r="35" fill="rgba(59, 130, 246, 0.1)" stroke="#3b82f6" stroke-width="2" filter="url(#glow-light)" />
+      <circle cx="80" cy="65" r="35" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2" filter="url(#glow-light)" />
       <!-- Cloudflare/DNS icon abstract -->
       <path d="M 65 70 Q 65 55 80 55 Q 85 40 100 40 Q 115 40 115 55 Q 125 55 125 70 Q 125 85 105 85 L 70 85 Q 65 85 65 70 Z" fill="#3b82f6" transform="translate(-15,-15) scale(0.9)" />
       <text x="80" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#f4f4f5" text-anchor="middle">DNS / Sender</text>
@@ -96,38 +103,38 @@
 
       <!-- SPF ROW -->
       <g transform="translate(30, 80)">
-        <rect width="300" height="50" rx="12" fill="rgba(255,255,255,0.03)" stroke="#3f3f46" stroke-width="1" />
+        <rect width="300" height="50" rx="12" fill="#ffffff" fill-opacity="0.03" stroke="#3f3f46" stroke-width="1" />
         <!-- Shield -->
         <path d="M 25 15 L 35 10 L 45 15 L 45 25 C 45 35 35 42 35 42 C 35 42 25 35 25 25 Z" fill="none" stroke="#3b82f6" stroke-width="2" filter="url(#glow-light)" />
         <text x="65" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#f4f4f5">SPF</text>
         <!-- Status Badge -->
-        <rect x="230" y="13" width="55" height="24" rx="12" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="1" filter="url(#glow-light)"/>
+        <rect x="230" y="13" width="55" height="24" rx="12" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1" filter="url(#glow-light)"/>
         <circle cx="242" cy="25" r="4" fill="#10b981" />
         <text x="252" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#10b981">PASS</text>
       </g>
 
       <!-- DKIM ROW -->
       <g transform="translate(30, 150)">
-        <rect width="300" height="50" rx="12" fill="rgba(255,255,255,0.03)" stroke="#3f3f46" stroke-width="1" />
+        <rect width="300" height="50" rx="12" fill="#ffffff" fill-opacity="0.03" stroke="#3f3f46" stroke-width="1" />
         <!-- Key Icon -->
         <circle cx="32" cy="22" r="6" fill="none" stroke="#8b5cf6" stroke-width="2" filter="url(#glow-light)" />
         <path d="M 37 27 L 46 36 L 49 33 M 43 33 L 46 30" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-light)" />
         <text x="65" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#f4f4f5">DKIM</text>
         <!-- Status Badge -->
-        <rect x="230" y="13" width="55" height="24" rx="12" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="1" filter="url(#glow-light)"/>
+        <rect x="230" y="13" width="55" height="24" rx="12" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1" filter="url(#glow-light)"/>
         <circle cx="242" cy="25" r="4" fill="#10b981" />
         <text x="252" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#10b981">PASS</text>
       </g>
 
       <!-- DMARC ROW -->
       <g transform="translate(30, 220)">
-        <rect width="300" height="50" rx="12" fill="rgba(255,255,255,0.03)" stroke="#3f3f46" stroke-width="1" />
+        <rect width="300" height="50" rx="12" fill="#ffffff" fill-opacity="0.03" stroke="#3f3f46" stroke-width="1" />
         <!-- Checklist Icon -->
         <rect x="25" y="12" width="20" height="26" rx="3" fill="none" stroke="#ec4899" stroke-width="2" filter="url(#glow-light)" />
         <path d="M 32 20 L 40 20 M 32 26 L 40 26 M 32 32 L 36 32" stroke="#ec4899" stroke-width="2" stroke-linecap="round" filter="url(#glow-light)" />
         <text x="65" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#f4f4f5">DMARC</text>
         <!-- Status Badge -->
-        <rect x="230" y="13" width="55" height="24" rx="12" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="1" filter="url(#glow-light)"/>
+        <rect x="230" y="13" width="55" height="24" rx="12" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1" filter="url(#glow-light)"/>
         <circle cx="242" cy="25" r="4" fill="#10b981" />
         <text x="252" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#10b981">PASS</text>
       </g>
