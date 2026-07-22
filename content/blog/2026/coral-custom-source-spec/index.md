@@ -1,6 +1,6 @@
 ---
 title: "Charting New Waters: Building a Custom Coral Source Spec for Internal Enterprise APIs"
-images: ["social-fallback.webp"]
+images: ["social-fallback.png"]
 date: 2026-05-30
 draft: false
 description: "How to extend Coral SQL to query private, internal microservices that don't have native connectors — with a real-world example of a custom payment-api.yaml source spec."

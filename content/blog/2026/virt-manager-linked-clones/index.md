@@ -1,6 +1,6 @@
 ---
 title: "How to Create Linked Clones in Virt-Manager (GUI)"
-images: ["social-fallback.webp"]
+images: ["social-fallback.png"]
 date: 2026-07-10
 draft: false
 slug: "virt-manager-linked-clones"
