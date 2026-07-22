@@ -20,7 +20,7 @@ If you are automating SVG-to-PNG conversions on a Linux server and notice your c
 | Inkscape | ⚠️ SVG 1.1 | ✅ (SVG 1.1) | ❌ | Fast | Standards-compliant SVG |
 | ImageMagick (`librsvg`) | ⚠️ SVG 1.1 | ✅ (SVG 1.1) | ❌ | Very Fast | Batch rasterization |
 
-When building out the DesignOps pipeline for this blog (as detailed in my guide on [Fixing Broken Hugo Open Graph Previews with Lossless WebP Fallbacks](/blog/hugo-svg-webp-social-fallback/)), my goal was simple: use a Python script to automatically read my vector `featured.svg` images, inject my branding, and convert them to `social-fallback.webp` thumbnails for LinkedIn and Twitter.
+When building out the DesignOps pipeline for this blog (as detailed in my guide on [Fixing Broken Hugo Open Graph Previews](/blog/hugo-svg-webp-social-fallback/)), my goal was simple: use a Python script to automatically read my vector `featured.svg` images, inject my branding, and convert them to `social-fallback.webp` thumbnails for LinkedIn and Twitter.
 
 The pipeline worked flawlessly, until I started using modern SVG features like `feGaussianBlur`, `rgba` alpha blending, and complex neon gradients. Suddenly, the automated images didn't look right. The colors were muddy, and some CSS filters disappeared entirely.
 
@@ -222,15 +222,14 @@ subprocess.run([
     abs_html_uri
 ], check=True)
 
-# 4. Strip metadata and convert to lossless WebP
+# 4. Strip metadata and convert to lossy WebP (q=90 VP8 for Twitter card compatibility)
 subprocess.run(
     ["exiftool", "-all=", "-overwrite_original", temp_png],
     check=True
 )
 subprocess.run([
     "cwebp", 
-    "-lossless", 
-    "-q", "100", 
+    "-q", "90", 
     temp_png, 
     "-o", final_webp
 ], check=True)
