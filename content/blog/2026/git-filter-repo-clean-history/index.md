@@ -840,6 +840,10 @@ There are two approaches depending on the situation:
 | Replace a leaked password everywhere | `git filter-repo --blob-callback` |
 | Fix one recent commit before pushing | `git rebase -i` |
 
+{{< alert >}}
+**Simpler alternative for text replacement:** If you need to find-and-replace a known secret string across your entire history, `git filter-repo` also supports a dedicated `--replace-text` flag with a simple replacements file. See my companion guide: [Scrubbing Secrets from Git History](/blog/2026/git-filter-repo-scrub-secrets/) for a focused walkthrough of this approach.
+{{< /alert >}}
+
 For example, imagine you committed this file months ago:
 
 ```text
