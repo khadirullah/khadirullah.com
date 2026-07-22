@@ -1,11 +1,11 @@
 ---
-title: "Fixing Broken Hugo Open Graph Previews with Lossless WebP Fallbacks"
+title: "Fixing Broken Hugo Open Graph Previews: Why I Switched from WebP to PNG"
 date: 2026-07-19
 draft: false
 slug: "hugo-svg-webp-social-fallback"
-description: "How I fixed broken social media previews on my Hugo blog by using lossless WebP fallback images alongside SVG featured images."
-summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. Here is the exact engineering solution I built to serve crisp SVGs on-site while feeding pixel-perfect lossless WebP images to social media scrapers."
-tags: ["Hugo", "SEO", "Web Development", "SVG", "WebP"]
+description: "How I fixed broken social media previews on my Hugo blog and why PNG beats WebP for Open Graph fallback images."
+summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. I initially used lossless WebP as the fix, but after real-world testing discovered that Twitter does not render WebP in preview cards. Here is why PNG is the right choice for social fallback images."
+tags: ["Hugo", "SEO", "Web Development", "SVG", "PNG", "WebP"]
 categories: ["Web Development"]
 images: ["social-fallback.png"]
 ---
@@ -14,7 +14,7 @@ Vector graphics (SVGs) are the holy grail of modern web design. They render with
 
 When you share a link on LinkedIn, Twitter, or WhatsApp, their scrapers look for an image to display in the preview card. Unfortunately, most of these platforms do not support SVG files for Open Graph images. The result? A broken or missing preview card that hurts your click-through rate.
 
-Here is the exact engineering solution I implemented to fix this on my Hugo website (using the Blowfish theme) without sacrificing the crispness of my SVGs.
+Here is the engineering solution I implemented to fix this on my Hugo website (using the Blowfish theme), and the surprising discovery I made about why **PNG, not WebP**, is the right format for social fallback images.
 
 ## 1. The Lossy Compression Trap
 
@@ -22,7 +22,9 @@ The obvious solution to the SVG problem is to provide a rasterized fallback imag
 
 WebP is a modern image format that provides superior compression. But if you just use standard WebP conversion, it defaults to *lossy* compression. 
 
-The secret weapon here is **lossless WebP**. Lossless WebP compresses pixel data without discarding any color details, preserving the exact pixel clarity of the original vector render while being significantly smaller than an equivalent PNG. For example, this blog post's own social fallback image went from **135 KB** as a PNG to **87 KB** as a lossless WebP (a **35% reduction**) with zero visible difference to the naked eye.
+The secret weapon for compression is **lossless WebP**. Lossless WebP compresses pixel data without discarding any color details, preserving the exact pixel clarity of the original vector render while being significantly smaller than an equivalent PNG. For example, this blog post's own social fallback image went from **135 KB** as a PNG to **87 KB** as a lossless WebP (a **35% reduction**) with zero visible difference to the naked eye.
+
+I initially used lossless WebP for all my social fallbacks. It seemed like the perfect solution. But as you will see in [Section 4](#4-verify-it-works), real-world platform testing revealed a critical problem.
 
 The conversion is a two-step process. First, strip all EXIF metadata from the rasterized PNG using `exiftool` to reduce file size and remove unnecessary data. Then convert to lossless WebP using `cwebp`:
 
@@ -60,19 +62,19 @@ images: ["social-fallback.png"]
 
 | | PNG | Lossless WebP |
 |---|---|---|
-| **Platform support** | ✅ Universal (every scraper) | ✅ All major platforms (LinkedIn, Twitter, WhatsApp, Slack) |
+| **Platform support** | ✅ Universal (every scraper) | ⚠️ Most platforms, but **Twitter/X does not render WebP** in OG previews |
 | **File size** | ~135 KB (this post's image) | ~87 KB (~35% smaller) |
 | **Quality** | Lossless, pixel-perfect | Lossless, pixel-perfect |
 | **Extra tools needed** | None (just `exiftool`) | `cwebp` |
-| **Best for** | Simplicity, maximum compatibility | Optimized page weight, faster load times |
+| **Best for** | Social media fallbacks (full compatibility) | On-site images where page weight matters |
 
-For most blogs, the difference is negligible. Use WebP if you want maximum optimization; use PNG if you want simplicity. Both are lossless and both render identically on social media.
+For social media OG images, **PNG is the safer choice** because Twitter/X does not support WebP in preview cards. I confirmed this by testing both formats on this blog post: the WebP fallback produced a blank preview on Twitter, while the PNG fallback rendered perfectly across all platforms.
 
 > **Note:** If you want to automate this conversion pipeline, check out my deep-dive [Ultimate Guide to Automating SVG Rasterization](/blog/svg-rasterization-engine-showdown/) to see a rendering compatibility comparison of the best command-line tools for the job.
 
 ## 2. The Hugo vs. Blowfish Conflict
 
-Now that we have our crisp `output.webp`, we need to tell Hugo to use it for Open Graph tags, while still using the `featured.svg` for the actual website layout.
+Now that we have our crisp fallback image, we need to tell Hugo to use it for Open Graph tags, while still using the `featured.svg` for the actual website layout.
 
 This is where things get tricky, especially if you are using a feature-rich theme like Blowfish. 
 
@@ -83,7 +85,7 @@ Blowfish automatically searches for images in your page bundle using greedy wild
 To solve this conflict, we need a two-step approach that "blinds" the theme from accidentally using the fallback image on the frontend, while explicitly feeding it to the SEO scrapers.
 
 **Step 1: Rename the fallback image.**
-Instead of naming it `featured.webp`, name it something the theme's wildcard search won't catch, such as `social-fallback.webp`.
+Instead of naming it `featured.png`, name it something the theme's wildcard search won't catch, such as `social-fallback.png`.
 
 **Step 2: Explicitly define the image in Front Matter.**
 In your Hugo blog post's Markdown file, use the `images` array in the YAML front matter to explicitly point the Open Graph templates to this specific file.
@@ -92,7 +94,7 @@ In your Hugo blog post's Markdown file, use the `images` array in the YAML front
 ---
 title: "Your Awesome Blog Post"
 date: 2026-07-19
-images: ["social-fallback.webp"]
+images: ["social-fallback.png"]
 ---
 ```
 
@@ -100,8 +102,8 @@ images: ["social-fallback.webp"]
 
 With this setup:
 1.  Your website's frontend continues to perfectly render the crisp, lightweight `featured.svg`.
-2.  The Hugo SEO templates generate `<meta property="og:image" content=".../social-fallback.webp">` tags in the `<head>` of your HTML.
-3.  When shared on LinkedIn or Twitter, their scrapers pull the perfectly crisp, lossless WebP image.
+2.  The Hugo SEO templates generate `<meta property="og:image" content=".../social-fallback.png">` tags in the `<head>` of your HTML.
+3.  When shared on LinkedIn or Twitter, their scrapers pull the perfectly crisp, lossless PNG image.
 
 You get the best of both worlds: flawless vector rendering on your site and pristine social media preview cards.
 
@@ -119,26 +121,30 @@ Here is what a successful result looks like for my SVG rasterization blog post. 
 
 Use the "Scrape Again" button to force a cache refresh if the preview looks stale.
 
-### LinkedIn: Post Composer Preview
+### The Twitter/X Problem: WebP Does Not Work
 
-LinkedIn has retired its Post Inspector tool (the URL now shows a blank white page). The only way to verify your LinkedIn preview is to paste the URL directly into the LinkedIn post composer. The preview card renders before you hit "Post."
+While testing my [SVG rasterization blog post](/blog/svg-rasterization-engine-showdown/) (which used a WebP social fallback), I discovered that **Twitter/X does not render WebP images in Open Graph preview cards.** The Card Validator confirmed the tags were correct, but Tweet Composer showed a blank generic icon instead of the image:
 
-![LinkedIn post composer showing the blog's preview card with the social fallback image rendering correctly.](media/linkedin-preview.webp)
+![Twitter/X Tweet Composer showing a blank preview card when using a WebP social fallback image.](media/twitter-webp-failed.webp)
 
-### Twitter/X: Card Validator (Limited)
+> **Note:** You will notice different blog URLs in these screenshots. That is intentional: the SVG rasterization blog post originally used `social-fallback.webp`, which is how I discovered the Twitter/X incompatibility. I then switched this blog post to `social-fallback.png` to confirm the fix. All other blogs on my site were also using WebP at the time of testing.
 
-The legacy [Card Validator](https://cards-dev.twitter.com/validator) still validates your meta tags in the logs, but **no longer renders image previews** (Twitter removed this feature in Aug 2022). The logs will confirm `twitter:card = summary_large_image tag found` and `Card loaded successfully`, which means your tags are correctly configured.
+### The Fix: PNG Fallback Across All Platforms
 
-![Twitter Card Validator showing successful tag detection in the logs, but no image preview rendered.](media/twitter-card-validator.webp)
+After switching from WebP to PNG as the social fallback for this blog post, here is how each platform rendered the preview card:
 
-To see your actual Twitter Card image, paste the URL into [Tweet Composer](https://twitter.com/intent/tweet). The preview renders inline without posting.
+{{< gallery >}}
+<img src="media/twitter-png-preview.webp" class="grid-w50" alt="Twitter/X showing the blog preview card with PNG fallback rendering correctly" />
+<img src="media/linkedin-png-preview.webp" class="grid-w50" alt="LinkedIn post composer showing the blog preview card with PNG fallback" />
+<img src="media/facebook-png-preview.webp" class="grid-w50" alt="Facebook post composer showing the blog preview card with PNG fallback" />
+<img src="media/whatsapp-png-preview.webp" class="grid-w50" alt="WhatsApp chat showing the blog preview with PNG fallback" />
+{{< /gallery >}}
 
-### WhatsApp: Paste and Check
+All four platforms rendered the PNG fallback correctly. Twitter/X, which showed a blank preview with WebP, now displays the full image.
 
-WhatsApp is the simplest to verify. Just paste the link into any chat. WhatsApp fetches the Open Graph data and displays the preview inline, complete with the image, title, and description.
+### My Takeaway: PNG for OG, WebP for Everything Else
 
-![WhatsApp chat showing two link previews: the homepage and the blog post, both rendering their respective social fallback images correctly.](media/whatsapp-preview.webp)
+Based on this testing, I am converting all OG social fallback images on my website from WebP to PNG. The ~48 KB extra per image is a small price for guaranteed compatibility across every platform. Images inside the blog content (screenshots, diagrams, etc.) will stay as WebP for optimal page load performance.
 
 > **Tip:** If any platform shows a stale or missing image, Meta's Sharing Debugger has a "Scrape Again" button to force a cache refresh. For Twitter, appending a dummy query parameter (e.g. `?v=2`) to your URL forces a fresh crawl.
 
-> **Note:** In my testing, LinkedIn and Twitter showed opposite quirks: LinkedIn dropped the homepage OG image while rendering the blog post image correctly, and Twitter did the exact opposite. Facebook and WhatsApp handled both flawlessly. Platform scrapers are inconsistent by nature, so don't panic if one platform behaves differently. As long as Meta's Sharing Debugger confirms your `og:image` tag is correct, you've done your part.
