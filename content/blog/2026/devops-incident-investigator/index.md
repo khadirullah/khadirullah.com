@@ -1,6 +1,6 @@
 ---
 title: "Building a DevOps Incident Investigator with Coral SQL — From 15 Minutes to 15 Seconds"
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 date: 2026-05-30
 draft: false
 description: "A step-by-step guide to building a CLI + Web Dashboard that correlates GitHub PRs, Sentry errors, and Slack messages using Coral SQL. Includes cross-source JOINs, custom source specs, AI root cause analysis, and automated Slack alerts."

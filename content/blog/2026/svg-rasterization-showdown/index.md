@@ -7,7 +7,7 @@ description: "A deep technical comparison of SVG rendering engines for DesignOps
 summary: "Automating social media preview images (Open Graph) using SVGs is incredibly powerful. But when I tried to automate SVG-to-WebP conversions on my Linux server, I discovered that standard command-line tools like Inkscape and ImageMagick handle browser-oriented SVGs very differently from Chrome."
 tags: ["designops", "svg", "imagemagick", "inkscape", "chrome-headless", "devops", "librsvg"]
 categories: ["Tutorials", "DevOps"]
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 ---
 
 {{< lead >}}

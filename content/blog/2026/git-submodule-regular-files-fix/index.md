@@ -1,6 +1,6 @@
 ---
 title: "Git Submodule Silently Became Regular Files — How I Diagnosed and Fixed It"
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 date: 2026-07-16
 draft: false
 slug: "git-submodule-regular-files-fix"

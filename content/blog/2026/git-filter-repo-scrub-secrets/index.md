@@ -3,7 +3,7 @@ title: "Accidentally Pushed a Password? How to Scrub Secrets from Git History"
 date: 2026-07-21
 draft: false
 slug: "git-filter-repo-scrub-secrets"
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 description: "A complete guide to removing leaked AWS API keys, passwords, and sensitive data from your entire Git history using git filter-repo text replacement."
 summary: "A complete guide to removing leaked AWS API keys, passwords, and sensitive data from your entire Git history using git filter-repo text replacement."
 tags: ["Git", "Security", "DevOps", "Tutorials"]

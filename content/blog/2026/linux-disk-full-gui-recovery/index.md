@@ -1,6 +1,6 @@
 ---
 title: "How I Recovered My Linux GUI After a Full Disk Killed LightDM"
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 date: 2026-06-22
 draft: false
 slug: "linux-disk-full-gui-recovery"

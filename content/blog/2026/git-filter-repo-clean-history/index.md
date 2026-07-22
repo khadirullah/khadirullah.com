@@ -1,6 +1,6 @@
 ---
 title: "I Deleted Files From Git But They Were Still There — Removing Objects From Git History"
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 date: 2026-07-12
 draft: false
 slug: "git-filter-repo-clean-history"

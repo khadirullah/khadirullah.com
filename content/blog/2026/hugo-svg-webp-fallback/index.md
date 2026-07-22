@@ -7,7 +7,7 @@ description: "How I fixed broken social media previews on my Hugo blog and why P
 summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. I initially used lossless WebP as the fix, but after real-world testing discovered that Twitter does not render WebP in preview cards. Here is why PNG is the right choice for social fallback images."
 tags: ["Hugo", "SEO", "Web Development", "SVG", "PNG", "WebP"]
 categories: ["Web Development"]
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 ---
 
 Vector graphics (SVGs) are the holy grail of modern web design. They render with pixel-perfect clarity on any screen size, maintain incredibly small file sizes, and can be styled with CSS. However, if you rely on SVGs for your website's featured images, you'll quickly run into a frustrating problem: **they completely break Open Graph (OG) social media previews**.

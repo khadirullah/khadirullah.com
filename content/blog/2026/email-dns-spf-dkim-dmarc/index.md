@@ -1,6 +1,6 @@
 ---
 title: "Setting Up Custom Domain Email with SPF, DKIM, and DMARC"
-images: ["social-fallback.png"]
+images: ["social-fallback.webp"]
 date: 2026-05-15
 draft: false
 slug: "email-dns-spf-dkim-dmarc"
