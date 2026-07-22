@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bgRadial" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" style="stop-color:#111827"/>
+      <stop offset="60%" style="stop-color:#0a0e1a"/>
+      <stop offset="100%" style="stop-color:#050709"/>
+    </radialGradient>
+
+    <radialGradient id="dangerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#dc2626" stop-opacity="0.12"/>
+      <stop offset="100%" style="stop-color:#dc2626" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="safeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#10b981" stop-opacity="0.10"/>
+      <stop offset="100%" style="stop-color:#10b981" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="redactGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981" stop-opacity="0.9"/>
+      <stop offset="100%" style="stop-color:#059669" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <filter id="tightGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#fff" stroke-width="0.3" opacity="0.02"/>
+    </pattern>
+
+    <clipPath id="termClip">
+      <rect x="0" y="0" width="750" height="300" rx="12"/>
+    </clipPath>
+  </defs>
+
+  <!-- ==================== BACKGROUND (full bleed) ==================== -->
+  <rect width="1200" height="630" fill="url(#bgRadial)"/>
+  <rect width="1200" height="630" fill="url(#scanlines)"/>
+
+  <!-- Ambient glows (full bleed, safe to clip) -->
+  <ellipse cx="380" cy="260" rx="320" ry="220" fill="url(#dangerGlow)"/>
+  <ellipse cx="820" cy="380" rx="320" ry="220" fill="url(#safeGlow)"/>
+
+  <!-- ==================== SAFE CONTENT ZONE ==================== -->
+  <!-- translate(72,38) scale(0.88) keeps everything inside Blowfish safe area -->
+  <g transform="translate(72, 38) scale(0.88)">
+
+    <!-- ==================== HEADER ==================== -->
+    <g transform="translate(600, 50)">
+      <rect x="-72" y="-14" width="144" height="24" rx="12" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+      <text x="0" y="3" text-anchor="middle" font-family="'SF Mono', 'Fira Code', 'Courier New', monospace" font-weight="600" font-size="11" fill="#f59e0b" letter-spacing="3" opacity="0.8">GIT SECURITY</text>
+    </g>
+
+    <text x="600" y="108" text-anchor="middle" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-weight="900" font-size="44" fill="#f8fafc" letter-spacing="-1">Scrub Secrets from</text>
+    <text x="600" y="145" text-anchor="middle" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#94a3b8" letter-spacing="0">Every Commit in Git History</text>
+
+    <!-- ==================== CENTRAL TERMINAL ==================== -->
+    <g transform="translate(225, 175)" filter="url(#shadow)">
+      <!-- Terminal frame -->
+      <rect width="750" height="300" rx="14" fill="#0d1117" stroke="#1e293b" stroke-width="1.5"/>
+
+      <!-- Terminal titlebar -->
+      <rect width="750" height="36" rx="14" fill="#161b22"/>
+      <rect y="22" width="750" height="14" fill="#161b22"/>
+      <circle cx="22" cy="18" r="5.5" fill="#f87171" opacity="0.9"/>
+      <circle cx="40" cy="18" r="5.5" fill="#fbbf24" opacity="0.7"/>
+      <circle cx="58" cy="18" r="5.5" fill="#4ade80" opacity="0.7"/>
+      <text x="375" y="22" text-anchor="middle" font-family="'SF Mono', monospace" font-size="11" fill="#64748b">replacements.txt → git filter-repo</text>
+
+      <!-- Content clipped to terminal bounds -->
+      <g clip-path="url(#termClip)">
+
+        <!-- ===== ROW 1: Leaked key ===== -->
+        <g transform="translate(20, 54)">
+          <text x="0" y="16" font-family="'SF Mono', monospace" font-size="12" fill="#3b4252">01</text>
+          <text x="30" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#6b7280">aws_access_key =</text>
+          <text x="202" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#f87171" font-weight="700" filter="url(#tightGlow)">AKIAIOSFODNN7EXAMPLE</text>
+          <line x1="198" y1="10" x2="484" y2="10" stroke="#ef4444" stroke-width="2.5" opacity="0.8"/>
+          <g transform="translate(500, 2)">
+            <circle r="9" fill="#1c0a0a" stroke="#ef4444" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#ef4444" font-weight="700">✕</text>
+          </g>
+        </g>
+
+        <!-- Arrow down -->
+        <g transform="translate(370, 80)">
+          <line x1="0" y1="0" x2="0" y2="20" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+          <polygon points="-4,20 0,27 4,20" fill="#f59e0b" opacity="0.6"/>
+        </g>
+
+        <!-- ===== ROW 2: Redacted key ===== -->
+        <g transform="translate(20, 114)">
+          <text x="0" y="16" font-family="'SF Mono', monospace" font-size="12" fill="#3b4252">01</text>
+          <text x="30" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#6b7280">aws_access_key =</text>
+          <rect x="198" y="1" width="220" height="20" rx="4" fill="url(#redactGrad)" filter="url(#tightGlow)"/>
+          <text x="308" y="15" text-anchor="middle" font-family="'SF Mono', monospace" font-size="11" fill="#ecfdf5" font-weight="800" letter-spacing="2">REDACTED</text>
+          <g transform="translate(432, 2)">
+            <circle r="9" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#10b981" font-weight="700">✓</text>
+          </g>
+        </g>
+
+        <!-- Separator -->
+        <line x1="20" y1="148" x2="730" y2="148" stroke="#1e293b" stroke-width="1" opacity="0.4"/>
+
+        <!-- ===== ROW 3: Leaked secret ===== -->
+        <g transform="translate(20, 164)">
+          <text x="0" y="16" font-family="'SF Mono', monospace" font-size="12" fill="#3b4252">02</text>
+          <text x="30" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#6b7280">aws_secret_key =</text>
+          <text x="206" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#f87171" font-weight="700" filter="url(#tightGlow)">wJalrXUtnFEMI/K7MDENG...</text>
+          <line x1="202" y1="10" x2="520" y2="10" stroke="#ef4444" stroke-width="2.5" opacity="0.8"/>
+          <g transform="translate(536, 2)">
+            <circle r="9" fill="#1c0a0a" stroke="#ef4444" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#ef4444" font-weight="700">✕</text>
+          </g>
+        </g>
+
+        <!-- Arrow down -->
+        <g transform="translate(370, 190)">
+          <line x1="0" y1="0" x2="0" y2="20" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+          <polygon points="-4,20 0,27 4,20" fill="#f59e0b" opacity="0.6"/>
+        </g>
+
+        <!-- ===== ROW 4: Redacted secret ===== -->
+        <g transform="translate(20, 224)">
+          <text x="0" y="16" font-family="'SF Mono', monospace" font-size="12" fill="#3b4252">02</text>
+          <text x="30" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#6b7280">aws_secret_key =</text>
+          <rect x="202" y="1" width="220" height="20" rx="4" fill="url(#redactGrad)" filter="url(#tightGlow)"/>
+          <text x="312" y="15" text-anchor="middle" font-family="'SF Mono', monospace" font-size="11" fill="#ecfdf5" font-weight="800" letter-spacing="2">REDACTED</text>
+          <g transform="translate(436, 2)">
+            <circle r="9" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#10b981" font-weight="700">✓</text>
+          </g>
+        </g>
+
+        <!-- ===== ROW 5: Password ===== -->
+        <g transform="translate(20, 262)">
+          <text x="0" y="16" font-family="'SF Mono', monospace" font-size="12" fill="#3b4252">03</text>
+          <text x="30" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#6b7280">db_password =</text>
+          <text x="176" y="16" font-family="'SF Mono', monospace" font-size="13" fill="#f87171" font-weight="400" opacity="0.4">SuperSecret123!</text>
+          <line x1="172" y1="10" x2="360" y2="10" stroke="#ef4444" stroke-width="2" opacity="0.4"/>
+          <text x="380" y="16" font-family="'SF Mono', monospace" font-size="12" fill="#475569">→</text>
+          <rect x="400" y="1" width="130" height="20" rx="4" fill="url(#redactGrad)" opacity="0.5"/>
+          <text x="465" y="15" text-anchor="middle" font-family="'SF Mono', monospace" font-size="10" fill="#ecfdf5" font-weight="700" letter-spacing="1">REDACTED</text>
+        </g>
+
+      </g>
+    </g>
+
+    <!-- ==================== GIT TIMELINE ==================== -->
+    <g transform="translate(100, 510)">
+      <!-- Timeline line -->
+      <line x1="0" y1="18" x2="1000" y2="18" stroke="#1e293b" stroke-width="2"/>
+
+      <!-- Tainted commits -->
+      <circle cx="80" cy="18" r="7" fill="#1c0a0a" stroke="#ef4444" stroke-width="1.5" opacity="0.5"/>
+      <text x="80" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#ef4444" opacity="0.4">tainted</text>
+
+      <circle cx="230" cy="18" r="7" fill="#1c0a0a" stroke="#ef4444" stroke-width="1.5" opacity="0.5"/>
+      <text x="230" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#ef4444" opacity="0.4">tainted</text>
+
+      <circle cx="380" cy="18" r="7" fill="#1c0a0a" stroke="#ef4444" stroke-width="1.5" opacity="0.5"/>
+      <text x="380" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#ef4444" opacity="0.4">tainted</text>
+
+      <!-- Transformation point -->
+      <circle cx="500" cy="18" r="5" fill="#f59e0b" filter="url(#tightGlow)" opacity="0.9"/>
+      <text x="500" y="44" text-anchor="middle" font-family="'SF Mono', monospace" font-size="9" fill="#f59e0b" font-weight="700">filter-repo</text>
+
+      <!-- Clean commits -->
+      <circle cx="620" cy="18" r="7" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
+      <text x="620" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#10b981">clean</text>
+
+      <circle cx="770" cy="18" r="7" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
+      <text x="770" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#10b981">clean</text>
+
+      <circle cx="920" cy="18" r="7" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
+      <text x="920" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#10b981">clean</text>
+    </g>
+
+    <!-- ==================== COMMAND BADGE ==================== -->
+    <g transform="translate(560, 580)">
+      <rect x="-10" y="-15" width="430" height="30" rx="15" fill="#0f172a" stroke="#1e40af" stroke-width="1" opacity="0.7"/>
+      <text x="4" y="3" font-family="monospace" font-size="11" fill="#475569">$</text>
+      <text x="18" y="3" font-family="'SF Mono', monospace" font-size="11" fill="#60a5fa" font-weight="600">git filter-repo</text>
+      <text x="162" y="3" font-family="'SF Mono', monospace" font-size="11" fill="#f59e0b">--replace-text</text>
+      <text x="298" y="3" font-family="'SF Mono', monospace" font-size="11" fill="#94a3b8">replacements.txt</text>
+    </g>
+
+  </g> <!-- end safe content zone -->
+</svg>
