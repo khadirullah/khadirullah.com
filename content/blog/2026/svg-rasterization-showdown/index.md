@@ -92,6 +92,10 @@ This forces Chrome to render the SVG at exactly 1200×630 pixels, matching the `
 
 No more clipping. The full image is captured edge-to-edge.
 
+{{< alert icon="bug" >}}
+**Chrome Version matters!** During testing, older Chrome versions (specifically `v147.x`) had a bug where SVG filters (like `feDropShadow`) confused the headless screenshot engine's bounding box calculations, causing the bottom of the image to clip *despite* the CSS fix. Upgrading to Chrome `v148` or newer (tested on `148.0.7778.215` and `150.0.7871.181`) resolves this layout bug entirely. If you still see clipping, check your browser version!
+{{< /alert >}}
+
 ## Why Inkscape and ImageMagick Break (Code Analysis)
 
 After seeing Inkscape and ImageMagick fail so spectacularly on the first test, I traced the rendering failures back to the source code. The issue was not the engines; it was my browser-oriented authoring style. Here is the exact code that broke them, and the strict SVG 1.1 equivalent that fixed it.
