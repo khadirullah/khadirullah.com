@@ -7,7 +7,7 @@ description: "How I fixed broken social media previews on my Hugo blog and why l
 summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. While lossless WebP (-lossless) fails on Twitter Cards due to VP8L format incompatibility, lossy WebP (-q 90) produces crisp 30 KB fallback cards that render perfectly across every social platform."
 tags: ["Hugo", "SEO", "Web Development", "SVG", "WebP", "Lossy vs Lossless"]
 categories: ["Web Development"]
-images: ["social-fallback.webp"]
+images: ["test-lossless.webp"]
 ---
 
 Vector graphics (SVGs) are the holy grail of modern web design. They render with pixel-perfect clarity on any screen size, maintain incredibly small file sizes, and can be styled with CSS. However, if you rely on SVGs for your website's featured images, you'll quickly run into a frustrating problem: **they completely break Open Graph (OG) social media previews**.
