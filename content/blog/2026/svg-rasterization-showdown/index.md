@@ -222,7 +222,7 @@ subprocess.run([
     abs_html_uri
 ], check=True)
 
-# 4. Strip metadata and convert to lossy WebP (q=90 VP8 for Twitter card compatibility)
+# 4. Strip metadata and convert to lossy WebP (q=90 for optimal size)
 subprocess.run(
     ["exiftool", "-all=", "-overwrite_original", temp_png],
     check=True
