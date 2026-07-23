@@ -1,55 +1,53 @@
 ---
-title: "Fixing Broken Hugo Open Graph Previews: Why Lossy WebP Beats Lossless for Twitter Cards"
+title: "Fixing Broken Hugo Open Graph Previews with WebP Social Fallbacks"
 date: 2026-07-19
 draft: false
 slug: "hugo-svg-webp-social-fallback"
-description: "How I fixed broken social media previews on my Hugo blog and why lossy WebP (-q 90) provides 30 KB social fallbacks compatible with Twitter, LinkedIn, Meta, and WhatsApp."
-summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. While lossless WebP (-lossless) fails on Twitter Cards due to VP8L format incompatibility, lossy WebP (-q 90) produces crisp 30 KB fallback cards that render perfectly across every social platform."
-tags: ["Hugo", "SEO", "Web Development", "SVG", "WebP", "Lossy vs Lossless"]
+description: "How I fixed broken social media previews on my Hugo blog by using WebP fallback images alongside SVG featured images, without letting the Blowfish theme accidentally override them."
+summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. Here is the exact engineering solution I built to serve crisp SVGs on-site while feeding lightweight WebP images to social media scrapers."
+tags: ["Hugo", "SEO", "Web Development", "SVG", "WebP"]
 categories: ["Web Development"]
-images: ["test-lossless.webp"]
+images: ["social-fallback.webp"]
 ---
 
 Vector graphics (SVGs) are the holy grail of modern web design. They render with pixel-perfect clarity on any screen size, maintain incredibly small file sizes, and can be styled with CSS. However, if you rely on SVGs for your website's featured images, you'll quickly run into a frustrating problem: **they completely break Open Graph (OG) social media previews**.
 
 When you share a link on LinkedIn, Twitter, or WhatsApp, their scrapers look for a rasterized image to display in the preview card. Unfortunately, none of these platforms support SVG files for Open Graph images. The result? A broken or missing preview card that severely hurts your click-through rate.
 
-Here is the engineering solution I implemented to fix this on my Hugo website (using the Blowfish theme), and the surprising discovery I made about why **Lossy WebP (`-q 90`), not Lossless WebP**, is the optimal format for social fallback images.
+Here is the exact engineering solution I implemented to fix this on my Hugo website (using the Blowfish theme).
 
-## 1. The Lossless WebP Trap vs. Lossy WebP
+## 1. Why WebP for Social Fallbacks?
 
-The obvious solution to the SVG problem is to provide a rasterized fallback image (like a PNG or JPEG). However, standard image compression often introduces ugly color banding and blurriness around sharp text, ruining the premium feel of the vector original.
+The obvious solution to the SVG problem is to provide a rasterized fallback image (like a PNG or JPEG). However, standard lossy image compression often introduces ugly color banding and blurriness around sharp text, ruining the premium feel of the vector original.
 
-WebP is a modern image format that provides superior compression. Naturally, my first instinct was to use **lossless WebP** (`cwebp -lossless`) to preserve exact pixel clarity. For this blog post, a metadata-stripped PNG went from **135 KB** to **87 KB** as a lossless WebP (a **35% reduction**).
+**WebP** is a modern image format that provides superior compression with two modes:
 
-I initially used lossless WebP for all my social fallbacks. It seemed like the perfect solution. But after real-world testing across platforms, I ran into a critical issue: **Twitter/X does not render Lossless WebP in Open Graph preview cards**.
+* **Lossless WebP** (`cwebp -lossless`): Preserves exact pixel clarity, zero quality loss. For this blog post, a metadata-stripped PNG went from **135 KB** to **87 KB** as a lossless WebP — a **35% reduction**.
+* **Lossy WebP** (`cwebp -q 90`): Near-identical visual quality with dramatically smaller files. The same image compressed to just **~30 KB** — a **78% reduction** from PNG — while remaining visually indistinguishable from the original.
 
-### Why Lossless WebP Fails on Twitter
-WebP actually uses two completely different compression engines depending on your flags:
-* **Lossless WebP (`-lossless`)**: Encodes image data using the **VP8L** container format stream.
-* **Lossy WebP (`-q 85` to `-q 90`)**: Encodes image data using standard **VP8** keyframes.
-
-Twitter's backend image processing crawler natively parses VP8 lossy streams, but quietly fails or drops **VP8L Lossless WebP** chunk headers, resulting in a completely blank card in Tweet Composer.
-
-By switching from lossless WebP to **Lossy WebP (`cwebp -q 90`)**, the file size dropped even further to **~30 KB** (a **78% reduction** from PNG) while remaining visually indistinguishable from the vector original and rendering perfectly across all scrapers.
+Both lossless and lossy WebP are fully supported across all major social media scrapers (Twitter, LinkedIn, Facebook, WhatsApp). I recommend **lossy WebP at quality 90** for social fallbacks simply because the file size savings are massive and there is no visible quality difference for OG preview cards.
 
 ### Format Comparison for Open Graph Fallbacks
 
 | Feature | PNG | Lossless WebP (`-lossless`) | Lossy WebP (`-q 90`) |
 |---|---|---|---|
-| **Twitter/X Support** | ✅ Universal | ❌ Blank Preview Card | ✅ Fully Supported |
-| **LinkedIn / Meta / WhatsApp** | ✅ Universal | ✅ Supported | ✅ Fully Supported |
+| **Social Platform Support** | ✅ Universal | ✅ Fully Supported | ✅ Fully Supported |
 | **File Size** | ~135 KB | ~87 KB (~35% smaller) | **~30 KB (~78% smaller)** |
 | **Quality** | Lossless | Lossless | Crisp (Indistinguishable) |
 | **Best For** | Archival assets | Internal site images | **Social media preview cards** |
+### When to Use Which
 
-To generate a crisp Lossy WebP social fallback, strip EXIF metadata using `exiftool` and convert with `cwebp -q 90`:
+**Lossy WebP (`-q 90`)** is the smart choice for Open Graph social fallbacks. Social platforms downscale, re-compress, and cache your image anyway — pixel-perfect fidelity is wasted on a preview card that renders at thumbnail size in a feed. The ~78% file size savings over PNG means faster scraper fetches and snappier link previews.
+
+**Lossless WebP (`-lossless`)** is better for images displayed *inside* your blog post (screenshots, diagrams, code snippets) where readers zoom in and sharp text matters. The extra kilobytes are worth it when the image is the content itself, not just a social thumbnail.
+
+To generate a crisp WebP social fallback, strip EXIF metadata using `exiftool` and convert with `cwebp`:
 
 ```bash
 # Step 1: Strip all EXIF metadata from the rasterized PNG
 exiftool -all= -overwrite_original input.png
 
-# Step 2: Convert to Lossy WebP (q=90 VP8 format for Twitter compatibility)
+# Step 2: Convert to WebP (lossy q=90 for optimal size)
 cwebp -q 90 input.png -o social-fallback.webp
 ```
 
@@ -94,30 +92,22 @@ You get the best of both worlds: vector rendering on your site and pristine, fas
 
 ## 4. Verification Across Platforms
 
-After deploying changes, verify that the `og:image` and `twitter:image` tags are being picked up correctly.
-
-### The Problem: Lossless WebP Fails on Twitter
-
-While testing with Lossless WebP (`-lossless`), Twitter/X failed to render the image, showing a blank generic icon in Tweet Composer despite valid metadata tags:
-
-![Twitter/X Tweet Composer showing a blank preview card when using a Lossless WebP fallback image.](media/twitter-webp-failed.webp)
-
-### The Fix: Lossy WebP (`-q 90`) Works Natively
-
-After converting the social fallback image using Lossy WebP (`cwebp -q 90`), here is how each platform rendered the preview card:
+After deploying changes, verify that the `og:image` and `twitter:image` tags are being picked up correctly. Here is how each platform rendered the WebP preview card for this blog:
 
 {{< gallery >}}
-<img src="media/twitter-webp90-preview.webp" class="grid-w50" alt="Twitter/X showing the blog preview card with Lossy WebP -q 90 fallback rendering correctly" />
-<img src="media/linkedin-webp90-preview.webp" class="grid-w50" alt="LinkedIn post composer showing the blog preview card with Lossy WebP -q 90 fallback" />
-<img src="media/facebook-webp90-preview.webp" class="grid-w50" alt="Facebook post composer showing the blog preview card with Lossy WebP -q 90 fallback" />
-<img src="media/whatsapp-webp90-preview.webp" class="grid-w50" alt="WhatsApp chat showing the blog preview with Lossy WebP -q 90 fallback" />
+<img src="media/twitter-webp90-preview.webp" class="grid-w50" alt="Twitter/X showing the blog preview card with WebP fallback rendering correctly" />
+<img src="media/linkedin-webp90-preview.webp" class="grid-w50" alt="LinkedIn post composer showing the blog preview card with WebP fallback" />
+<img src="media/facebook-webp90-preview.webp" class="grid-w50" alt="Facebook post composer showing the blog preview card with WebP fallback" />
+<img src="media/whatsapp-webp90-preview.webp" class="grid-w50" alt="WhatsApp chat showing the blog preview with WebP fallback" />
 {{< /gallery >}}
 
-All four platforms rendered the Lossy WebP fallback perfectly. Twitter/X, which previously showed a blank preview with Lossless WebP, now displays the full image card.
+All four platforms rendered the WebP fallback perfectly.
+
+> **Tip:** If any platform shows a stale or missing image, try appending a dummy query parameter (e.g. `?v=2`) to your URL to force a fresh crawl. Social platform scrapers cache aggressively, and stale cache is the most common reason for previews appearing broken.
 
 ### Summary Checklist
 
-* **Use Lossy WebP (`-q 90`)** for Open Graph social fallbacks for guaranteed Twitter/X compatibility and ~78% file size savings over PNG.
-* **Avoid Lossless WebP (`-lossless`)** for OG images due to Twitter scraper VP8L decoding issues.
+* **Use WebP** for Open Graph social fallbacks — lossy `-q 90` gives ~78% file size savings over PNG with no visible quality loss.
 * **Name the file `social-fallback.webp`** to avoid Blowfish theme resource matching collisions with `featured.svg`.
 * **Add `images: ["social-fallback.webp"]`** to your YAML front matter to feed Hugo SEO templates.
+* **Always cache-bust** when testing — append `?v=2` to your URL to force scrapers to re-fetch.
