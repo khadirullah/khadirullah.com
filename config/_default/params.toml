@@ -23,6 +23,7 @@ disableTextInHeader = false
 
 [header]
   layout = "floating" # valid options: basic, fixed, fixed-fill, fixed-gradient, fixed-fill-blur, floating
+  mobileMenuStyle = "dropdown" # valid options: fullscreen, dropdown
 
 [footer]
   showMenu = true
@@ -58,12 +59,14 @@ disableTextInHeader = false
   showRelatedContent = true	
   relatedContentLimit = 3
   showTaxonomies = true 	# use showTaxonomies OR showCategoryOnly, not both	
+  showCategoriesInSecondaryColor = true
   showWordCount = false	
   showZenMode = true	
   sharingLinks = [ "linkedin", "x-twitter", "reddit", "email",]	# ADD — share buttons
   externalLinkForceNewTab = true # disable to allow external links in the same tab (defaults to true).
 
 [list]
+  featureImageHover = true
   showBreadcrumbs = true
   showSummary = true		
   showTableOfContents = false
