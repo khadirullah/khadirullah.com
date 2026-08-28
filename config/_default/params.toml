@@ -1,7 +1,7 @@
 # -- Theme Options --
 # https://blowfish.page/docs/configuration/#theme-parameters
 
-colorScheme = "ocean"
+colorScheme = "burufugu"
 defaultAppearance = "dark" # valid options: light or dark
 autoSwitchAppearance = false
 
@@ -11,6 +11,7 @@ enableCodeCopy = true
 enableStructuredBreadcrumbs = true 	
 highlightCurrentMenuArea = true         
 smartTOC = true
+smartTOCHideUnfocusedChildren = true
 enableStyledScrollbar = true
 
 
@@ -21,7 +22,7 @@ disableTextInHeader = false
 
 
 [header]
-  layout = "fixed-fill-blur" # valid options: basic, fixed, fixed-fill, fixed-gradient, fixed-fill-blur
+  layout = "floating" # valid options: basic, fixed, fixed-fill, fixed-gradient, fixed-fill-blur, floating
 
 [footer]
   showMenu = true
@@ -52,11 +53,13 @@ disableTextInHeader = false
   showHeadingAnchors = true
   showPagination = true
   showReadingTime = true
+  showReadingProgress = true
   showTableOfContents = true	
   showRelatedContent = true	
   relatedContentLimit = 3
   showTaxonomies = true 	# use showTaxonomies OR showCategoryOnly, not both	
   showWordCount = false	
+  showZenMode = true	
   sharingLinks = [ "linkedin", "x-twitter", "reddit", "email",]	# ADD — share buttons
   externalLinkForceNewTab = true # disable to allow external links in the same tab (defaults to true).
 
