@@ -1,0 +1,10 @@
+/* Custom CSS overrides */
+
+/* Constrain SVG and image logos in floating/fixed headers to standard height */
+.logo svg,
+.logo img {
+  max-height: 2.5rem;
+  max-width: 2.5rem;
+  width: auto;
+  height: auto;
+}
