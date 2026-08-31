@@ -3,7 +3,7 @@ title: "Introducing DiagView"
 date: 2026-02-11
 draft: false
 description: "A lightweight JavaScript library for interactive SVG diagrams — with zoom, pan, search, minimap, rotation, text-select, and a fully automated CI/CD pipeline."
-summary: "I built a lightweight library that gives static SVGs superpowers — zoom, pan, search, minimap, rotation, text-select mode, watermarks, and more — with a CI/CD pipeline that automates linting, 169 tests, building, and npm publishing."
+summary: "I built a lightweight library that gives static SVGs superpowers — zoom, pan, search, minimap, rotation, text-select mode, watermarks, and more — with a CI/CD pipeline that automates linting, testing, building, and npm publishing."
 tags: ["project", "javascript", "open-source", "ci-cd", "github-actions", "devops"]
 categories: ["Projects"]
 slug: "introducing-diagview"
@@ -19,6 +19,8 @@ If you export a complex architecture diagram as an SVG and embed it on your docs
 I looked for a library to solve this. I found **D3.js** (too complex for just viewing) and **Leaflet** (too heavy for a diagram). I didn't want to write hundreds of lines of code just to let a user zoom into a flowchart.
 
 So, I built **DiagView**.
+
+> **Update (Aug 31, 2026):** DiagView v1.0.10 and v1.0.11 shipped a major precision pass — pixel-exact share-link restore at any zoom, fully working rotation (live, minimap, share links, rememberZoom), sharp mobile rendering at any zoom level, a hardened SVG sanitizer, and a headless-Chrome geometry test harness. See the [release notes](https://github.com/khadirullah/diagview/releases) for the full story.
 
 ## Demo
 
@@ -72,8 +74,8 @@ Before writing any code, I scoured npm and GitHub. Here's what I found:
 <!-- Panzoom (required for zoom/pan) -->
 <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
 
-<!-- DiagView -->
-<script src="https://cdn.jsdelivr.net/npm/diagview@1.0.6/dist/diagview.umd.min.js"></script>
+<!-- DiagView (auto-updates within v1) -->
+<script src="https://cdn.jsdelivr.net/npm/diagview@1/dist/diagview.umd.min.js"></script>
 
 <!-- Your diagram -->
 <div class="diagram">
@@ -219,7 +221,7 @@ DiagView includes a three-tier security model for SVG content:
 
 | Mode | What It Blocks | When to Use |
 |------|---------------|-------------|
-| **strict** (default) | `<script>`, `<iframe>`, `<foreignObject>`, `<animate>`, inline event handlers, `<style>` injection | Untrusted SVGs (user-uploaded, third-party) |
+| **strict** (default) | `<script>`, `<iframe>`, `<animate>`, inline event handlers, dangerous URL schemes, `<style>` injection — while preserving `<foreignObject>` so Mermaid htmlLabels render intact | Untrusted SVGs (user-uploaded, third-party) |
 | **permissive** | `<script>`, `<iframe>`, `<object>` only | Semi-trusted SVGs (your own diagrams with animations) |
 | **off** | Nothing | Fully trusted SVGs only |
 
@@ -299,7 +301,7 @@ DiagView.init({
 One thing I invested heavily in was the **automation pipeline**. Every push to the repository triggers a GitHub Actions workflow that:
 
 1. **Lints** the code with ESLint
-2. **Runs 169 unit tests** with Jest
+2. **Runs the full Jest suite** (195+ unit tests as of v1.0.11)
 3. **Builds** the UMD and ESM bundles with Rollup
 4. **Publishes to npm** on tagged releases (semantic versioning)
 5. **Deploys documentation** to GitHub Pages
@@ -317,7 +319,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run lint
-      - run: npm test          # 169 tests
+      - run: npm test          # full unit suite
       - run: npm run build
 
   publish:
@@ -333,7 +335,7 @@ The project also uses:
 - **Husky** — pre-commit hooks that run lint-staged
 - **lint-staged** — runs ESLint + Prettier only on changed files
 - **release-it** — automated version bumping, changelog generation, and npm publishing
-- **size-limit** — CI fails if bundle size exceeds the budget (140 KB UMD, 150 KB ESM)
+- **size-limit** — CI fails if the bundle exceeds a **40 KB budget** (minified + brotli)
 
 ## Bundle Size
 
