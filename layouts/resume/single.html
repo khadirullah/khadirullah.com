@@ -18,6 +18,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {{- $scheme := site.Params.colorScheme | default "blowfish" -}}
+  {{- with resources.Get (printf "css/schemes/%s.css" $scheme) }}
+  <!-- Blowfish colour scheme, inlined at build time. Change colorScheme in
+       config/_default/params.toml and this page follows on the next build. -->
+  <style>{{ .Content | safeCSS }}</style>
+  {{- else }}
+  {{- errorf "resume: colour scheme %q not found in themes/blowfish/assets/css/schemes/" $scheme -}}
+  {{- end }}
   <style>
     *,
     *::before,
@@ -28,46 +36,28 @@
     }
 
     /* --- Dark Mode (Default) ---
-       Mapped onto the Blowfish "burufugu" scheme so the resume matches the rest of
-       the site. Values come from themes/blowfish/assets/css/schemes/burufugu.css.
-       Site body is neutral-800, links are primary-400. */
+       Every colour below is derived from the Blowfish scheme inlined above, so the
+       resume tracks the site automatically. Blowfish stores its palette as bare RGB
+       triplets (e.g. --color-neutral-800: 26, 33, 74), hence the rgb() wrappers. */
     :root {
-      --color-primary: #0d1233;
-      /* neutral-900 */
-      --color-accent: #60acf6;
-      /* primary-400 */
-      --color-accent-dark: #4a9ef0;
-      /* primary-500 */
-      --color-text: #eef0f9;
-      /* neutral-100 */
-      --color-text-secondary: #c3c8e2;
-      /* neutral-300 */
-      --color-text-muted: #8d94bd;
-      /* neutral-400 */
-      --color-border: #303761;
-      /* neutral-700 */
-      --color-bg: #1a214a;
-      /* neutral-800, matches site body */
-      --color-bg-page: #0d1233;
-      /* neutral-900 */
-      --color-header-subtitle: #8ac5fa;
-      /* primary-300 */
-      --color-contact: #8d94bd;
-      /* neutral-400 */
-      --color-contact-link: #60acf6;
-      /* primary-400 */
-      --color-contact-dot: #464e7a;
-      /* neutral-600 */
-      --color-summary-bold: #f6f7fc;
-      /* neutral-50 */
-      --color-entry-title: #f6f7fc;
-      /* neutral-50 */
-      --color-entry-li: #dde0f0;
-      /* neutral-200 */
-      --color-skill-cat: #f6f7fc;
-      /* neutral-50 */
-      --color-project-link-hover: #8ac5fa;
-      /* primary-300 */
+      --color-primary: rgb(var(--color-neutral-900));
+      --color-accent: rgb(var(--color-primary-400));
+      --color-accent-dark: rgb(var(--color-primary-500));
+      --color-text: rgb(var(--color-neutral-100));
+      --color-text-secondary: rgb(var(--color-neutral-300));
+      --color-text-muted: rgb(var(--color-neutral-400));
+      --color-border: rgb(var(--color-neutral-700));
+      --color-bg: rgb(var(--color-neutral-800));
+      --color-bg-page: rgb(var(--color-neutral-900));
+      --color-header-subtitle: rgb(var(--color-primary-300));
+      --color-contact: rgb(var(--color-neutral-400));
+      --color-contact-link: rgb(var(--color-primary-400));
+      --color-contact-dot: rgb(var(--color-neutral-600));
+      --color-summary-bold: rgb(var(--color-neutral-50));
+      --color-entry-title: rgb(var(--color-neutral-50));
+      --color-entry-li: rgb(var(--color-neutral-200));
+      --color-skill-cat: rgb(var(--color-neutral-50));
+      --color-project-link-hover: rgb(var(--color-primary-300));
     }
 
     body {
@@ -104,7 +94,10 @@
       left: 48px;
       right: 48px;
       height: 3px;
-      background: linear-gradient(90deg, #4a9ef0, #f0705a, #8ac5fa);
+      background: linear-gradient(90deg,
+          rgb(var(--color-primary-500)),
+          rgb(var(--color-secondary-500)),
+          rgb(var(--color-primary-300)));
       border-radius: 2px;
     }
 
@@ -137,8 +130,7 @@
     }
 
     .contact-row a:hover {
-      color: #badefd;
-      /* primary-200 */
+      color: rgb(var(--color-primary-200));
     }
 
     .contact-row span::before {
@@ -459,8 +451,8 @@
     /* --- Print (White / Printer-Friendly) --- */
     @media print {
       :root {
-        --color-accent: #2a62bd;
-        --color-accent-dark: #264c98;
+        --color-accent: rgb(var(--color-primary-700));
+        --color-accent-dark: rgb(var(--color-primary-800));
         --color-text: #1e293b;
         --color-text-secondary: #475569;
         --color-text-muted: #64748b;
