@@ -27,26 +27,47 @@
       box-sizing: border-box;
     }
 
-    /* --- Dark Mode (Default) --- */
+    /* --- Dark Mode (Default) ---
+       Mapped onto the Blowfish "burufugu" scheme so the resume matches the rest of
+       the site. Values come from themes/blowfish/assets/css/schemes/burufugu.css.
+       Site body is neutral-800, links are primary-400. */
     :root {
-      --color-primary: #0b1120;
-      --color-accent: #60a5fa;
-      --color-accent-dark: #3b82f6;
-      --color-text: #e2e8f0;
-      --color-text-secondary: #94a3b8;
-      --color-text-muted: #64748b;
-      --color-border: #1e293b;
-      --color-bg: #0f172a;
-      --color-bg-page: #020617;
-      --color-header-subtitle: #93c5fd;
-      --color-contact: #94a3b8;
-      --color-contact-link: #60a5fa;
-      --color-contact-dot: #334155;
-      --color-summary-bold: #f1f5f9;
-      --color-entry-title: #f1f5f9;
-      --color-entry-li: #cbd5e1;
-      --color-skill-cat: #f1f5f9;
-      --color-project-link-hover: #93c5fd;
+      --color-primary: #0d1233;
+      /* neutral-900 */
+      --color-accent: #60acf6;
+      /* primary-400 */
+      --color-accent-dark: #4a9ef0;
+      /* primary-500 */
+      --color-text: #eef0f9;
+      /* neutral-100 */
+      --color-text-secondary: #c3c8e2;
+      /* neutral-300 */
+      --color-text-muted: #8d94bd;
+      /* neutral-400 */
+      --color-border: #303761;
+      /* neutral-700 */
+      --color-bg: #1a214a;
+      /* neutral-800, matches site body */
+      --color-bg-page: #0d1233;
+      /* neutral-900 */
+      --color-header-subtitle: #8ac5fa;
+      /* primary-300 */
+      --color-contact: #8d94bd;
+      /* neutral-400 */
+      --color-contact-link: #60acf6;
+      /* primary-400 */
+      --color-contact-dot: #464e7a;
+      /* neutral-600 */
+      --color-summary-bold: #f6f7fc;
+      /* neutral-50 */
+      --color-entry-title: #f6f7fc;
+      /* neutral-50 */
+      --color-entry-li: #dde0f0;
+      /* neutral-200 */
+      --color-skill-cat: #f6f7fc;
+      /* neutral-50 */
+      --color-project-link-hover: #8ac5fa;
+      /* primary-300 */
     }
 
     body {
@@ -83,7 +104,7 @@
       left: 48px;
       right: 48px;
       height: 3px;
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+      background: linear-gradient(90deg, #4a9ef0, #f0705a, #8ac5fa);
       border-radius: 2px;
     }
 
@@ -116,7 +137,8 @@
     }
 
     .contact-row a:hover {
-      color: #bfdbfe;
+      color: #badefd;
+      /* primary-200 */
     }
 
     .contact-row span::before {
@@ -437,8 +459,8 @@
     /* --- Print (White / Printer-Friendly) --- */
     @media print {
       :root {
-        --color-accent: #2563eb;
-        --color-accent-dark: #1d4ed8;
+        --color-accent: #2a62bd;
+        --color-accent-dark: #264c98;
         --color-text: #1e293b;
         --color-text-secondary: #475569;
         --color-text-muted: #64748b;
