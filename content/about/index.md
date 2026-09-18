@@ -108,7 +108,7 @@ Provisioned AWS infrastructure using Terraform — VPCs, EC2 instances, load bal
 
 ### DiagView
 
-A lightweight interactive SVG/Mermaid diagram viewer with search, export, and deep linking. Published to npm with 169 unit tests and fully automated CI/CD.
+A lightweight interactive SVG/Mermaid diagram viewer with search, export, and deep linking. Published to npm at v1.0.12 with 342 tests and fully automated CI/CD.
 
 {{< github repo="khadirullah/diagview" >}}
 
