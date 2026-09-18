@@ -552,7 +552,7 @@
       <h1>Khadirullah Mohammad</h1>
       <div class="subtitle">DevOps & Cloud Engineer</div>
       <div class="contact-row">
-        <span>India</span>
+        <span>India · Open to Hyderabad, Bangalore, Remote</span>
         <span><a href="mailto:contact@khadirullah.com">contact@khadirullah.com</a></span>
         <span><a href="https://khadirullah.com">khadirullah.com</a></span>
         <span><a href="https://github.com/khadirullah">github.com/khadirullah</a></span>
@@ -567,7 +567,7 @@
       <div class="section summary">
         <div class="section-title">Professional Summary</div>
         <p>
-          <b>DevOps & Cloud Engineer</b> with 6+ years of IT infrastructure experience — from bare-metal system administration and network management to <b>CI/CD pipelines</b>, <b>Kubernetes</b> orchestration, and cloud automation on <b>AWS</b> with <b>Terraform</b>. Built and shipped an <b>AI-powered incident correlation tool</b> integrating GitHub, Sentry, and Slack APIs using cross-source SQL joins. Proven ability to independently own end-to-end infrastructure and deliver under pressure. Skilled in eliminating manual toil through automation, Infrastructure as Code, and GitOps practices.
+          Infrastructure engineer with <b>4+ years</b> of hands-on Linux administration, networking, and systems experience, now working in DevOps. Builds <b>CI/CD pipelines</b> with Jenkins and GitHub Actions, provisions <b>AWS</b> infrastructure with modular <b>Terraform</b>, and runs <b>Kubernetes</b> workloads on self-managed kubeadm clusters. Spent 4 years 5 months as the sole IT engineer at a small company, owning every workstation, network device, and camera on site. Used to being the only person responsible for the infrastructure.
         </p>
       </div>
 
@@ -580,28 +580,30 @@
             <span class="entry-title">DevOps & Cloud Engineer</span>
             <span class="entry-date">Dec 2023 – Present</span>
           </div>
-          <div class="entry-subtitle">Independent Practice · Remote</div>
+          <div class="entry-subtitle">Independent DevOps Practice (Self-Directed) · Remote</div>
           <ul>
-            <li>Built an <b>AI-powered DevOps Incident Investigator</b> that correlates GitHub PRs, Sentry errors, and Slack messages using <b>cross-source SQL JOINs</b> via Coral — reducing incident triage from 15 minutes of tab-switching to a single unified view. Integrated <b>Gemini AI</b> for automated root-cause analysis with actionable fix suggestions.</li>
-            <li>Built <b>CI/CD pipelines</b> using Jenkins and GitHub Actions — integrating SonarQube static analysis, Trivy container scanning, Docker multi-stage builds, and automated deployment to Kubernetes clusters with AWS ELB.</li>
-            <li>Provisioned <b>AWS infrastructure</b> (VPC, EC2, ELB, S3, IAM, Route 53) using <b>Terraform</b> with modular configurations, variable files, and full lifecycle management.</li>
-            <li>Deployed <b>Kubernetes</b> workloads with Deployments, Services, Ingress controllers, RBAC, NetworkPolicies, and SecurityContexts on both local VMs and AWS.</li>
-            <li>Built and published <b>DiagView</b>, an open-source npm package (v1.0.9, 175 unit tests), with a fully automated CI/CD pipeline: lint → test → build → publish to npm → deploy docs to GitHub Pages.</li>
+            <li>Built a <b>3-node kubeadm Kubernetes cluster</b> on QEMU/KVM provisioned entirely by <b>Terraform</b> with the libvirt provider. Cloud-init installs containerd and kubeadm, Calico runs as CNI via the Tigera operator, and workers fetch the join token over HTTP, so the build needs no SSH. One terraform apply, roughly 7 minutes to a ready cluster.</li>
+            <li>Built end-to-end <b>CI/CD pipelines</b> using Jenkins and GitHub Actions — GitHub webhook trigger, SonarQube static analysis, Docker multi-stage builds, Trivy image scanning, registry push, and deployment to Kubernetes behind an AWS ELB.</li>
+            <li>Provisioned <b>AWS infrastructure</b> (VPC with public and private subnets, EC2, Security Groups, ELB, S3, IAM, Route 53) using modular <b>Terraform</b> with variable files and outputs.</li>
+            <li>Configured <b>Kubernetes</b> workloads — Deployments, ReplicaSets, Services, NGINX Ingress, ingress and egress NetworkPolicies, certificate-based users with verb-level RBAC, and SecurityContext capability control.</li>
+            <li>Built an <b>AI-powered DevOps Incident Investigator</b> that correlates GitHub PRs, Sentry errors, and Slack messages using <b>cross-source SQL JOINs</b> via Coral, with <b>Gemini</b> for automated root-cause analysis. Selected as a Top 50 showcase project at the Coral x WeMakeDevs hackathon.</li>
+            <li>Built and published <b>DiagView</b>, an open-source npm package (v1.0.11, 195 tests), with a fully automated CI/CD pipeline: lint → test → build → publish to npm → deploy docs to GitHub Pages.</li>
           </ul>
         </div>
 
         <div class="entry">
           <div class="entry-header">
-            <span class="entry-title">Infrastructure & IT Engineer</span>
+            <span class="entry-title">Engineer (Programmer, Network & System Admin)</span>
             <span class="entry-date">Jul 2019 – Nov 2023</span>
           </div>
           <div class="entry-subtitle">Bizrak Web Solutions · India · 4 yrs 5 mos</div>
           <ul>
-            <li>Sole engineer managing <b>end-to-end IT operations</b> for the organization — system provisioning, network administration, hardware maintenance, and security across all workstations.</li>
-            <li>Administered <b>Linux and Windows systems</b> — OS installations, patch management, user provisioning, and troubleshooting. Maintained uptime through proactive monitoring and incident resolution.</li>
-            <li>Configured and maintained <b>network infrastructure</b> — routers (TP-Link, OpenWRT), WiFi access points with channel optimization, static IP assignments, VPN tunnels, and firewall rules.</li>
-            <li>Automated routine administration tasks using <b>Bash scripts</b>, reducing manual provisioning time and ensuring consistent configurations across systems.</li>
-            <li>Deployed and managed <b>CCTV surveillance</b> and physical security systems, including network-attached camera configuration and remote monitoring setup.</li>
+            <li>Sole IT engineer for the organization, owning every employee workstation, network device, and surveillance camera from procurement through daily support.</li>
+            <li>Planned and carried out a full workstation <b>OS migration from Windows to Linux</b> across all company endpoints.</li>
+            <li>Wrote <b>Bash and AutoHotkey scripts</b> for automations, software deployment, patching, and recurring maintenance, replacing a multi-hour manual build with a scripted one.</li>
+            <li>Replaced stock <b>TP-Link router firmware with OpenWRT</b> for better control and throughput, and planned WiFi channel allocation using spectrum analysis.</li>
+            <li>Assigned and documented <b>static IP addressing</b> for all endpoints, configured firewall filtering rules, and segmented the local network.</li>
+            <li>Assembled and maintained desktop hardware, and deployed and configured the <b>CCTV surveillance</b> system.</li>
           </ul>
         </div>
       </div>
@@ -611,22 +613,22 @@
         <div class="section-title">Technical Skills</div>
         <div class="skills-grid">
           <span class="skill-category">Cloud & IaC</span>
-          <span class="skill-items">AWS (EC2, S3, VPC, ELB, IAM, Route 53, CloudFormation), Terraform, Ansible</span>
+          <span class="skill-items">AWS (EC2, VPC, Subnets, Security Groups, ELB, EKS, S3, IAM, Route 53, CloudWatch), Terraform (modular IaC, variables, outputs, state), Ansible</span>
 
           <span class="skill-category">Containers & Orchestration</span>
-          <span class="skill-items">Docker, Docker Compose, Kubernetes (Deployments, Services, RBAC, Ingress, NetworkPolicies)</span>
+          <span class="skill-items">Docker (Dockerfiles, multi-stage builds, Compose), Kubernetes (Deployments, ReplicaSets, Services, RBAC, Ingress, NetworkPolicies, SecurityContexts, ConfigMaps, Secrets), kubeadm, kops</span>
 
-          <span class="skill-category">CI/CD & DevOps</span>
-          <span class="skill-items">Jenkins, GitHub Actions, SonarQube, Trivy, Git, Maven, npm</span>
+          <span class="skill-category">CI/CD & Build</span>
+          <span class="skill-items">Jenkins (declarative pipelines), GitHub Actions, SonarQube, Trivy, Maven, Gradle, npm, Docker Hub / Quay / Nexus, Git</span>
 
           <span class="skill-category">Scripting & Automation</span>
-          <span class="skill-items">Python (scripting, API integration, Flask), Bash, SQL, YAML</span>
+          <span class="skill-items">Bash, Python (API integration, Flask), AutoHotkey, SQL, YAML, cron and systemd timers</span>
 
-          <span class="skill-category">Monitoring & Observability</span>
-          <span class="skill-items">Prometheus, Grafana, Sentry (error tracking), Slack (incident alerting), Coral SQL (cross-source queries)</span>
+          <span class="skill-category">Monitoring & Incident Tooling</span>
+          <span class="skill-items">Sentry (error tracking), Slack (incident alerting), Coral SQL (cross-source queries), CloudWatch</span>
 
           <span class="skill-category">Systems & Networking</span>
-          <span class="skill-items">Linux Administration (Fedora, Debian/Ubuntu), DNS, TCP/IP, QEMU/KVM, iptables, SSL/TLS</span>
+          <span class="skill-items">Linux Administration (Fedora, Debian/Ubuntu), systemd, QEMU/KVM and libvirt, DNS, TCP/IP, OpenWRT, iptables, SSL/TLS</span>
 
           <span class="skill-category">Security</span>
           <span class="skill-items">SPF/DKIM/DMARC, IAM Policies, Fernet Encryption, Cloudflare, Token Management</span>
@@ -645,13 +647,13 @@
 
         <div class="project-entry">
           <div class="project-name">Local K8s Terraform — Automated Kubernetes Lab · <a href="https://github.com/khadirullah/local-k8s-terraform">GitHub</a></div>
-          <div class="project-desc">Fully automated local Kubernetes cluster provisioning using Terraform and Libvirt/QEMU/KVM. Deploys a multi-node cluster (1 master + N workers) with Calico CNI, cloud-init configuration, and automated kubeadm setup. Supports Ubuntu and Fedora. One-command deploy and teardown.</div>
+          <div class="project-desc">Fully automated local Kubernetes cluster provisioning using Terraform and Libvirt/QEMU/KVM. Deploys a multi-node cluster (1 control plane + N workers) with Calico CNI via the Tigera operator, cloud-init configuration, and automated kubeadm setup. Workers fetch the join token over HTTP, so the build needs no SSH. Supports Ubuntu and Fedora. One-command deploy and teardown, roughly 7 minutes to a ready cluster.</div>
           <div class="project-tech">Terraform · Libvirt · QEMU/KVM · Kubernetes · Calico · Cloud-Init · Bash</div>
         </div>
 
         <div class="project-entry">
           <div class="project-name">DiagView — Open Source npm Package · <a href="https://github.com/khadirullah/diagview">GitHub</a> · <a href="https://khadirullah.github.io/diagview/">Live Demo</a></div>
-          <div class="project-desc">Lightweight interactive SVG/Mermaid diagram viewer with zoom, pan, search, and export. Published to npm (v1.0.9) with a fully automated GitHub Actions CI/CD pipeline — linting, 175 unit tests, semantic versioning, and automated npm publishing on tagged releases.</div>
+          <div class="project-desc">Lightweight interactive SVG/Mermaid diagram viewer with zoom, pan, search, minimap, and export. Published to npm (v1.0.11) with a fully automated GitHub Actions CI/CD pipeline — linting, 195 tests, semantic versioning, and automated npm publishing on tagged releases.</div>
           <div class="project-tech">JavaScript · GitHub Actions · npm · Jest · Rollup · CI/CD</div>
         </div>
 
@@ -675,8 +677,9 @@
         <ul class="additional-list">
           <li><b>Hackathon:</b> Top 50 Showcase — Pirates of the Coral-Bean (WeMakeDevs, May 2026) — Solo developer</li>
           <li><b>Blog:</b> <a href="https://khadirullah.com">khadirullah.com</a> — Technical articles on DevOps, CI/CD, Kubernetes, Git security, and Linux troubleshooting</li>
-          <li><b>Open Source:</b> Maintainer of <a href="https://github.com/khadirullah/diagview">DiagView</a> — npm package with automated CI/CD, 175 unit tests, GitHub Pages docs</li>
+          <li><b>Open Source:</b> Maintainer of <a href="https://github.com/khadirullah/diagview">DiagView</a> — npm package with automated CI/CD, 195 tests, GitHub Pages docs</li>
           <li><b>Lab Environment:</b> QEMU/KVM + virt-manager for local DevOps labs on Fedora & Debian</li>
+          <li><b>Currently building:</b> Prometheus, Grafana, and AlertManager monitoring stack on the self-hosted Kubernetes cluster, with alert rules routed to Slack</li>
           <li><b>Certifications:</b> Kestra Fundamentals (Jun 2026) · AWS SAA & CKA self-study in progress</li>
         </ul>
       </div>
@@ -685,7 +688,7 @@
   </div>
 
   <div class="footer-note">
-    Last updated August 2026 · Best viewed on desktop · Use "Save as PDF" for a print-ready copy
+    Last updated September 2026 · Best viewed on desktop · Use "Save as PDF" for a print-ready copy
   </div>
 </body>
 
