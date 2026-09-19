@@ -18,6 +18,13 @@ enableStyledScrollbar = true
 
 disableImageOptimization = false
 disableImageOptimizationMD = false
+# Shape of the image box on post cards (homepage recent, blog list, term pages, related posts).
+# Blowfish defaults to 1.5 (3:2, a photo shape) and fills the box with object-fit: cover,
+# which cut 21% off the sides of every featured image here. All featured images on this site
+# are 1200x630 (1.9:1, the Open Graph social preview size), so the box matches them exactly.
+# Undocumented on blowfish.page; added in v2.102.0 by PR #2877. Applies to card views only,
+# the simple list row has a fixed 300px box that ignores this.
+thumbnailAspectRatio = "1.9"
 disableTextInHeader = false
 
 

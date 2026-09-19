@@ -8,3 +8,17 @@
   width: auto;
   height: auto;
 }
+
+/* Article hero image (article.heroStyle = "big").
+   Blowfish styles it as .single_hero_round { max-height: 50vh; object-fit: cover; }.
+   That caps the hero at half the browser window and crops the image top and bottom
+   to fit. A 1200x630 featured image at the 1024px content width is 538px tall, so on
+   a 600px window only 300px show, on a 900px window 450px, and the pill at the top
+   and the chip row at the bottom are cut. Only windows taller than about 1080px show
+   the whole image.
+   Removing the cap lets the image take its natural height on every window, and the
+   page scrolls instead. This file loads after the theme stylesheet, so the plain
+   rule wins. */
+.single_hero_round {
+  max-height: none;
+}
