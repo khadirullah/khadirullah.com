@@ -80,6 +80,20 @@ Building CI/CD pipelines with Jenkins and GitHub Actions, provisioning Kubernete
 
 ## Projects
 
+### Uptime Checker, a DevSecOps pipeline with a real application behind it
+
+A website monitor built so that a pipeline would have something real to build, scan and deploy. Six services in two languages: a FastAPI api, a Go worker, an nginx board, a one-shot migration job, Postgres 18 and Redis 8. On every merge to main, GitHub Actions builds only the services that changed, runs `pytest`, `go test -race` and `hadolint`, scans each image with Trivy and fails on any fixable HIGH or CRITICAL, pushes to GHCR tagged with the commit sha, and opens a pull request that pins that sha in the release overlay. ArgoCD deploys the merged overlay in sync waves, with the migration job as a hook.
+
+In the cluster, a Sealed Secret holds the database password, default-deny NetworkPolicies allow one rule per arrow in the diagram, and an HPA scales the api. The write-up covers the four things that broke on the way to a green deploy.
+
+**Tech:** Python, FastAPI, Go, nginx, Postgres, Redis, Docker, GitHub Actions, Trivy, hadolint, Kustomize, ArgoCD, Sealed Secrets, Kubernetes
+
+{{< github repo="khadirullah/uptime-checker" >}}
+
+[Read the full write-up](/blog/uptime-checker-devsecops-pipeline/)
+
+---
+
 ### ☸️ Local Kubernetes Cluster with Terraform
 
 A 3-node kubeadm cluster on QEMU/KVM that comes up from a single `terraform apply`. The Terraform libvirt provider creates the VMs, cloud-init installs containerd and kubeadm, Calico runs as the CNI through the Tigera operator, and workers fetch the join token over HTTP, so the build never needs SSH. Roughly 7 minutes from nothing to a ready cluster.
