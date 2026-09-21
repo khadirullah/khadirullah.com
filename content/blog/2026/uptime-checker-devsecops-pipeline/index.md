@@ -125,7 +125,7 @@ world around it does, and a rebuild picks up the base image fixes for free.
 The whole path from a branch to a running pod. Amber is the pull request,
 blue is build and scan, green is deploy.
 
-{{< figure src="media/pipeline-flow.gif" alt="Animated ring of eight steps: push a branch, ci on the pull request, ci-ok and merge, changes, build per service, deploy pull request, argocd, sync waves. Each step lights up in turn with a one-line explanation." >}}
+{{< figure default=true src="media/pipeline-flow.gif" alt="Animated ring of eight steps: push a branch, ci on the pull request, ci-ok and merge, changes, build per service, deploy pull request, argocd, sync waves. Each step lights up in turn with a one-line explanation." >}}
 
 The same path with every job and wave named:
 
