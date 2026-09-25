@@ -78,7 +78,7 @@ disableTextInHeader = false
   showSummary = true		
   showTableOfContents = false
   showCards = true		
-  groupByYear = true
+  groupByYear = false
   cardView = true		
 
 
