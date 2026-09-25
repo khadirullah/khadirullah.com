@@ -20,7 +20,7 @@ enableEmoji = true
 # Analytics: Cloudflare Web Analytics (configured in Cloudflare dashboard)
 
 [pagination]
-  pagerSize = 10
+  pagerSize = 12
 
 [imaging]
   anchor = 'Center'
