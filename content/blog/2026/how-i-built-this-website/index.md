@@ -2,6 +2,7 @@
 title: "How I Built and Deployed This Website"
 images: ["social-fallback.webp"]
 date: 2026-05-19
+lastmod: 2026-09-26
 draft: false
 slug: "how-i-built-this-website"
 aliases:
@@ -233,7 +234,7 @@ Then the content is just standard Markdown — headings, code blocks, tables, li
 | Framework preset | Hugo |
 | Build command | `hugo` |
 | Build output directory | `public` |
-| Environment variable | `HUGO_VERSION` = `0.147.6` (or your version) |
+| Environment variable | `HUGO_VERSION` = `0.164.0` (or your version) |
 | Environment variable | `HUGO_ENV` = `production` |
 
 {{< alert >}}
