@@ -51,7 +51,7 @@ disableTextInHeader = false
   
 [article]
   showDate = true
-  showDateUpdated = false
+  showDateUpdated = true
   showAuthor = true
   showHero = true		
   heroStyle = "big" 		# valid options: basic, big, background, thumbAndBackground	    		
