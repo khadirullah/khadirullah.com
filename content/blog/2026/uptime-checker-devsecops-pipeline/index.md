@@ -5,7 +5,7 @@ date: 2026-09-19
 draft: false
 description: "uptime-checker: a six-service website monitor in Go and Python, and the pipeline that builds, scans, deploys and runs it on Kubernetes with sealed secrets, network policies, ArgoCD and autoscaling."
 summary: "I built a small website monitor so that a DevSecOps pipeline would have something real to build, scan and deploy. This is what the pipeline does, the four things that broke on the way, and what a company would do differently."
-tags: ["project", "kubernetes", "devops", "cicd", "github-actions", "security", "argocd", "docker", "golang", "python"]
+tags: ["project", "kubernetes", "devops", "ci-cd", "github-actions", "security", "argocd", "docker", "golang", "python"]
 categories: ["Projects"]
 slug: "uptime-checker-devsecops-pipeline"
 ---

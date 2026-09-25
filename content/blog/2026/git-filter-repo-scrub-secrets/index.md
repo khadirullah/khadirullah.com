@@ -6,7 +6,7 @@ slug: "git-filter-repo-scrub-secrets"
 images: ["social-fallback.webp"]
 description: "A complete guide to removing leaked AWS API keys, passwords, and sensitive data from your entire Git history using git filter-repo text replacement."
 summary: "A complete guide to removing leaked AWS API keys, passwords, and sensitive data from your entire Git history using git filter-repo text replacement."
-tags: ["Git", "Security", "DevOps", "Tutorials"]
+tags: ["git", "security", "devops", "tutorial"]
 categories: ["DevOps", "Security"]
 showToc: true
 showReadingTime: true
