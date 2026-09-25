@@ -2,13 +2,18 @@
 title: "Fully Automated Local Kubernetes Cluster with Terraform and QEMU/KVM"
 images: ["social-fallback.webp"]
 date: 2026-08-16
+lastmod: 2026-09-25
 draft: false
 slug: "local-k8s-terraform-cluster"
 description: "Build a production-like 3-node Kubernetes cluster on your local machine using Terraform, QEMU/KVM, and Cloud-Init. Fully automated from zero to kubectl get nodes in one command. Covers architecture, cloud-init automation, Calico CNI via Tigera Operator, the libvirt provider 0.8→0.9 rewrite, and every version upgrade nuance."
-summary: "A deep dive into building a fully automated local Kubernetes cluster with Terraform and QEMU/KVM. One command provisions 3 VMs, installs Kubernetes via kubeadm, deploys Calico CNI, and joins workers automatically (no manual SSH required). Includes a detailed breakdown of the Terraform libvirt provider 0.8→0.9 rewrite and what breaking schema changes mean for your infrastructure code."
-tags: ["kubernetes", "terraform", "qemu", "kvm", "cloud-init", "devops", "homelab", "calico", "kubeadm", "libvirt", "virtualization", "linux"]
+summary: "A deep dive into building a fully automated local Kubernetes cluster with Terraform and QEMU/KVM. One command provisions 3 VMs, installs Kubernetes via kubeadm, deploys Calico CNI, and joins workers automatically (no manual SSH required). Includes a detailed breakdown of the Terraform libvirt provider 0.8→0.9 rewrite and what breaking schema changes mean for your infrastructure code. Updated for v2.1 with the five bugs that kept Fedora 44 from booting."
+tags: ["kubernetes", "terraform", "qemu", "kvm", "cloud-init", "devops", "homelab", "calico", "kubeadm", "libvirt", "virtualization", "linux", "fedora"]
 categories: ["Tutorials", "Infrastructure"]
 ---
+
+{{< alert icon="circle-info" >}}
+**Updated 25 September 2026 for v2.1.** The Fedora 44 option never booted in v2.0. <a href="#getting-fedora-44-to-boot-in-v21">Getting Fedora 44 to boot in v2.1</a> walks through the five bugs in the way and the fix for each. The join server section now shows the one-hour token on a live cluster. Release notes are [on GitHub](https://github.com/khadirullah/local-k8s-terraform/releases/tag/v2.1).
+{{< /alert >}}
 
 Running Kubernetes locally shouldn't require a PhD in YAML. Yet most local K8s solutions (Minikube, Kind, k3s) trade away the real learning experience. They abstract everything so heavily that the skills don't transfer to production.
 
@@ -148,6 +153,8 @@ My solution: **the master runs a Python HTTP server as a systemd service.**
 After `kubeadm init` completes on the master, the join command is saved to `/srv/k8s-join/join-command.sh` and served via HTTP on port 8000.
 
 The folder matters. `http.server` hands out every file in its working directory, not just the one you meant. My first version served `/home/km`, and that folder also holds a copy of the admin kubeconfig, so anything that could reach port 8000 could download full control of the cluster. Now the join command sits in a folder of its own. `DynamicUser=yes` runs the server as a throwaway user, and `ProtectHome=yes` hides `/home` from it. The token itself is created with `--ttl 1h`, so it stops working an hour after the cluster comes up.
+
+{{< figure src="media/term-token-ttl.webp" alt="kubeadm token list showing the served token with 57 minutes left and the kubeadm init token with 23 hours, join-command.sh using the 57 minute token, and curl getting 404 for .kube/config on port 8000" caption="A fresh v2.1 cluster, three minutes old. The token in join-command.sh has 57 minutes left. The one kubeadm init made lasts 23 hours, but the join server never hands it out. Asking port 8000 for the kubeconfig gets a 404. I masked the token secrets." >}}
 
 Workers poll this URL in a retry loop:
 
@@ -535,6 +542,70 @@ If you use `v1beta3` with kubeadm 1.36, you'll get a deprecation warning and it 
 
 ---
 
+## Getting Fedora 44 to boot in v2.1
+
+`setup.sh` has offered Fedora 44 since v2.0, but no Fedora cluster had ever come up. I found out while testing the join token fix on my own Fedora desktop. Five bugs stood in the way, and each one hid behind the one before it. Every fix walked straight into the next failure.
+
+{{< timeline >}}
+
+{{< timelineItem md=true icon="download" header="The image download returned 404" badge="bug 1" >}}
+`setup.sh` asked for `Fedora-Cloud-Base-Generic.x86_64-44-1.7.qcow2`. The real file is `Fedora-Cloud-Base-Generic-44-1.7.x86_64.qcow2`, with the version before the architecture, so every mirror answered 404.
+
+That alone would be a one-line fix, but `wget -O` creates its output file even when the download fails. The failed run left a 146-byte error page named like the image. The next run saw the file, skipped the download and built VMs from it. The script now downloads to a `.part` file and renames it only after wget succeeds.
+{{< /timelineItem >}}
+
+{{< timelineItem md=true icon="triangle-exclamation" header="The VMs booted with no IP address" badge="bug 2" >}}
+The network config found the network card with `match: name: en*`. Netplan on Ubuntu understands that pattern. On Fedora, cloud-init writes a NetworkManager profile instead, and that renderer drops the pattern. It pinned the profile to `interface-name=nic0`, a card that doesn't exist. The real card was `enp0s3`, which fell back to DHCP. `k8s-net` has DHCP turned off, so the VM never got an address.
+
+{{< figure src="media/term-fedora-nic0.webp" alt="The cloud-init NetworkManager profile pinned to interface-name=nic0, and the NetworkManager log showing enp0s3 falling back to Wired connection 1 and getting no DHCP lease" caption="Read from the powered-off master's disk with virt-cat and virt-log. The static IP went into a profile for nic0. The real card, enp0s3, tried DHCP and gave up." >}}
+
+Now Terraform gives each VM a fixed MAC address built from its IP, and the network config matches the card by that MAC. `192.168.100.11` gets `52:54:00:a8:64:0b`. The MAC only has to be unique on the `k8s-net` bridge, and NAT keeps it from ever leaving the host. It also keeps working if a future image renames the card.
+{{< /timelineItem >}}
+
+{{< timelineItem md=true icon="bug" header="kubeadm was never installed" badge="bug 3" >}}
+With networking fixed, the master came up and cloud-init finished, but `~/.kube` stayed empty. `rpm -q kubeadm` said it wasn't installed. Fedora 44 ships dnf5, and dnf5 dropped the `--disableexcludes` flag that the official Kubernetes install docs use.
+
+{{< figure src="media/term-fedora-dnf5.webp" alt="dnf5 rejecting --disableexcludes as an unknown argument, then installing kubelet, kubeadm and kubectl 1.36.5 with --setopt=disable_excludes=kubernetes" caption="dnf5 rejects the old flag outright. The `--setopt` form installs all three packages, and the repo's exclude line still stops a routine dnf upgrade from touching them." >}}
+
+Why did cloud-init finish as if nothing failed? `runcmd` runs as one shell script, and cloud-init only reports the exit code of its last command. A failed install in the middle doesn't count. On Fedora the `runcmd` output goes to the journal, not `cloud-init-output.log`, so the error didn't show up where I looked first.
+{{< /timelineItem >}}
+
+{{< timelineItem md=true icon="fire" header="kubelet refused to start" badge="bug 4" >}}
+kubeadm installed, then `kubeadm init` timed out at `wait-control-plane`. kubelet was crash-looping because swap was on, even though cloud-init runs `swapoff -a`.
+
+{{< figure src="media/term-fedora-zram.webp" alt="swapon showing /dev/zram0 active, kubelet failing with running with swap on is not supported, restart counter at 15, and kubeadm init failing at wait-control-plane" caption="The swap is /dev/zram0, compressed RAM rather than a disk file. kubelet had restarted 15 times by the time I looked, and kubeadm init had already given up." >}}
+
+Fedora turns on zram swap by default, and a systemd generator recreates its swap unit on every boot and every `daemon-reload`. `swapoff -a` turns it off until the next reload. cloud-init now writes an empty `/etc/systemd/zram-generator.conf`, which tells the generator to make nothing, then runs `systemctl daemon-reload` and `swapoff -a`.
+{{< /timelineItem >}}
+
+{{< timelineItem md=true icon="tag" header="Nodes got long names" badge="bug 5" >}}
+The cluster finally came up, but Fedora nodes registered as `k8s-master.k8s.local` while Ubuntu nodes were plain `k8s-master`. cloud-init on the Red Hat family of distros sets the FQDN as the hostname by default, and kubelet names the node after the hostname.
+
+{{< figure src="media/term-names-before.webp" alt="kubectl get nodes listing k8s-master.k8s.local, k8s-worker-1.k8s.local and k8s-worker-2.k8s.local" caption="Before. A working cluster, but with different node names on Fedora and Ubuntu." >}}
+
+One line in the Fedora cloud-init fixes it, `prefer_fqdn_over_hostname: false`. The FQDN still resolves through `/etc/hosts`, so nothing that needs it breaks.
+
+{{< figure src="media/term-names-after.webp" alt="kubectl get nodes listing k8s-master, k8s-worker-1 and k8s-worker-2, all Ready, and hostname printing k8s-master while hostname -f prints k8s-master.k8s.local" caption="After. Short node names like on Ubuntu. hostname -f still gives the full name." >}}
+{{< /timelineItem >}}
+
+{{< /timeline >}}
+
+### What changed from v2.0 to v2.1
+
+| | v2.0 | v2.1 |
+|---|---|---|
+| **Join server** | Served all of `/home/km`, admin kubeconfig included | Serves only `/srv/k8s-join`, as a throwaway user |
+| **Served join token** | Valid for 24 hours | Expires after 1 hour |
+| **Control plane version** | `x.y.0` | The installed patch, like `v1.36.5` |
+| **`k8s_version` check** | Bad values failed inside the VM | Bad values fail at `terraform plan` |
+| **Network card match** | `en*` name pattern | Fixed MAC built from each node's IP |
+| **Fedora 44** | Never booted | 3 nodes Ready |
+| **Fedora node names** | `k8s-master.k8s.local` | `k8s-master`, same as Ubuntu |
+
+The full list with commit links is in the [v2.1 release notes](https://github.com/khadirullah/local-k8s-terraform/releases/tag/v2.1) and the repo's [CHANGELOG.md](https://github.com/khadirullah/local-k8s-terraform/blob/main/CHANGELOG.md).
+
+---
+
 ## Quick Start
 
 ```bash
@@ -558,6 +629,10 @@ cd ..
 export KUBECONFIG=~/.kube/config-local-k8s
 kubectl get nodes
 ```
+
+{{< alert icon="triangle-exclamation" >}}
+**Running a v2.0 cluster?** Rebuild it. cloud-init only runs on a VM's first boot, so an old cluster keeps the join server that hands out the admin kubeconfig. Pull the new code, run `../scripts/destroy.sh` from `terraform/`, then run `./scripts/setup.sh` from the repo root and `terraform apply` again. The README's [Upgrading from v2.0](https://github.com/khadirullah/local-k8s-terraform#upgrading-from-v20) section has the full steps.
+{{< /alert >}}
 
 ---
 
