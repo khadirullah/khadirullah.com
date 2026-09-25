@@ -2,6 +2,7 @@
 title: "How to Block Internet Access for Any Linux App (While Keeping LAN)"
 images: ["social-fallback.webp"]
 date: 2026-03-25
+lastmod: 2026-04-01
 draft: false
 slug: "block-internet-linux-apps"
 aliases:

@@ -2,6 +2,7 @@
 title: "Building a DevOps Incident Investigator with Coral SQL — From 15 Minutes to 15 Seconds"
 images: ["social-fallback.webp"]
 date: 2026-05-30
+lastmod: 2026-06-01
 draft: false
 description: "A step-by-step guide to building a CLI + Web Dashboard that correlates GitHub PRs, Sentry errors, and Slack messages using Coral SQL. Includes cross-source JOINs, custom source specs, AI root cause analysis, and automated Slack alerts."
 summary: "How I built a DevOps Incident Investigator that correlates GitHub PRs, Sentry errors, and Slack messages using Coral SQL — reducing incident triage from 15 minutes of tab-switching to 15 seconds with one command."

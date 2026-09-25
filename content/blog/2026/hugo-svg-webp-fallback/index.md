@@ -1,6 +1,7 @@
 ---
 title: "Fixing Broken Hugo Open Graph Previews with WebP Social Fallbacks"
 date: 2026-07-19
+lastmod: 2026-07-23
 draft: false
 slug: "hugo-svg-webp-social-fallback"
 description: "How I fixed broken social media previews on my Hugo blog by using WebP fallback images alongside SVG featured images, without letting the Blowfish theme accidentally override them."

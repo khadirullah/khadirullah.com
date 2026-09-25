@@ -2,6 +2,7 @@
 title: "I Deleted Files From Git But They Were Still There — Removing Objects From Git History"
 images: ["social-fallback.webp"]
 date: 2026-07-12
+lastmod: 2026-07-22
 draft: false
 slug: "git-filter-repo-clean-history"
 description: "A practical guide to purging files from git history using git filter-repo, with a real-world Hugo blog scenario, investigation commands, and a full walkthrough of the cleanup process."

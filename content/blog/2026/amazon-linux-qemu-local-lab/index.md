@@ -2,6 +2,7 @@
 title: "How to Run Amazon Linux 2023 Locally with QEMU/KVM and Cloud-Init"
 images: ["social-fallback.webp"]
 date: 2026-07-09
+lastmod: 2026-07-12
 draft: false
 slug: "amazon-linux-qemu-local-lab"
 aliases:

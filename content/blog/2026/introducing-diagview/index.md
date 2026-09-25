@@ -1,6 +1,7 @@
 ---
 title: "Introducing DiagView"
 date: 2026-02-11
+lastmod: 2026-08-31
 draft: false
 description: "A lightweight JavaScript library for interactive SVG diagrams — with zoom, pan, search, minimap, rotation, text-select, and a fully automated CI/CD pipeline."
 summary: "I built a lightweight library that gives static SVGs superpowers — zoom, pan, search, minimap, rotation, text-select mode, watermarks, and more — with a CI/CD pipeline that automates linting, testing, building, and npm publishing."

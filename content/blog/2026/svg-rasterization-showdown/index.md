@@ -1,6 +1,7 @@
 ---
 title: "The Ultimate Guide to Automating SVG Rasterization: Inkscape vs ImageMagick vs Headless Chrome"
 date: 2026-07-20
+lastmod: 2026-07-23
 draft: false
 slug: "svg-rasterization-engine-showdown"
 description: "A deep technical comparison of SVG rendering engines for DesignOps automation. Learn why browser-oriented SVGs render differently in Inkscape, ImageMagick, and Headless Chrome, and how to choose the right tool."
