@@ -134,7 +134,9 @@ My solution: **the master runs a Python HTTP server as a systemd service.**
 
     [Service]
     Type=simple
-    WorkingDirectory=/home/km
+    DynamicUser=yes
+    ProtectHome=yes
+    WorkingDirectory=/srv/k8s-join
     ExecStart=/usr/bin/python3 -m http.server 8000 --bind 192.168.100.10
     Restart=on-failure
     RestartSec=5
@@ -143,7 +145,11 @@ My solution: **the master runs a Python HTTP server as a systemd service.**
     WantedBy=multi-user.target
 ```
 
-After `kubeadm init` completes on the master, the join command is saved to a file and served via HTTP on port 8000. Workers poll this URL in a retry loop:
+After `kubeadm init` completes on the master, the join command is saved to `/srv/k8s-join/join-command.sh` and served via HTTP on port 8000.
+
+The folder matters. `http.server` hands out every file in its working directory, not just the one you meant. My first version served `/home/km`, and that folder also holds a copy of the admin kubeconfig, so anything that could reach port 8000 could download full control of the cluster. Now the join command sits in a folder of its own. `DynamicUser=yes` runs the server as a throwaway user, and `ProtectHome=yes` hides `/home` from it. The token itself is created with `--ttl 1h`, so it stops working an hour after the cluster comes up.
+
+Workers poll this URL in a retry loop:
 
 ```bash
 # Worker cloud-init runcmd (simplified)
@@ -161,7 +167,7 @@ while true; do
 done
 ```
 
-No SSH keys between nodes, no shared secrets, no coordination service. Just HTTP.
+No SSH keys between nodes, no coordination service. Just HTTP and a short-lived token.
 
 ---
 
@@ -482,7 +488,7 @@ Here's every component that changed between the two versions:
 |---|---|---|---|
 | Terraform Libvirt Provider | `~> 0.8.0` (SDKv2) | `~> 0.9.8` (Plugin Framework) | 1:1 mapping to libvirt XML schema |
 | Kubernetes | v1.30 | v1.36 | Latest stable release |
-| kubeadm API | `v1beta3` | `v1beta4` | New config format for K8s 1.36 |
+| kubeadm API | `v1beta3` | `v1beta4` | Current config format, v1beta3 is deprecated |
 | Calico CNI | v3.27.0 (raw manifest) | v3.32.1 (Tigera Operator) | Production-recommended lifecycle management |
 | containerd config | version 2 | version 3 | Required for containerd 2.x |
 | Pause container | `registry.k8s.io/pause:3.9` | `registry.k8s.io/pause:3.11` | Matches K8s 1.36 default |
@@ -515,7 +521,7 @@ The plugin path changed from `io.containerd.grpc.v1.cri` (the old gRPC-based CRI
 
 ### kubeadm API: v1beta3 → v1beta4
 
-Kubernetes 1.36 requires the `v1beta4` kubeadm configuration API:
+Kubernetes 1.36 still accepts `v1beta3` but deprecates it, so v2.0 moves to `v1beta4`:
 
 ```yaml
 # v1.0
