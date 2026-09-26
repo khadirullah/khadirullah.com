@@ -29,7 +29,7 @@ The result is [**local-k8s-terraform**](https://github.com/khadirullah/local-k8s
 
 ## Why Not Minikube/Kind/k3s?
 
-| | local-k8s-terraform | Minikube | Kind | k3s |
+| Feature | local-k8s-terraform | Minikube | Kind | k3s |
 |---|---|---|---|---|
 | **Real VMs** | ✅ Separate QEMU VMs | Single VM or Docker | Docker containers | Lightweight binary |
 | **Multi-node networking** | ✅ Libvirt NAT + static IPs | Limited | Docker network | Varies |
@@ -592,7 +592,7 @@ One line in the Fedora cloud-init fixes it, `prefer_fqdn_over_hostname: false`. 
 
 ### What changed from v2.0 to v2.1
 
-| | v2.0 | v2.1 |
+| Area | v2.0 | v2.1 |
 |---|---|---|
 | **Join server** | Served all of `/home/km`, admin kubeconfig included | Serves only `/srv/k8s-join`, as a throwaway user |
 | **Served join token** | Valid for 24 hours | Expires after 1 hour |
