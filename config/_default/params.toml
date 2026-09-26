@@ -96,3 +96,8 @@ disableTextInHeader = false
   groupByYear = false
   cardView = true			
 
+
+[seo]
+  # Posts have a short description and a long summary for list cards.
+  # Put description first so the meta description stays near 160 characters.
+  metaDescriptionOrder = ["description", "summary", "site"]
