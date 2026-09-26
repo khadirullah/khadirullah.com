@@ -4,7 +4,7 @@ date: 2026-07-19
 lastmod: 2026-07-23
 draft: false
 slug: "hugo-svg-webp-social-fallback"
-description: "How I fixed broken social media previews on my Hugo blog by using WebP fallback images alongside SVG featured images, without letting the Blowfish theme accidentally override them."
+description: "How I fixed broken social previews on my Hugo blog with WebP fallback images next to SVG featured images, without Blowfish overriding them."
 summary: "SVGs break Open Graph social previews on LinkedIn, Twitter, and WhatsApp. Here is the exact engineering solution I built to serve crisp SVGs on-site while feeding lightweight WebP images to social media scrapers."
 tags: ["hugo", "seo", "web-development", "svg", "webp"]
 categories: ["Web Development"]

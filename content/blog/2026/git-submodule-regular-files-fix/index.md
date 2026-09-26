@@ -4,7 +4,7 @@ images: ["social-fallback.webp"]
 date: 2026-07-16
 draft: false
 slug: "git-submodule-regular-files-fix"
-description: "How to diagnose and fix a git submodule that silently became regular tracked files — with a Hugo theme as a real-world example, plus the Cloudflare Pages deployment fix that followed."
+description: "Diagnose and fix a git submodule that silently turned into regular tracked files, with a Hugo theme example and the Cloudflare Pages fix after it."
 summary: "I ran `git submodule update --remote --merge` and nothing happened. My Hugo theme was stuck at an old version. Turns out I had accidentally replaced the submodule with manually copied files without realizing it. Here's how I diagnosed the git state mismatch, restored the proper submodule, and fixed the Cloudflare Pages deployment failure that followed."
 tags: ["git", "git-submodules", "hugo", "devops", "tutorial", "cloudflare-pages"]
 categories: ["Tutorials"]

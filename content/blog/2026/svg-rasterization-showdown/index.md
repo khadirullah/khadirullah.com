@@ -4,7 +4,7 @@ date: 2026-07-20
 lastmod: 2026-07-23
 draft: false
 slug: "svg-rasterization-engine-showdown"
-description: "A deep technical comparison of SVG rendering engines for DesignOps automation. Learn why browser-oriented SVGs render differently in Inkscape, ImageMagick, and Headless Chrome, and how to choose the right tool."
+description: "Why the same SVG renders differently in Inkscape, ImageMagick and Headless Chrome, and how to pick the right engine for DesignOps automation."
 summary: "Automating social media preview images (Open Graph) using SVGs is incredibly powerful. But when I tried to automate SVG-to-WebP conversions on my Linux server, I discovered that standard command-line tools like Inkscape and ImageMagick handle browser-oriented SVGs very differently from Chrome."
 tags: ["designops", "svg", "imagemagick", "inkscape", "chrome-headless", "devops", "librsvg"]
 categories: ["Tutorials", "DevOps"]

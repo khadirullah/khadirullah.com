@@ -5,7 +5,7 @@ date: 2026-08-16
 lastmod: 2026-09-25
 draft: false
 slug: "local-k8s-terraform-cluster"
-description: "Build a production-like 3-node Kubernetes cluster on your local machine using Terraform, QEMU/KVM, and Cloud-Init. Fully automated from zero to kubectl get nodes in one command. Covers architecture, cloud-init automation, Calico CNI via Tigera Operator, the libvirt provider 0.8→0.9 rewrite, and every version upgrade nuance."
+description: "Build a 3-node Kubernetes cluster on your own machine with Terraform, QEMU/KVM and cloud-init. One command takes you from zero to kubectl get nodes."
 summary: "A deep dive into building a fully automated local Kubernetes cluster with Terraform and QEMU/KVM. One command provisions 3 VMs, installs Kubernetes via kubeadm, deploys Calico CNI, and joins workers automatically (no manual SSH required). Includes a detailed breakdown of the Terraform libvirt provider 0.8→0.9 rewrite and what breaking schema changes mean for your infrastructure code. Updated for v2.1 with the five bugs that kept Fedora 44 from booting."
 tags: ["kubernetes", "terraform", "qemu", "kvm", "cloud-init", "devops", "homelab", "calico", "kubeadm", "libvirt", "virtualization", "linux", "fedora"]
 categories: ["Tutorials", "Infrastructure"]

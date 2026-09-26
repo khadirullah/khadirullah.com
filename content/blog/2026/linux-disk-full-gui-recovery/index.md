@@ -6,7 +6,7 @@ draft: false
 slug: "linux-disk-full-gui-recovery"
 aliases:
   - "/blog/how-i-recovered-my-linux-gui-after-a-full-disk-killed-lightdm/"
-description: "A real-world walkthrough of diagnosing and fixing a Linux system stuck on tty1 — caused by a completely full root filesystem that silently broke LightDM, Xorg, and the entire graphical session."
+description: "Fixing a Linux desktop stuck on tty1 after a full root filesystem silently broke LightDM, Xorg and the whole graphical session."
 summary: "My Linux desktop dropped to tty1 with no GUI. LightDM was failing, but the real culprit was a 100% full root disk. Here's exactly how I diagnosed it from the terminal and brought the system back — step by step."
 tags: ["linux", "troubleshooting", "lightdm", "systemd", "disk-management", "sysadmin", "debian"]
 categories: ["Tutorials"]

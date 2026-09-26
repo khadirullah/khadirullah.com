@@ -3,7 +3,7 @@ title: "Charting New Waters: Building a Custom Coral Source Spec for Internal En
 images: ["social-fallback.webp"]
 date: 2026-05-30
 draft: false
-description: "How to extend Coral SQL to query private, internal microservices that don't have native connectors — with a real-world example of a custom payment-api.yaml source spec."
+description: "Extend Coral SQL to query private microservices that have no native connector, using a real custom payment-api.yaml source spec."
 summary: "A step-by-step guide to building a custom Coral source spec that turns any internal REST API into a queryable SQL table — no SDK, no glue code, just one YAML file."
 tags: ["coral", "devops", "hackathon", "api", "sql", "yaml", "enterprise"]
 categories: ["Tutorials"]

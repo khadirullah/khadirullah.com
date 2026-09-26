@@ -7,7 +7,7 @@ draft: false
 slug: "amazon-linux-qemu-local-lab"
 aliases:
   - "/blog/how-to-run-amazon-linux-2023-locally-with-qemu/kvm-and-cloud-init/"
-description: "A complete guide to running official Amazon Linux 2023 cloud images locally using QEMU/KVM, Virt-Manager, and Cloud-Init, with concepts that apply equally to VirtualBox, VMware, and Hyper-V. Zero cloud costs, instant boot, SSH key authentication, and the real troubleshooting gotchas nobody warns you about."
+description: "Run official Amazon Linux 2023 cloud images locally with QEMU/KVM, Virt-Manager and cloud-init. No cloud costs, SSH key login, and the real gotchas."
 summary: "Run the official Amazon Linux 2023 QCOW2 image locally on QEMU/KVM with Virt-Manager. Covers Cloud-Init seed ISO creation, SSH key setup, and an 8-test deep dive into the password locking behavior that most guides get wrong. The Cloud-Init concepts apply to VirtualBox, VMware, and Hyper-V too."
 tags: ["linux", "aws", "qemu", "kvm", "cloud-init", "devops", "virt-manager", "homelab", "virtualization", "ssh", "virtualbox", "vmware", "hyper-v"]
 categories: ["Tutorials"]

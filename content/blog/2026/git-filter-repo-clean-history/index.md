@@ -5,7 +5,7 @@ date: 2026-07-12
 lastmod: 2026-07-22
 draft: false
 slug: "git-filter-repo-clean-history"
-description: "A practical guide to purging files from git history using git filter-repo, with a real-world Hugo blog scenario, investigation commands, and a full walkthrough of the cleanup process."
+description: "Purge files from your entire git history with git filter-repo, walking through a real Hugo blog cleanup with every investigation command."
 summary: "I accidentally shipped 3MB of unused screenshots to production through my Hugo blog. Deleting them wasn't enough. They lived forever in git history. Here's how I investigated, cleaned up, and verified the purge using git filter-repo."
 tags: ["git", "devops", "tutorial", "github", "hugo", "cloudflare-pages", "security", "git-filter-repo"]
 categories: ["Tutorials"]
