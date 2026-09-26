@@ -48,7 +48,9 @@
             theme: isDark ? 'dark' : 'base',
             themeVariables: {
               fontFamily: "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif",
-              fontSize: "16px"
+              fontSize: "16px",
+              // Dark theme edge labels are #cccccc on #585858 (4.43:1). #525252 passes 4.5:1.
+              ...(isDark && { edgeLabelBackground: '#525252' })
             }
           });
 
