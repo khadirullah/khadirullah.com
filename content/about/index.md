@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "About Khadirullah Mohammad, DevOps & Cloud Engineer"
+description: "I started out fixing PCs and routers. Now I'm a DevOps engineer who builds CI/CD pipelines and AWS infrastructure with Docker, Kubernetes and Terraform."
 showDate: false
 showReadingTime: false
 showAuthor: false

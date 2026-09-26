@@ -11,7 +11,7 @@ title = "Khadirullah Mohammad"
   dateFormat = "2 January 2006"
   logo = "img/km-header.svg"
   images = ["img/og-image.png"]
-  description = "DevOps & Cloud Engineer from India specializing in AWS, Kubernetes, CI/CD, and Terraform. Built an AI-powered incident correlation tool using cross-source SQL. Available for remote and full-time roles."
+  description = "DevOps & Cloud Engineer from India. AWS, Kubernetes, CI/CD, Terraform. Built an AI-powered incident correlation tool. Open to remote and full-time roles."
   copyright = "© { year } Khadirullah Mohammad"
 
 [params.author]
