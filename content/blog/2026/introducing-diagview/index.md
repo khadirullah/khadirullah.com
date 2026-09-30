@@ -28,7 +28,7 @@ So, I built **DiagView**.
 
 ## Demo
 
-{{< video src="media/demo.webm" poster="media/demo-poster.webp" autoplay="true" loop="true" muted="true" controls="false" caption="Zoom, pan, search, minimap, and export in action" >}}
+{{< video src="media/demo.webm" poster="media/demo-poster.webp" autoplay="true" loop="true" muted="true" controls="false" caption="Zoom, pan, search, export and readable labels in action" >}}
 
 ## What is DiagView?
 
