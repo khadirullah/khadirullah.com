@@ -30,6 +30,10 @@ So, I built **DiagView**.
 
 {{< video src="media/demo.webm" poster="media/demo-poster.webp" autoplay="true" loop="true" muted="true" controls="false" caption="Zoom, pan, search, export and readable labels in action" >}}
 
+For a narrated tour of every feature, watch the walkthrough below. It runs 2:31 and has English subtitles.
+
+{{< youtube 0XemdL7n3ao >}}
+
 ## What is DiagView?
 
 **DiagView** is a feature-rich, interactive wrapper that gives your static SVGs superpowers.
