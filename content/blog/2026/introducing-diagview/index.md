@@ -1,17 +1,18 @@
 ---
 title: "Introducing DiagView"
 date: 2026-02-11
-lastmod: 2026-08-31
+lastmod: 2026-09-30
 draft: false
-description: "A lightweight JavaScript library for interactive SVG diagrams — with zoom, pan, search, minimap, rotation, text-select, and a fully automated CI/CD pipeline."
-summary: "I built a lightweight library that gives static SVGs superpowers — zoom, pan, search, minimap, rotation, text-select mode, watermarks, and more — with a CI/CD pipeline that automates linting, testing, building, and npm publishing."
+description: "A JavaScript library that opens SVG and Mermaid diagrams in a fullscreen viewer with zoom, pan, search, readable labels and print-ready export."
+summary: "I built a lightweight library that opens static SVG and Mermaid diagrams in a fullscreen viewer. It has zoom, pan, search, a minimap, rotation, readable labels, watermarks and export to SVG, PNG and PDF. A CI/CD pipeline lints, tests and builds every change and publishes releases to npm."
 tags: ["project", "javascript", "open-source", "ci-cd", "github-actions", "devops"]
 categories: ["Projects"]
 slug: "introducing-diagview"
 ---
 
-
-As developers, we love clear documentation. Use Case diagrams, Cloud Architectures, Flowcharts — they are the lifeblood of understanding complex systems. Tools like Mermaid.js, PlantUML, and Draw.io are fantastic for *creating* them.
+{{< lead >}}
+As developers, we love clear documentation. Use Case diagrams, Cloud Architectures and Flowcharts are the lifeblood of understanding complex systems. Tools like Mermaid.js, PlantUML, and Draw.io are fantastic for *creating* them.
+{{< /lead >}}
 
 But **viewing** them? That experience is often stuck in the past.
 
@@ -21,7 +22,9 @@ I looked for a library to solve this. I found **D3.js** (too complex for just vi
 
 So, I built **DiagView**.
 
-> **Update (Aug 31, 2026):** DiagView v1.0.10 and v1.0.11 shipped a major precision pass — pixel-exact share-link restore at any zoom, fully working rotation (live, minimap, share links, rememberZoom), sharp mobile rendering at any zoom level, a hardened SVG sanitizer, and a headless-Chrome geometry test harness. See the [release notes](https://github.com/khadirullah/diagview/releases) for the full story.
+{{< alert icon="circle-info" >}}
+**Update (Sep 30, 2026):** DiagView v1.1.0 adds a Readable switch for faint labels, a dot grid and seven new options. SVG exports now embed only the fonts their labels use, and about 120 bugs are fixed. [What's new in 1.1.0](#whats-new-in-110) below covers the highlights, and the [v1.1.0 release notes](https://github.com/khadirullah/diagview/releases/tag/v1.1.0) list everything.
+{{< /alert >}}
 
 ## Demo
 
@@ -37,39 +40,80 @@ It is built on top of the excellent [panzoom](https://github.com/timmywil/panzoo
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **Deep Search** | Traverses the SVG DOM to find and highlight matching nodes with pulsing glow |
-| 📤 **Multi-Format Export** | PNG, SVG, PDF, JPEG, WebP, or copy to clipboard |
+| 🔍 **Deep Search** | Traverses the SVG DOM to find matching nodes, outlines each match and fades the rest |
+| 🖼️ **Canvas Themes** | Auto, light, dark or custom canvas, an optional dot grid, and Readable mode for faint labels |
+| 📤 **Multi-Format Export** | PNG, SVG, PDF, JPEG and WebP, or copy as an image or as SVG markup |
+| 🖨️ **Print Friendly** | Printing the page hides the toolbars, menu and viewer and keeps the diagrams. For paper, export SVG, which scales to any size, or PNG and PDF at up to 10x |
 | 🗺️ **Smart Minimap** | Accurate portrait/landscape scaling; click-to-navigate |
 | 🔄 **Rotation** | 90° rotation steps with correct Panzoom recalibration |
 | 📝 **Text Select Mode** | Toggle SVG text selection for copying node labels (press `T`) |
 | 🎯 **Meeting Mode** | Built-in laser pointer for remote presentations |
 | 🔗 **Precision Share Links** | Generate URLs that preserve exact zoom/pan position |
-| ⌨️ **Keyboard Navigation** | Full keyboard control — zoom, pan, search, rotate, share |
+| ⌨️ **Keyboard Navigation** | Zoom, pan, search, rotate and share from the keyboard. `Tab` reaches diagrams and the links inside them |
 | 🌗 **Auto-Theming** | Detects Tailwind, Bootstrap, and system dark/light mode |
 | 📱 **Mobile-First Touch** | Pinch-to-zoom, double-tap to reset, Visual Viewport sync |
 | 🔒 **SVG Sanitization** | Three-tier security model (strict/permissive/off) |
 | 🎭 **3 Layout Modes** | Header toolbar, floating FAB, or invisible click-to-open |
-| 🔧 **Per-Diagram Overrides** | Set layout, accent, scale per diagram via `data-*` attributes |
+| 🔧 **Per-Diagram Overrides** | Set layout, export scale, sanitizing and watermark per diagram via `data-*` attributes |
 | 🌐 **Shadow DOM Support** | Works inside Shadow DOM roots |
-| 🔄 **Remember Zoom** | Persist zoom/pan state per diagram across modal opens |
-| 🏷️ **Watermarks** | Customizable watermarks on export (corner, background, four-sides) |
-| 📦 **4 Button Styles** | Transparent, accent, solid, neutral — match any UI |
+| 🔄 **Remember Zoom** | Keep zoom, pan and rotation per diagram between opens, until reload |
+| 🏷️ **Watermarks** | Export-only watermarks in a corner, across the background or on four sides, on the diagram or in the margin |
+| 📦 **4 Button Styles** | Transparent, accent, solid or neutral, to match any UI |
+
+## What's new in 1.1.0
+
+{{< stats >}}
+{{< stat value="~120" label="Bugs fixed" >}}Across export, search, the minimap, share links and keyboard use.{{< /stat >}}
+{{< stat value="923" label="Unit tests" >}}Jest, across 40 suites.{{< /stat >}}
+{{< stat value="659" label="Browser tests" >}}Chromium, Firefox and WebKit.{{< /stat >}}
+{{< /stats >}}
+
+{{< feature-grid >}}
+{{< feature icon="eye" title="Readable labels" headingLevel="h3" >}}
+A Text Colours switch recolours labels under 4.5:1 contrast and keeps each hue. Exports get the same colours, so prints stay readable.
+{{< /feature >}}
+{{< feature icon="download" title="Lighter exports" headingLevel="h3" >}}
+SVG files embed only the fonts the labels use. Large Mermaid diagrams export to PNG and PDF in Chrome again.
+{{< /feature >}}
+{{< feature icon="a11y" title="Keyboard and screen readers" headingLevel="h3" >}}
+`Tab` reaches each diagram and the links inside it. Focus goes back where it was when the viewer closes.
+{{< /feature >}}
+{{< /feature-grid >}}
+
+### New options
+
+```javascript
+DiagView.init({
+  canvasGrid: "dots",                 // dot grid behind the diagram in the viewer
+  rotateKeepsView: true,              // rotating keeps the centre and on-screen size
+  warningColor: "#f59e0b",            // colour of warning notices
+  exportFonts: "used",                // "used" | "all" | "none"
+  exportSearchHighlight: false,       // export the plain diagram during a search
+  security: { exportMode: "strict" }, // clean every export in strict mode
+  watermark: { placement: "margin" }, // corner and side marks outside the diagram
+});
+```
+
+{{< alert icon="triangle-exclamation" >}}
+Upgrading from 1.0.x? Most pages need no changes. If you use `onExport`, watermark positions or `require("diagview")`, read "Before you upgrade" in the [release notes](https://github.com/khadirullah/diagview/releases/tag/v1.1.0) first.
+{{< /alert >}}
 
 ## The Landscape: Why Wasn't This Already Solved?
 
 Before writing any code, I scoured npm and GitHub. Here's what I found:
 
-**D3.js** — The titan of data visualization. But D3 is for *creating* graphics from data, not for *viewing* pre-made SVGs.
+**D3.js.** The titan of data visualization. But D3 is for *creating* graphics from data, not for *viewing* pre-made SVGs.
 
-**svg-pan-zoom** — A focused library for adding pan/zoom to SVGs. But it's just the engine — no UI, no search, no export.
+**svg-pan-zoom.** A focused library for adding pan/zoom to SVGs. But it's just the engine, with no UI, no search and no export.
 
-**Leaflet.js** — The standard for interactive maps. Overkill for a simple flowchart.
+**Leaflet.js.** The standard for interactive maps. Overkill for a simple flowchart.
 
-**The gap was clear:** I needed a batteries-included solution — something that would just *work* with a single `init()` call.
+**The gap was clear:** I needed a batteries-included solution, something that would just *work* with a single `init()` call.
 
 ## Quick Start
 
-### CDN (Fastest)
+{{< tabs >}}
+{{< tab label="CDN" >}}
 
 ```html
 <!-- Panzoom (required for zoom/pan) -->
@@ -89,7 +133,8 @@ Before writing any code, I scoured npm and GitHub. Here's what I found:
 </script>
 ```
 
-### NPM
+{{< /tab >}}
+{{< tab label="npm" >}}
 
 ```bash
 npm install diagview @panzoom/panzoom
@@ -103,6 +148,9 @@ DiagView.init({
   accentColor: '#3b82f6',
 });
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Flexible Layouts
 
@@ -118,31 +166,30 @@ DiagView supports three layout modes to fit your design:
 
 ### Header Layout
 
-A full-width toolbar is always visible above the diagram. Best for documentation sites and dashboards where discoverability matters.
+A bar above the diagram holds its title and the copy, download and fullscreen buttons. With a mouse, the bar shows when you hover the diagram. On touch screens it stays visible. Best for documentation sites and dashboards.
 
-![Header Layout](media/layout-header.webp "Header layout — toolbar always visible")
+![Header Layout](media/layout-header.webp "Header layout with the title bar and buttons on hover")
 
 ### Floating Layout
 
-A circular FAB button appears at the bottom-right. Controls hover in at the bottom of the diagram card. Clean and minimal.
+The copy, download and fullscreen buttons float under the diagram with no title bar. With a mouse they show on hover. On touch screens they stay visible.
 
-![Floating Layout](media/layout-floating.webp "Floating layout — minimal FAB button")
+![Floating Layout](media/layout-floating.webp "Floating layout with the buttons under the diagram on hover")
 
 ### Off Layout
 
-No controls are rendered. The diagram itself is the trigger — clicking it opens the fullscreen viewer.
+No controls are rendered. The diagram itself is the trigger. Clicking it opens the fullscreen viewer.
 
-![Off Layout](media/layout-off.webp "Off layout — click anywhere on the diagram to open")
+![Off Layout](media/layout-off.webp "Off layout. Click anywhere on the diagram to open it")
 
 ## Per-Diagram Overrides
 
-Any diagram can override the global configuration using `data-diagview-*` attributes. This lets you mix layout modes and accent colors on a single page:
+Any diagram can override the global configuration using `data-diagview-*` attributes. This lets you mix layout modes and export sizes on a single page:
 
 ```html
-<!-- Purple accent with header layout for this diagram only -->
+<!-- Header layout and a larger export for this diagram only -->
 <div class="diagram"
   data-diagview-layout="header"
-  data-diagview-accent="#8b5cf6"
   data-diagview-scale="6"
   data-title="My Architecture">
   <svg>...</svg>
@@ -157,32 +204,40 @@ Any diagram can override the global configuration using `data-diagview-*` attrib
 | Attribute | Values | Description |
 |-----------|--------|-------------|
 | `data-diagview-layout` | `header` \| `floating` \| `off` | Layout for this diagram only |
-| `data-diagview-accent` | Any CSS color | Accent color for this diagram only |
-| `data-diagview-scale` | `1`–`10` | Export resolution for this diagram only |
+| `data-diagview-scale` | `1` to `10` | Export resolution for this diagram only |
 | `data-diagview-sanitize` | `strict` \| `permissive` \| `off` | SVG sanitization mode |
-| `data-diagview-allow-remote` | `true` \| `false` | Allow remote CSS/fonts in SVG |
-| `data-diagview-watermark` | `true` \| `false` | Enable watermark for this diagram |
+| `data-diagview-allow-remote` | `true` \| `false` | Keep remote CSS and fonts under `strict` |
+| `data-diagview-watermark` | `true` \| `false` | Turn the watermark on or off for this diagram |
 | `data-diagview-watermark-text` | Any string | Custom watermark text |
-| `data-title` | Any string | Title shown in header layout |
+| `data-diagview-watermark-style` | `corner` \| `background` \| `both` | Watermark style for this diagram |
+| `data-diagview-watermark-pos` | `top-left` \| `...` \| `four-sides` | Watermark position for this diagram |
+| `data-diagview-watermark-placement` | `diagram` \| `margin` | Corner and side text on the diagram or in the margin |
+| `data-diagview-watermark-opacity` | `0` to `1` | Watermark opacity for this diagram |
+| `data-title` | Any string | Title shown in header layout, and the export file name |
+
+The accent colour is one per page. Set it with `accentColor` in `init()` or with the `--diagram-accent` CSS variable. v1.1.0 removed the old `data-diagview-accent` attribute because it never changed a colour.
 
 ## Keyboard Shortcuts
 
-All shortcuts are active when the fullscreen modal is open:
+All shortcuts are active when the fullscreen viewer is open. While the search box has focus, keys type into it and only `Esc` acts as a shortcut.
 
 | Key | Action |
 |-----|--------|
-| `Esc` | Close fullscreen |
-| `Space` / `0` | Reset zoom — fit to screen |
+| `Esc` | Close help, search or menu, then the viewer |
+| `Space` / `0` | Reset zoom to fit the screen |
 | `+` / `=` | Zoom in |
 | `-` / `_` | Zoom out |
 | `↑ ↓ ← →` | Pan diagram |
 | `Shift` + arrows | Fast pan (3× speed) |
-| `F` | Focus search input |
+| `F` | Open search |
 | `T` | Toggle text-select mode |
 | `R` | Rotate 90° clockwise |
 | `M` | Toggle meeting mode (laser pointer) |
 | `L` | Copy share link to clipboard |
 | `?` | Show/hide keyboard shortcuts panel |
+| `Ctrl` / `Cmd` / `Alt` + any key | Left to the browser, so `Ctrl`+`F` still searches the page |
+
+On the page, `Tab` stops on a diagram with the `off` layout and `Enter` opens it. In the viewer, `Tab` also stops on links inside the diagram.
 
 ## Under the Hood: Technical Decisions
 
@@ -190,15 +245,15 @@ All shortcuts are active when the fullscreen modal is open:
 
 This was the feature I was most proud of. The search system:
 
-1. **Pre-Caches Candidates** — On first open, queries all text elements and stores them in a WeakMap
-2. **Uses Dirty Checking** — Before writing to the DOM, checks if values have changed
-3. **Batches Updates** — All DOM mutations are wrapped in requestAnimationFrame
+1. **Pre-Caches Candidates.** On first open, queries all text elements and stores them in a WeakMap
+2. **Uses Dirty Checking.** Before writing to the DOM, checks if values have changed
+3. **Batches Updates.** All DOM mutations are wrapped in requestAnimationFrame
 
-The result? Searching through diagrams with **2,500+ nodes** is instant.
+The result? Searching through diagrams with **2,500+ nodes** is instant. Each match keeps the diagram's own colours and gets a 3px outline in blue or amber, whichever shows up on the canvas. Everything else fades to 15%.
 
 ### Fullscreen View
 
-Clicking any diagram opens it in a fullscreen modal with all controls — zoom, pan, search, export, rotate, share, and minimap:
+Clicking any diagram opens it in a fullscreen modal with zoom, pan, search, export, rotate, share and minimap controls.
 
 ![Fullscreen View](media/fullscreen-view.webp "Fullscreen modal with all controls")
 
@@ -222,21 +277,22 @@ DiagView includes a three-tier security model for SVG content:
 
 | Mode | What It Blocks | When to Use |
 |------|---------------|-------------|
-| **strict** (default) | `<script>`, `<iframe>`, `<animate>`, inline event handlers, dangerous URL schemes, `<style>` injection — while preserving `<foreignObject>` so Mermaid htmlLabels render intact | Untrusted SVGs (user-uploaded, third-party) |
+| **strict** (default) | `<script>`, `<iframe>`, `<animate>`, inline event handlers, dangerous URL schemes, `<style>` injection. It keeps `<foreignObject>` so Mermaid htmlLabels render intact | Untrusted SVGs (user-uploaded, third-party) |
 | **permissive** | `<script>`, `<iframe>`, `<object>` only | Semi-trusted SVGs (your own diagrams with animations) |
 | **off** | Nothing | Fully trusted SVGs only |
 
 ### Watermarks
 
-Watermarks are applied **only during export/download** — they never appear in the interactive viewer. You can configure them globally or per-diagram:
+Watermarks are applied **only during export/download**. They never appear in the interactive viewer. You can configure them globally or per-diagram:
 
 ```javascript
 DiagView.init({
   watermark: {
     enabled: true,
     text: "Confidential",
-    style: "corner",        // "corner" | "background" | "both"
-    position: "bottom-right", // 6 positions + "four-sides"
+    style: "corner",          // "corner" | "background" | "both"
+    position: "bottom-right", // "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center" | "four-sides"
+    placement: "diagram",     // "diagram" | "margin" (corner and side text outside the diagram)
     opacity: 0.2,
   },
 });
@@ -246,22 +302,23 @@ DiagView.init({
 
 The export module handles edge cases:
 
-- **Robust Dimension Calculation** — Uses getBBox() to find actual content area
-- **Cross-Origin Font Handling** — Inlines Google Fonts for consistent exports
-- **High-DPI Scaling** — Up to 10x resolution for print-quality images
-- **Transparent Background** — PNG and WebP support transparent backgrounds
-- **PDF Export** — Lazy-loads jsPDF from CDN only when needed
+- **Robust Dimension Calculation.** Uses getBBox() to find actual content area
+- **Font Embedding.** Embeds only the page fonts the labels use. `exportFonts: "all"` embeds every font, `"none"` embeds none
+- **High-DPI Scaling.** Up to 10x resolution for print-quality images
+- **Transparent Background.** PNG and WebP support transparent backgrounds
+- **PDF Export.** Lazy-loads jsPDF from CDN only when needed
 
 ### Export Formats
 
 | Format | Transparent | Notes |
 |--------|-------------|-------|
-| PNG | ✅ | High-res raster; default 4× scale |
+| PNG | ✅ | High-res raster. Default scale is 4, or 2 on touch devices and narrow screens |
 | SVG | ✅ | Fully scalable vector |
 | JPEG | ❌ | Smallest file size |
 | WebP | ✅ | Modern format; good compression |
 | PDF | ❌ | Requires jsPDF (lazy-loaded from CDN) |
-| Copy | ❌ | Copies PNG to system clipboard |
+| Copy Image | ❌ | Copies PNG to system clipboard |
+| Copy SVG | ✅ | Copies the SVG markup to the clipboard as text |
 
 ### Optional Panzoom Dependency
 
@@ -274,7 +331,7 @@ This keeps DiagView usable even in constrained environments.
 
 ### Mobile Support
 
-DiagView is fully optimized for mobile — pinch-to-zoom, double-tap to reset, and Visual Viewport sync for stability on iOS and Android:
+DiagView is fully optimized for mobile, with pinch-to-zoom, double-tap to reset, and Visual Viewport sync for stability on iOS and Android:
 
 ![Mobile View](media/mobile-view.webp "Mobile-optimized touch interface")
 
@@ -299,60 +356,76 @@ DiagView.init({
 
 ## CI/CD Pipeline
 
-One thing I invested heavily in was the **automation pipeline**. Every push to the repository triggers a GitHub Actions workflow that:
+One thing I invested heavily in was the **automation pipeline**. Every push to `main` and every pull request runs GitHub Actions workflows that:
 
 1. **Lints** the code with ESLint
-2. **Runs the full Jest suite** (195+ unit tests as of v1.0.11)
-3. **Builds** the UMD and ESM bundles with Rollup
-4. **Publishes to npm** on tagged releases (semantic versioning)
-5. **Deploys documentation** to GitHub Pages
+2. **Runs the Jest suite** (923 unit tests as of v1.1.0)
+3. **Builds** the UMD and ESM bundles with Rollup, then checks the package entry points, the TypeScript declarations and the bundle size
+4. **Runs 659 browser tests** with Playwright in Chromium, Firefox and WebKit
+5. **Deploys the demo** to GitHub Pages, on pushes to `main`
+
+Publishing the GitHub release for a version tag runs a second workflow. It lints, tests and builds again, then publishes to npm with provenance.
+
+{{< mermaid >}}
+flowchart LR
+    push([Push to main]) --> test["Lint, 923 unit tests,<br/>build, types, size"]
+    push --> e2e["659 browser tests<br/>Chromium, Firefox, WebKit"]
+    push --> pages["Demo to<br/>GitHub Pages"]
+    release([GitHub release]) --> checks["Lint, test,<br/>build"]
+    checks --> npm["npm publish<br/>with provenance"]
+{{< /mermaid >}}
+
+This diagram runs on DiagView 1.1.0. Click it to open the viewer, then zoom, search or export it.
 
 ```yaml
-# Simplified GitHub Actions workflow
+# Simplified publish workflow
 on:
-  push:
-    tags: ['v*']  # Triggers on version tags like v1.0.6
+  release:
+    types: [published]  # Runs when the GitHub release for a tag like v1.1.0 is published
+
+permissions:
+  contents: read
+  id-token: write       # Lets npm verify this workflow and sign the provenance
 
 jobs:
-  test:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run lint
-      - run: npm test          # full unit suite
+      - run: npm test       # full unit suite
       - run: npm run build
-
-  publish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm publish       # Pushes to npm registry
+      - run: npm publish --provenance --access public
 ```
 
-The pipeline ensures that **no broken code gets published**. If any test fails, the publish step never runs. This is the same pattern used in production CI/CD — just applied to an open-source package.
+The pipeline ensures that **no broken code gets published**. If lint, a test or the build fails, the publish step never runs. This is the same pattern used in production CI/CD, just applied to an open-source package.
 
 The project also uses:
-- **Husky** — pre-commit hooks that run lint-staged
-- **lint-staged** — runs ESLint + Prettier only on changed files
-- **release-it** — automated version bumping, changelog generation, and npm publishing
-- **size-limit** — CI fails if the bundle exceeds a **40 KB budget** (minified + brotli)
+- **Husky** runs lint-staged in a pre-commit hook
+- **lint-staged** runs ESLint and Prettier only on changed files
+- **release-it** handles version bumping, changelog generation and GitHub releases. The publish workflow does the npm part
+- **size-limit** fails CI if the UMD bundle goes over **45 KB** or the ESM bundle over **50 KB** (minified + brotli)
 
 ## Bundle Size
 
 | Metric | Size |
 |--------|------|
-| **UMD Minified** | ~134 KB |
-| **ESM Minified** | ~140 KB |
-| **Gzipped (Transfer)** | **~38 KB** |
+| **UMD Minified** | ~167 KB |
+| **UMD Gzipped** | ~50 KB |
+| **UMD Brotli (Transfer)** | **~45 KB** |
+| **ESM Brotli (Transfer)** | **~50 KB** |
 
 For context, that's smaller than a single hero image. And it includes all CSS, SVG icons, and the entire UI framework.
 
 ## Framework Support
 
-DiagView is framework-agnostic — it works with plain HTML, React, Vue, Svelte, Angular, or any framework that renders SVGs to the DOM. It also supports Shadow DOM and Mermaid.js integration.
+DiagView is framework-agnostic. It works with plain HTML, React, Vue, Svelte, Angular, or any framework that renders SVGs to the DOM. It also supports Shadow DOM and Mermaid.js integration.
 
 ## Full Configuration
+
+{{< accordion mode="collapse" separated=true >}}
+{{< accordionItem title="All options with their defaults" >}}
 
 ```javascript
 DiagView.init({
@@ -360,37 +433,44 @@ DiagView.init({
   layout: 'floating',           // 'header' | 'floating' | 'off'
 
   // Theme (null = auto-detect)
-  accentColor: null,
+  accentColor: null,            // null = --diagram-accent, then the built-in blue
+  warningColor: '#f59e0b',      // warning notices
   backgroundColor: null,
   textColor: null,
 
   // UI
   ui: { buttons: { style: 'accent' } },
   showKeyboardHelp: true,
+  showFirstTimeThemeHint: true,
   showBranding: true,
   showMinimap: true,
   animateOpen: true,
+  canvasGrid: 'none',           // 'none' | 'dots'
 
   // Interaction
   naturalPanning: false,
-  immersiveMode: false,
-  rememberZoom: false,
-  printFriendly: true,
+  rotateKeepsView: false,
+  rememberZoom: false,          // in memory, until reload
 
-  // Zoom limits
+  // Zoom limits and animation
   maxZoomScale: 25,
   minZoomScale: 0.05,
+  zoomAnimationDuration: 200,   // ms, 0 = no animation
+  panAnimationDuration: 200,
 
   // Export
-  highResScale: 4,               // 1–10
-  mobileScale: 2,                // 1–5
+  highResScale: 4,               // 1 to 10
+  mobileScale: 2,                // 1 to 5
   maxPixels: 16777216,           // 16MP safety cap
+  exportFonts: 'used',           // 'used' | 'all' | 'none'
+  exportSearchHighlight: true,
 
   // Security
   security: {
     mode: 'strict',
     allowOverrides: true,
     allowRemoteResources: false,
+    exportMode: 'same',          // 'same' | 'strict'
   },
 
   // Watermarks (export only)
@@ -399,6 +479,7 @@ DiagView.init({
     text: '',
     style: 'corner',
     position: 'bottom-right',
+    placement: 'diagram',        // 'diagram' | 'margin'
     opacity: 0.2,
   },
 
@@ -411,13 +492,16 @@ DiagView.init({
 });
 ```
 
+{{< /accordionItem >}}
+{{< /accordion >}}
+
 ## Try It Out
 
 I built this to scratch my own itch. If you write technical documentation for a living, I think you'll find it useful too.
 
-- 🧪 **Live Demo:** [khadirullah.github.io/diagview](https://khadirullah.github.io/diagview/)
-- ⭐ **GitHub:** [github.com/khadirullah/diagview](https://github.com/khadirullah/diagview)
-- 📦 **NPM:** [npmjs.com/package/diagview](https://www.npmjs.com/package/diagview)
+{{< button href="https://khadirullah.github.io/diagview/" target="_blank" rel="noopener" >}}Live demo{{< /button >}}&nbsp;&nbsp;
+{{< button href="https://github.com/khadirullah/diagview" target="_blank" rel="noopener" >}}GitHub{{< /button >}}&nbsp;&nbsp;
+{{< button href="https://www.npmjs.com/package/diagview" target="_blank" rel="noopener" >}}npm{{< /button >}}
 
 Have feedback or found a bug? [Open an issue on GitHub](https://github.com/khadirullah/diagview/issues).
 
