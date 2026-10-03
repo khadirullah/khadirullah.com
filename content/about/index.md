@@ -12,7 +12,7 @@ showTableOfContents: true
 
 {{< lead >}}
 DevOps & Cloud Engineer with 4+ years of professional IT experience and a B.Tech in Computer Science.
-I build CI/CD pipelines, manage cloud infrastructure on AWS, and automate deployments using Docker, Kubernetes, and Terraform. Recently built a 3-node Kubernetes cluster that comes up from a single `terraform apply`, and an AI-powered incident correlation tool that JOINs data across GitHub, Sentry, and Slack using cross-source SQL.
+I build CI/CD pipelines, manage cloud infrastructure on AWS, and automate deployments using Docker, Kubernetes, and Terraform. Recently built uptime-checker, a six-service app with a GitHub Actions DevSecOps pipeline, Trivy gates and ArgoCD deploys, and a 3-node Kubernetes cluster that comes up from a single `terraform apply`.
 {{< /lead >}}
 
 ---
