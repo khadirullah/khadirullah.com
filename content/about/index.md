@@ -74,7 +74,6 @@ Building CI/CD pipelines with Jenkins and GitHub Actions, provisioning Kubernete
 - Slack: incident alerting and team notifications
 - Coral SQL: cross-source API queries (GitHub + Sentry + Slack)
 - Fernet AES encryption, SSL/TLS, IAM, Cloudflare
-- Currently building: Prometheus, Grafana, and AlertManager on my local cluster, with alerts routed to Slack
 
 ---
 
