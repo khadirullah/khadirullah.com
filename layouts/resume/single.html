@@ -596,6 +596,7 @@
           </div>
           <div class="entry-subtitle">Independent DevOps Practice (Self-Directed) · Remote</div>
           <ul>
+            <li>Built <b>uptime-checker</b>, a six-service website monitor in Python and Go, and the <b>GitHub Actions DevSecOps pipeline</b> around it. Tests, hadolint, a <b>Trivy</b> gate on fixable HIGH and CRITICAL findings, GHCR push by commit sha, and pull-request deploys into a Kustomize overlay that <b>ArgoCD</b> syncs in waves with the migration job as a hook. Sealed Secrets, default-deny NetworkPolicies and an HPA in the cluster.</li>
             <li>Built a <b>3-node kubeadm Kubernetes cluster</b> on QEMU/KVM provisioned entirely by <b>Terraform</b> with the libvirt provider. Cloud-init installs containerd and kubeadm, Calico runs as CNI via the Tigera operator, and workers fetch the join token over HTTP, so the build needs no SSH. One terraform apply, roughly 7 minutes to a ready cluster.</li>
             <li>Built end-to-end <b>CI/CD pipelines</b> using Jenkins and GitHub Actions — GitHub webhook trigger, SonarQube static analysis, Docker multi-stage builds, Trivy image scanning, registry push, and deployment to Kubernetes behind an AWS ELB.</li>
             <li>Provisioned <b>AWS infrastructure</b> (VPC with public and private subnets, EC2, Security Groups, ELB, S3, IAM, Route 53) using modular <b>Terraform</b> with variable files and outputs.</li>
@@ -652,6 +653,12 @@
       <!-- Projects -->
       <div class="section">
         <div class="section-title">Projects</div>
+
+        <div class="project-entry">
+          <div class="project-name">Uptime Checker, DevSecOps Pipeline with a Real Application · <a href="https://github.com/khadirullah/uptime-checker">GitHub</a> · <a href="https://khadirullah.com/blog/uptime-checker-devsecops-pipeline/">Blog</a></div>
+          <div class="project-desc">Six-service website monitor (FastAPI api, Go worker, nginx board, migration job, Postgres, Redis) built so a DevSecOps pipeline has something real to build, scan and deploy. A path-filtered GitHub Actions pipeline runs tests and hadolint, gates every image on Trivy for fixable HIGH and CRITICAL findings, pushes to GHCR by commit sha, and deploys through pull requests into a Kustomize overlay. ArgoCD syncs it in waves, with Sealed Secrets, default-deny NetworkPolicies and an HPA in the cluster.</div>
+          <div class="project-tech">Python · Go · FastAPI · Docker · GitHub Actions · Trivy · GHCR · Kustomize · ArgoCD · Sealed Secrets · Kubernetes</div>
+        </div>
 
         <div class="project-entry">
           <div class="project-name">DevOps Incident Investigator · <a href="https://github.com/khadirullah/devops-incident-investigator">GitHub</a></div>
