@@ -36,6 +36,8 @@ This post covers how I diagnosed the problem, fixed the submodule, and then deal
 Hugo themes support multiple installation methods — **git submodule**, **manual copy**, and **Hugo modules**. Manually copying files into `themes/` is a [perfectly valid installation method](https://blowfish.page/docs/installation/). The problem arises specifically when your repo has a `.gitmodules` entry claiming a submodule exists, but Git's index tracks the files as regular committed files. That state conflict is what causes `git submodule update` to silently do nothing.
 {{< /alert >}}
 
+The fix also left a second problem behind.
+
 {{< alert >}}
 **Related:** After fixing this submodule issue, I discovered that the old theme files were still bloating my git history. I wrote a separate guide on how I cleaned them up: [Removing Objects From Git History with git filter-repo](/blog/git-filter-repo-clean-history/).
 {{< /alert >}}
