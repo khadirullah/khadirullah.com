@@ -34,7 +34,7 @@ Sole engineer running end-to-end IT operations for the organization. Workstation
 {{< /timelineItem >}}
 
 {{< timelineItem icon="cloud" header="DevOps & Cloud Engineering" badge="Dec 2023 – Present" >}}
-Building CI/CD pipelines with Jenkins and GitHub Actions, provisioning Kubernetes clusters with Terraform and kubeadm, writing infrastructure as code for AWS, and working towards AWS certifications.
+Building CI/CD pipelines with Jenkins and GitHub Actions, provisioning Kubernetes clusters with Terraform and kubeadm, and writing infrastructure as code for AWS.
 {{< /timelineItem >}}
 
 {{< /timeline >}}
@@ -117,6 +117,8 @@ An AI-powered incident correlation tool that JOINs data from GitHub PRs, Sentry 
 
 {{< github repo="khadirullah/devops-incident-investigator" >}}
 
+[Read the full write-up](/blog/devops-incident-investigator/)
+
 ---
 
 ### CI/CD Pipelines
@@ -140,6 +142,8 @@ Provisioned AWS infrastructure using Terraform: VPCs with public and private sub
 A lightweight interactive SVG/Mermaid diagram viewer with search, export, and deep linking. Published to npm at v1.1.0 with 923 unit tests, 659 browser tests and fully automated CI/CD.
 
 {{< github repo="khadirullah/diagview" >}}
+
+[Live demo](https://diagview.khadirullah.com/) · [Read the full write-up](/blog/introducing-diagview/)
 
 ### This Website
 
