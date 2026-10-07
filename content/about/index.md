@@ -50,7 +50,8 @@ Building CI/CD pipelines with Jenkins and GitHub Actions, provisioning Kubernete
 
 <span class="text-2xl">{{< icon "docker" >}}</span> **Containers & Orchestration**
 - Docker: Dockerfiles, custom images, multi-stage builds, Docker Compose
-- Kubernetes: Deployments, Services, RBAC, NetworkPolicies, Ingress, SecurityContexts
+- Kubernetes: Deployments, Services, RBAC, NetworkPolicies, Ingress, SecurityContexts, HPA
+- GitOps: ArgoCD with sync waves, Kustomize overlays, Sealed Secrets
 - Cluster provisioning: kubeadm, kops
 
 <span class="text-2xl">{{< icon "git" >}}</span> **CI/CD & Tooling**
