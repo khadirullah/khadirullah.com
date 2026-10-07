@@ -221,9 +221,13 @@ If applications, CI pipelines, or deployments used the exposed credential, updat
 **Working on a team?** If you are worried about accidentally overwriting a colleague's recent push, you can use `--force-with-lease` instead of `--force`. This acts as a safety valve—Git will refuse to overwrite the remote branch if someone else has pushed new commits to it since you last fetched!
 {{< /alert >}}
 
+The push itself also takes longer than usual.
+
 {{< alert "warning" >}}
 **Expect a slow push!** A normal `git push` only uploads a few kilobytes of recent changes. Because `git filter-repo` just assigned brand-new hashes to every commit in your history, GitHub doesn't recognize any of them. Your computer will have to compress and re-upload your entire repository history from scratch. Large repositories with extensive histories may take several minutes to rewrite and upload.
 {{< /alert >}}
+
+One thing is left outside the repository.
 
 {{< alert "warning" >}}
 **Check GitHub Alerts:** If GitHub Secret Scanning generated an alert for the leaked credential, rewriting Git history does not automatically close the alert. After rotating the credential and cleaning the repository, review the alert in GitHub to confirm the secret has been addressed.
