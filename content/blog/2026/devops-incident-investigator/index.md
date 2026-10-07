@@ -325,6 +325,8 @@ SELECT id, slug, name FROM sentry.projects
 ```
 {{< /alert >}}
 
+Slack had its own problem.
+
 {{< alert icon="triangle-exclamation" >}}
 **Slack Bot Permissions:** Got `not_in_channel` error when fetching messages. The bot had `channels:history` but wasn't *in* the channel. Then hit `missing_scope` — needed `channels:join` scope. Quick fix: add scope → reinstall app → copy new token.
 {{< /alert >}}
