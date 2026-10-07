@@ -503,7 +503,7 @@ DiagView.init({
 
 I built this to scratch my own itch. If you write technical documentation for a living, I think you'll find it useful too.
 
-{{< button href="https://khadirullah.github.io/diagview/" target="_blank" rel="noopener" >}}Live demo{{< /button >}}&nbsp;&nbsp;
+{{< button href="https://diagview.khadirullah.com/" target="_blank" rel="noopener" >}}Live demo{{< /button >}}&nbsp;&nbsp;
 {{< button href="https://github.com/khadirullah/diagview" target="_blank" rel="noopener" >}}GitHub{{< /button >}}&nbsp;&nbsp;
 {{< button href="https://www.npmjs.com/package/diagview" target="_blank" rel="noopener" >}}npm{{< /button >}}
 
