@@ -2,6 +2,9 @@
 <script>
   // 1. Synchronously hide diagrams from the built-in theme mermaid processor
   // The theme's appearance.js runs on DOMContentLoaded and looks for .mermaid
+  // DiagView starts itself with default options unless this is set; it is
+  // started below, after mermaid has drawn the diagrams.
+  document.documentElement.setAttribute('data-diagview-no-auto-init', '');
   document.querySelectorAll('pre.mermaid').forEach(function (el) {
     el.classList.remove('mermaid');
     el.classList.add('custom-mermaid');
@@ -60,9 +63,20 @@
           // Initialize DiagView
           DiagView.init({
             layout: 'off',
+            offHint: 'below',
+            accentColor: '#2f73cd', // the theme's primary-600
             showKeyboardHelp: true,
             diagramSelector: '.custom-mermaid',
-            showMinimap: false,
+            showMinimap: true,
+            // Stamps exported and downloaded images only, never the page
+            watermark: {
+              enabled: true,
+              text: 'khadirullah.com',
+              style: 'corner',
+              position: 'bottom-right',
+              placement: 'margin',
+              opacity: 0.4,
+            },
           });
         } catch (err) {
           console.error("Failed to initialize Mermaid or DiagView:", err);
