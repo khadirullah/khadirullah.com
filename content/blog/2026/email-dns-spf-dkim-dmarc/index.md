@@ -75,6 +75,8 @@ Add all three in Cloudflare DNS.
 **Note:** These are the MX records for Zoho's US/global data center (`zoho.com`). If you signed up at `zoho.eu` or `zoho.in`, your MX servers will be different (e.g., `mx.zoho.eu`). Always use the exact values Zoho provides during setup.
 {{< /alert >}}
 
+One Cloudflare setting matters for these records.
+
 {{< alert icon="triangle-exclamation" cardColor="#331a1a" iconColor="#ef4444" textColor="#fca5a5" >}}
 **Important:** Make sure the proxy status for MX records is set to **DNS only** (gray cloud), not **Proxied** (orange cloud). Email traffic cannot go through Cloudflare's proxy.
 {{< /alert >}}
@@ -126,6 +128,8 @@ Breaking it down:
 {{< alert icon="circle-info" cardColor="#1a2633" iconColor="#60a5fa" textColor="#93c5fd" >}}
 **`~all` vs `-all`:** The `~` (tilde) means "soft fail" — unauthorized emails are marked suspicious but still delivered. The `-` (hyphen) means "hard fail" — unauthorized emails are rejected outright. I started with `~all` to make sure legitimate emails weren't accidentally blocked. Once you're confident everything works, you can switch to `-all` for stricter enforcement.
 {{< /alert >}}
+
+SPF also limits how many DNS lookups one record can trigger.
 
 {{< alert icon="circle-info" cardColor="#1a2633" iconColor="#60a5fa" textColor="#93c5fd" >}}
 **DevOps gotcha: SPF has a 10 DNS lookup limit.** Each `include:` in your SPF record triggers DNS lookups, and nested includes count too. Zoho's `include:zoho.com` uses a few of those. If you later add services like SendGrid, Mailchimp, or AWS SES, you can easily exceed this limit — causing SPF to permanently fail. Use tools like [dmarcian SPF Surveyor](https://dmarcian.com/spf-survey/) to audit your lookup count.
@@ -208,6 +212,8 @@ Breaking it down:
 {{< alert icon="triangle-exclamation" cardColor="#332b1a" iconColor="#f59e0b" textColor="#fcd34d" >}}
 **Heads up:** DMARC aggregate reports are not human-readable emails. They arrive as **gzipped XML attachments** that look like gibberish if you open them directly. You'll need a tool to parse them — services like [DMARC Analyzer](https://www.dmarcanalyzer.com/), [Postmark DMARC](https://dmarc.postmarkapp.com/), or [dmarcian](https://dmarcian.com/) can ingest these reports and turn them into dashboards you can actually read.
 {{< /alert >}}
+
+The record above uses three tags. You will see others too.
 
 {{< alert icon="circle-info" cardColor="#1a2633" iconColor="#60a5fa" textColor="#93c5fd" >}}
 **Other useful DMARC tags you'll encounter:**
