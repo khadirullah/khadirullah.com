@@ -137,7 +137,7 @@ For many commits, use `git filter-repo --blob-callback`.
 ### The complete workflow
 
 {{< mermaid >}}
-flowchart LR
+flowchart TB
     A["🔍 Investigate"] --> B["💾 Backup"]
     B --> C["📂 Fresh Clone"]
     C --> D["🧹 filter-repo"]
