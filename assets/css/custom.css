@@ -62,3 +62,13 @@ html:not(.dark) .logo .logo-text {
 html:not(.dark) img[src="/img/km.svg"] {
   content: url("/img/km-light.svg");
 }
+
+/* Alerts with a code block or table.
+   Blowfish's alert shortcode is a flex row whose text span keeps the default
+   min-width: auto, so a wide code block runs past the alert box and makes the
+   page wider than the screen on phones. min-width: 0 lets the code block
+   scroll inside the alert instead.
+   Remove this once the theme includes nunocoracao/blowfish#3131. */
+.flex.px-4.py-3.rounded-md > span:last-child {
+  min-width: 0;
+}
