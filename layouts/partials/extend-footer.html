@@ -45,23 +45,11 @@
 
           const mermaid = await waitForMermaid();
 
-          const isDark = document.documentElement.classList.contains("dark");
-          mermaid.initialize({
-            startOnLoad: false,
-            theme: isDark ? 'dark' : 'base',
-            themeVariables: {
-              fontFamily: "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif",
-              fontSize: "16px",
-              // Dark theme edge labels are #cccccc on #585858 (4.43:1). #525252 passes 4.5:1.
-              ...(isDark && { edgeLabelBackground: '#525252' })
-            }
-          });
-
-          // Run mermaid explicitly on our custom class
-          await mermaid.run({ querySelector: '.custom-mermaid' });
-
-          // Initialize DiagView
-          DiagView.init({
+          // Mermaid replaces each block's source with the drawn SVG, so keep
+          // the sources to draw the diagrams again when the theme switches.
+          const blocks = [...mermaidBlocks];
+          const sources = blocks.map(el => el.textContent);
+          const options = {
             layout: 'off',
             offHint: 'below',
             accentColor: '#2f73cd', // the theme's primary-600
@@ -77,7 +65,42 @@
               placement: 'margin',
               opacity: 0.4,
             },
-          });
+          };
+          let drawnDark;
+
+          const drawDiagrams = async () => {
+            const isDark = document.documentElement.classList.contains("dark");
+            drawnDark = isDark;
+            blocks.forEach((el, i) => {
+              el.removeAttribute('data-processed');
+              el.textContent = sources[i];
+            });
+            mermaid.initialize({
+              startOnLoad: false,
+              theme: isDark ? 'dark' : 'base',
+              themeVariables: {
+                fontFamily: "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif",
+                fontSize: "16px",
+                // Dark theme edge labels are #cccccc on #585858 (4.43:1). #525252 passes 4.5:1.
+                ...(isDark && { edgeLabelBackground: '#525252' })
+              }
+            });
+            await mermaid.run({ nodes: blocks });
+          };
+
+          await drawDiagrams();
+          let queue = Promise.resolve(DiagView.init(options));
+
+          // Mermaid writes the theme colours into each SVG, so a switch
+          // between light and dark draws the diagrams again with the new theme.
+          new MutationObserver(() => {
+            queue = queue.then(async () => {
+              if (document.documentElement.classList.contains("dark") === drawnDark) return;
+              await DiagView.destroy();
+              await drawDiagrams();
+              await DiagView.init(options);
+            }).catch(err => console.error("Failed to redraw the diagrams:", err));
+          }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         } catch (err) {
           console.error("Failed to initialize Mermaid or DiagView:", err);
         }
