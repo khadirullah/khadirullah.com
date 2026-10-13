@@ -47,8 +47,10 @@
 
           // Mermaid replaces each block's source with the drawn SVG, so keep
           // the sources to draw the diagrams again when the theme switches.
+          // Mermaid reads the block's HTML, so a <br/> in a label is an
+          // element here and textContent would drop it.
           const blocks = [...mermaidBlocks];
-          const sources = blocks.map(el => el.textContent);
+          const sources = blocks.map(el => el.innerHTML);
           const options = {
             layout: 'off',
             offHint: 'below',
@@ -73,7 +75,7 @@
             drawnDark = isDark;
             blocks.forEach((el, i) => {
               el.removeAttribute('data-processed');
-              el.textContent = sources[i];
+              el.innerHTML = sources[i];
             });
             mermaid.initialize({
               startOnLoad: false,
