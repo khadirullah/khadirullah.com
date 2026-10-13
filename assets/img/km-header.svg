@@ -42,7 +42,8 @@
       <stop
          offset="0%"
          stop-color="#22d3ee"
-         id="stop1" />
+         id="stop1"
+         class="logo-stop1" />
       <stop
          offset="50%"
          stop-color="#0e7490"
@@ -50,7 +51,8 @@
       <stop
          offset="100%"
          stop-color="#164e63"
-         id="stop3" />
+         id="stop3"
+         class="logo-stop3" />
     </linearGradient>
     <!-- Soft Glow Filter -->
     <filter
@@ -80,7 +82,8 @@
        opacity="0.12"
        transform="translate(-84.6, -165.8) scale(1.3)"
        filter="url(#soft-glow)"
-       id="path3" />
+       id="path3"
+       class="logo-cloud" />
     <!-- 2. Security Shield backplate -->
     <path
        d="M 256 145 L 296 155 C 296 215, 276 255, 256 275 C 236 255, 216 215, 216 155 Z"
@@ -90,7 +93,8 @@
        stroke-width="4"
        opacity="0.95"
        filter="url(#soft-glow)"
-       id="path4" />
+       id="path4"
+       class="logo-shield" />
     <!-- 3. DevOps Infinity loop -->
     <path
        d="M 176 270 C 80 270, 80 130, 176 130 C 230 130, 282 270, 336 270 C 432 270, 432 130, 336 130 C 282 130, 230 270, 176 270 Z"

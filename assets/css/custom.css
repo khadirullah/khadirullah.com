@@ -24,3 +24,41 @@
 .single_hero_round {
   max-height: none;
 }
+
+/* Light mode logos.
+   The header logo is inlined, so light mode restyles it in place to match
+   static/img/km-light.svg: no glow, a solid pale cloud and shield, a deeper
+   gradient and dark K and M letters. A new header SVG needs the same logo-*
+   classes on those parts.
+   The profile and author images show km.svg, whose white letters vanish on
+   white, so light mode shows km-light.svg instead. A photo or a logo that
+   reads on both backgrounds needs neither rule. */
+html:not(.dark) .logo svg path {
+  filter: none;
+}
+
+html:not(.dark) .logo .logo-cloud {
+  fill: #e3f2f6;
+  opacity: 1;
+}
+
+html:not(.dark) .logo .logo-shield {
+  fill: #cfe8ef;
+  fill-opacity: 1;
+}
+
+html:not(.dark) .logo .logo-stop1 {
+  stop-color: #0891b2;
+}
+
+html:not(.dark) .logo .logo-stop3 {
+  stop-color: #134e5e;
+}
+
+html:not(.dark) .logo .logo-text {
+  fill: #0f3b4a !important;
+}
+
+html:not(.dark) img[src="/img/km.svg"] {
+  content: url("/img/km-light.svg");
+}
