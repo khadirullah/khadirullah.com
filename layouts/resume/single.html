@@ -15,6 +15,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script>
+    // This page loads none of the theme's scripts, so read the light or dark
+    // choice the site's switcher saved. Dark stays the default.
+    if (localStorage.getItem('appearance') === 'light') {
+      document.documentElement.classList.add('light');
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -58,6 +65,45 @@
       --color-entry-li: rgb(var(--color-neutral-200));
       --color-skill-cat: rgb(var(--color-neutral-50));
       --color-project-link-hover: rgb(var(--color-primary-300));
+    }
+
+    /* --- Light Mode ---
+       Used when the reader picked light with the site's switcher. The colours
+       follow the print version below, on a light page around a white card. */
+    @media screen {
+      html.light {
+        --color-primary: #ffffff;
+        --color-accent: rgb(var(--color-primary-700));
+        --color-accent-dark: rgb(var(--color-primary-800));
+        --color-text: #1e293b;
+        --color-text-secondary: #475569;
+        --color-text-muted: #64748b;
+        --color-border: #e2e8f0;
+        --color-bg: #ffffff;
+        --color-bg-page: rgb(var(--color-neutral-100));
+        --color-header-subtitle: rgb(var(--color-primary-700));
+        --color-contact: #475569;
+        --color-contact-link: rgb(var(--color-primary-700));
+        --color-contact-dot: #94a3b8;
+        --color-summary-bold: #1e293b;
+        --color-entry-title: #1e293b;
+        --color-entry-li: #1e293b;
+        --color-skill-cat: #1e293b;
+        --color-project-link-hover: rgb(var(--color-primary-800));
+      }
+
+      html.light .resume {
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.06);
+      }
+
+      html.light .header {
+        color: #0f172a;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      html.light .contact-row a:hover {
+        color: rgb(var(--color-primary-900));
+      }
     }
 
     body {
