@@ -68,40 +68,134 @@
               opacity: 0.4,
             },
           };
-          let drawnDark;
+          const isDark = () => document.documentElement.classList.contains("dark");
+          // The theme each diagram is drawn in
+          const drawn = blocks.map(isDark);
 
-          const drawDiagrams = async () => {
-            const isDark = document.documentElement.classList.contains("dark");
-            drawnDark = isDark;
-            blocks.forEach((el, i) => {
-              el.removeAttribute('data-processed');
-              el.innerHTML = sources[i];
-            });
+          const setUpMermaid = (dark) => {
             mermaid.initialize({
               startOnLoad: false,
-              theme: isDark ? 'dark' : 'base',
+              theme: dark ? 'dark' : 'base',
               themeVariables: {
                 fontFamily: "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif",
                 fontSize: "16px",
                 // Dark theme edge labels are #cccccc on #585858 (4.43:1). #525252 passes 4.5:1.
-                ...(isDark && { edgeLabelBackground: '#525252' })
+                ...(dark && { edgeLabelBackground: '#525252' })
               }
             });
-            await mermaid.run({ nodes: blocks });
           };
 
-          await drawDiagrams();
+          setUpMermaid(isDark());
+          await mermaid.run({ nodes: blocks });
           let queue = Promise.resolve(DiagView.init(options));
 
           // Mermaid writes the theme colours into each SVG, so a switch
-          // between light and dark draws the diagrams again with the new theme.
-          new MutationObserver(() => {
+          // between light and dark draws the diagrams again. drawFor() draws
+          // the diagrams at the given indexes in a hidden box while the page
+          // still shows the old ones, and resolves to a function that swaps
+          // the new SVGs in. DiagView stays up and keeps its buttons on the
+          // new SVGs, so the page does not change height or jump. Mermaid
+          // only lays out a flowchart inside <body>, so the box sits there.
+          // Mermaid sizes each node from the text styles around the diagram,
+          // so each draft takes the font, line height and width of its block.
+          const drawFor = async (dark, indexes) => {
+            const box = document.createElement('div');
+            box.setAttribute('aria-hidden', 'true');
+            box.style.cssText = 'position:absolute;left:-10000px;top:0;width:2400px;height:4000px;' +
+              'overflow:hidden;visibility:hidden;contain:strict';
+            const drafts = indexes.map(i => {
+              const draft = document.createElement('pre');
+              const style = getComputedStyle(blocks[i]);
+              draft.className = 'not-prose';
+              draft.style.font = style.font;
+              draft.style.letterSpacing = style.letterSpacing;
+              draft.style.width = style.width;
+              draft.innerHTML = sources[i];
+              return box.appendChild(draft);
+            });
+            document.body.appendChild(box);
+            try {
+              setUpMermaid(dark);
+              await mermaid.run({ nodes: drafts });
+            } finally {
+              box.remove();
+            }
+            return () => {
+              indexes.forEach((i, n) => {
+                const fresh = drafts[n].querySelector(':scope > svg');
+                const old = blocks[i].querySelector(':scope > svg');
+                if (!fresh || !old) return;
+                // Keep what DiagView set on the SVG it set up
+                if (old.hasAttribute('aria-label')) fresh.setAttribute('aria-label', old.getAttribute('aria-label'));
+                fresh.setAttribute('class', old.getAttribute('class') || '');
+                fresh.style.transition = old.style.transition;
+                fresh.style.color = old.style.color;
+                old.replaceWith(fresh);
+                drawn[i] = dark;
+              });
+            };
+          };
+
+          const all = () => blocks.map((el, i) => i);
+          const onScreen = () => all().filter(i => {
+            const box = blocks[i].getBoundingClientRect();
+            return box.bottom > 0 && box.top < window.innerHeight && box.width > 0;
+          });
+
+          // Draws the diagrams that are not in the page's theme yet, the ones
+          // on screen first
+          const catchUp = async () => {
+            for (const pick of [onScreen, all]) {
+              const dark = isDark();
+              const behind = pick().filter(i => drawn[i] !== dark);
+              if (!behind.length) continue;
+              const swap = await drawFor(dark, behind);
+              // A newer switch draws its own diagrams
+              if (isDark() === dark) swap();
+            }
+          };
+
+          // A click on the theme switcher waits until the diagrams on screen
+          // are drawn in the other theme, then goes on to the theme's own
+          // handler. The page and those diagrams change colour in the same
+          // frame, and the rest are drawn right after. Drawing only the ones
+          // on screen keeps the wait short on a phone. The listener sits on
+          // the document in the capture phase, so it runs before the theme's
+          // handler on the button in every browser. Browsers from before
+          // about 2021 run the listeners on the clicked element in the order
+          // they were added, and the theme's handler was added first.
+          let passClick = false;
+          document.addEventListener('click', event => {
+            const button = event.target.closest?.('#appearance-switcher, #appearance-switcher-mobile');
+            if (!button || passClick) return;
+            event.stopImmediatePropagation();
+            event.preventDefault();
             queue = queue.then(async () => {
-              if (document.documentElement.classList.contains("dark") === drawnDark) return;
-              await DiagView.destroy();
-              await drawDiagrams();
-              await DiagView.init(options);
-            }).catch(err => console.error("Failed to redraw the diagrams:", err));
+              const dark = !isDark();
+              const first = onScreen().filter(i => drawn[i] !== dark);
+              const swap = first.length ? await drawFor(dark, first).catch(err => {
+                console.error("Failed to redraw the diagrams:", err);
+              }) : null;
+              // Pass the click on from a new task. A click from Enter or Space
+              // can still be in progress here when nothing had to be drawn,
+              // and the browser ignores click() on that button until it ends.
+              await new Promise(resolve => setTimeout(resolve));
+              passClick = true;
+              try {
+                button.click();
+              } finally {
+                passClick = false;
+              }
+              if (swap && isDark() === dark) swap();
+              // DiagView picks up the new page colours now, not 50 ms later
+              DiagView.configure({});
+            }).then(catchUp).catch(err => console.error("Failed to switch the theme:", err));
+          }, true);
+
+          // Any other theme change, such as the system theme, draws the
+          // diagrams again after the page has switched
+          new MutationObserver(() => {
+            queue = queue.then(catchUp).catch(err => console.error("Failed to redraw the diagrams:", err));
           }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         } catch (err) {
           console.error("Failed to initialize Mermaid or DiagView:", err);
