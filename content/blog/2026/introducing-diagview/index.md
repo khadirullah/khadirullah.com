@@ -1,7 +1,7 @@
 ---
 title: "Introducing DiagView"
 date: 2026-02-11
-lastmod: 2026-09-30
+lastmod: 2026-10-13
 draft: false
 description: "A JavaScript library that opens SVG and Mermaid diagrams in a fullscreen viewer with zoom, pan, search, readable labels and print-ready export."
 summary: "I built a lightweight library that opens static SVG and Mermaid diagrams in a fullscreen viewer. It has zoom, pan, search, a minimap, rotation, readable labels, watermarks and export to SVG, PNG and PDF. A CI/CD pipeline lints, tests and builds every change and publishes releases to npm."
@@ -363,23 +363,23 @@ DiagView.init({
 One thing I invested heavily in was the **automation pipeline**. Every push to `main` and every pull request runs GitHub Actions workflows that:
 
 1. **Lints** the code with ESLint
-2. **Runs the Jest suite** (923 unit tests as of v1.1.0)
+2. **Runs the Jest suite** (1228 unit tests as of v1.2.0)
 3. **Builds** the UMD and ESM bundles with Rollup, then checks the package entry points, the TypeScript declarations and the bundle size
-4. **Runs 659 browser tests** with Playwright in Chromium, Firefox and WebKit
+4. **Runs 1008 browser tests** with Playwright in Chromium, Firefox and WebKit
 5. **Deploys the demo** to GitHub Pages, on pushes to `main`
 
 Publishing the GitHub release for a version tag runs a second workflow. It lints, tests and builds again, then publishes to npm with provenance.
 
 {{< mermaid >}}
 flowchart LR
-    push([Push to main]) --> test["Lint, 923 unit tests,<br/>build, types, size"]
-    push --> e2e["659 browser tests<br/>Chromium, Firefox, WebKit"]
+    push([Push to main]) --> test["Lint, 1228 unit tests,<br/>build, types, size"]
+    push --> e2e["1008 browser tests<br/>Chromium, Firefox, WebKit"]
     push --> pages["Demo to<br/>GitHub Pages"]
     release([GitHub release]) --> checks["Lint, test,<br/>build"]
     checks --> npm["npm publish<br/>with provenance"]
 {{< /mermaid >}}
 
-This diagram runs on DiagView 1.1.0. Click it to open the viewer, then zoom, search or export it.
+This diagram runs on DiagView 1.2.0. Click it to open the viewer, then zoom, search or export it.
 
 ```yaml
 # Simplified publish workflow
