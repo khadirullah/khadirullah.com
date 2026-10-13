@@ -42,7 +42,7 @@ disableTextInHeader = false
 [homepage]
   layout = "profile" # valid options: page, profile, hero, card, background, custom
   showRecent = true		
-  showRecentItems = 5
+  showRecentItems = 6
   showMoreLink = true		
   showMoreLinkDest = "/blog/"	
   cardView = true
