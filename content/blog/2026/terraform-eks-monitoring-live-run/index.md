@@ -2,6 +2,7 @@
 title: "I ran my EKS monitoring stack and broke it on purpose"
 images: ["social-fallback.webp"]
 date: 2026-10-28
+lastmod: 2026-11-09
 draft: true
 description: "Applying a Terraform EKS cluster with Prometheus, Grafana and Alertmanager for the first time, crashing a pod and stopping a node's kubelet to prove the alerts fire, and the three bugs that terraform validate never caught."
 summary: "My EKS monitoring repo had passed terraform validate for weeks and had never been applied. I applied it, crashed a pod, stopped a node's kubelet, and watched what the alerts did. It found three bugs, and one of them was an alert that switches itself off while the pod is still broken. A second run proved the fixes."
@@ -1535,6 +1536,59 @@ flowchart TB
 The same CLI check found nothing left. That includes CloudWatch log groups.
 Control plane logging was never turned on, so there were none to clean up.
 
+Neither run had a LoadBalancer Service, so that first step never had anything
+to delete. On November&nbsp;9,&nbsp;2026, I ran the stack a third time to test it.
+
+Before `deploy.sh`, I made three load balancers in the same region to stand in
+for other projects.
+
+| Name | Type | Tag |
+|---|---|---|
+| `a7f3c91e2b4d48e6a0c5f1d9e8b7c6a5` | classic | `Project=payments-legacy` |
+| `k8s-shop-frontend-9f2c41ab` | network | `elbv2.k8s.aws/cluster=shop-prod` |
+| `billing-api-prod` | application | `Project=billing` |
+
+The first has a name like the ones EKS gives its own. The second has "k8s" in
+its name and is tagged for a different cluster.
+
+After `deploy.sh`, I added an nginx Service of type LoadBalancer, and
+Kubernetes made a fourth. Before this run, I changed the script's last check to
+find load balancers by their tags instead of by name.
+
+Below are the four load balancers, then the Tags tab of each one. The nginx
+load balancer comes first. It is the only one tagged
+`kubernetes.io/cluster/eks-monitoring`. Click or tap an image to see it full
+size.
+
+{{< gallery >}}
+<img src="media/run3-lbs-after-deploy.webp" class="grid-w100" alt="Load balancers page listing four load balancers. The first, aae170d4e47c24201a3..., is the one Kubernetes made." />
+<img src="media/run3-tags-nginx.webp" class="grid-w50" alt="Tags of load balancer aae170d4e47c24201a35060756dbc09c: kubernetes.io/cluster/eks-monitoring is owned, kubernetes.io/service-name is lbtest/nginx" />
+<img src="media/run3-tags-payments.webp" class="grid-w50" alt="Tags of load balancer a7f3c91e2b4d48e6a0c5f1d9e8b7c6a5: Project is payments-legacy" />
+<img src="media/run3-tags-shop.webp" class="grid-w50" alt="Tags of load balancer k8s-shop-frontend-9f2c41ab: elbv2.k8s.aws/cluster is shop-prod" />
+<img src="media/run3-tags-billing.webp" class="grid-w50" alt="Tags of load balancer billing-api-prod: Project is billing" />
+{{< /gallery >}}
+
+Then I ran `destroy.sh`.
+
+```text
+[->] Step 1/3: Removing Kubernetes resources that hold AWS load balancers
+[!] LoadBalancer services found, deleting them first:
+lbtest/nginx
+service "nginx" deleted from lbtest namespace
+[->] Waiting 45s for AWS to release the load balancers
+...
+Destroy complete! Resources: 28 destroyed.
+...
+[ok] Nothing orphaned in us-east-1.
+```
+
+{{< figure src="media/run3-lbs-after-destroy.webp" alt="Load balancers page listing three load balancers: a7f3c91e2b4d48e6a0c5f1d9e8b7c6a5, k8s-shop-frontend-9f2c41ab and billing-api-prod" caption="After destroy.sh. The nginx load balancer is gone, and the other three are still there." >}}
+
+The VPC deleted cleanly, and the last check did not flag any of the other
+three. Each run has its own page in the repo's
+[docs/runs](https://github.com/khadirullah/terraform-eks-monitoring/tree/main/docs/runs)
+folder, and the logs and screenshots of run 3 are there too.
+
 One thing outlives the destroy, and it is on your own machine.
 `aws eks update-kubeconfig` added a context, a cluster and a user for the EKS
 cluster to `~/.kube/config`. Terraform knows nothing about them. Left in place,
@@ -1655,6 +1709,13 @@ this.
 - The README status line records both runs and what each one proved.
 - The runbook's destroy section covers the kubeconfig cleanup.
 
+After the second run, two more commits changed the check the destroy script
+runs at the end for anything left behind that still costs money. It now finds
+leftover load balancers by their cluster tags instead of their names, and it
+reports a check that failed instead of printing "Nothing orphaned". The third
+run tested the load balancer part on a live cluster. Each run has its own page
+in [docs/runs](https://github.com/khadirullah/terraform-eks-monitoring/tree/main/docs/runs).
+
 ## Before you try this yourself
 
 Read the code first and understand what it builds. Then set a budget before
@@ -1698,7 +1759,7 @@ And keep learning. Learn small and grow big.
 - Apply it again after the fixes. A fix that only passed validate is the same
   kind of claim the repo started as.
 
-The repository has the Terraform, the manifests and a runbook with every test
-in this post.
+The repository has the Terraform, the manifests, a runbook with both failure
+tests, and a page for each of the three runs in docs/runs.
 
 {{< github repo="khadirullah/terraform-eks-monitoring" >}}
