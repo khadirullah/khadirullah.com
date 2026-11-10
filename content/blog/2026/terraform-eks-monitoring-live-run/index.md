@@ -1,9 +1,8 @@
 ---
 title: "I ran my EKS monitoring stack and broke it on purpose"
 images: ["social-fallback.webp"]
-date: 2026-10-28
-lastmod: 2026-11-09
-draft: true
+date: 2026-11-11T01:45:00+05:30
+draft: false
 description: "Applying a Terraform EKS cluster with Prometheus, Grafana and Alertmanager for the first time, crashing a pod and stopping a node's kubelet to prove the alerts fire, and the three bugs that terraform validate never caught."
 summary: "My EKS monitoring repo had passed terraform validate for weeks and had never been applied. I applied it, crashed a pod, stopped a node's kubelet, and watched what the alerts did. It found three bugs, and one of them was an alert that switches itself off while the pod is still broken. A second run proved the fixes."
 tags: ["project", "kubernetes", "aws", "eks", "terraform", "prometheus", "grafana", "alertmanager", "monitoring", "devops"]
