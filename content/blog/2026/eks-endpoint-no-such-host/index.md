@@ -1,8 +1,8 @@
 ---
 title: "My new EKS cluster said no such host"
 images: ["social-fallback.webp"]
-date: 2026-10-30
-draft: true
+date: 2026-11-11T01:40:00+05:30
+draft: false
 description: "A brand-new EKS endpoint failed to resolve right after terraform apply. The kubeconfig was fine. My VM's DNS resolver had cached an early no, and Google and Cloudflare already had the answer. Every command from the terminal, and how to check for it yourself."
 summary: "kubectl said my brand-new EKS cluster's name did not exist. The kubeconfig was fine and AWS had the name. My own DNS resolver had asked too early and cached the no. Here is how I found it, step by step from the terminal, and how to check for it yourself."
 tags: ["dns", "kubernetes", "aws", "eks", "linux", "troubleshooting"]
