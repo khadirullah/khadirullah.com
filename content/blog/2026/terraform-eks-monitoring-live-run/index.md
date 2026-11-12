@@ -2,6 +2,7 @@
 title: "I ran my EKS monitoring stack and broke it on purpose"
 images: ["social-fallback.webp"]
 date: 2026-11-11T01:45:00+05:30
+lastmod: 2026-11-12
 draft: false
 description: "Applying a Terraform EKS cluster with Prometheus, Grafana and Alertmanager for the first time, crashing a pod and stopping a node's kubelet to prove the alerts fire, and the three bugs that terraform validate never caught."
 summary: "My EKS monitoring repo had passed terraform validate for weeks and had never been applied. I applied it, crashed a pod, stopped a node's kubelet, and watched what the alerts did. It found three bugs, and one of them was an alert that switches itself off while the pod is still broken. A second run proved the fixes."
@@ -13,6 +14,25 @@ slug: "terraform-eks-monitoring-live-run"
 {{< lead >}}
 Twenty-eight resources, two deliberate failures, and three bugs that only showed up once the cluster was real.
 {{< /lead >}}
+
+## TL;DR
+
+I applied my Terraform EKS monitoring stack on real AWS for the first time,
+then broke it on purpose to see if the alerts worked. It found three bugs that
+`terraform validate` never caught.
+
+- **The crash alert switched itself off.** It went quiet ten and a half
+  minutes after it fired, while the pod was still in CrashLoopBackOff. It now
+  alerts on the CrashLoopBackOff state itself.
+- **Grafana hit its memory limit.** At 512Mi it restarted twice, first from a
+  failed health check and then with OOMKilled. The limit is now 1Gi, and on
+  the second run Grafana peaked at 610&nbsp;MiB.
+- **The cluster had no upgrade policy.** AWS defaulted it to extended support,
+  which bills the control plane at $0.60 an hour instead of $0.10 once its
+  version leaves standard support. It is now set to standard.
+
+A second run proved all three fixes. The stack costs about $0.20 an hour, so
+plan to destroy it the same day.
 
 I wanted a blueprint. One setup I can bring up on AWS, deploy my apps to, and
 see them in monitoring from the first minute. A base to practise on, so a new
